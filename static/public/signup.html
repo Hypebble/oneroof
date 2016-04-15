@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <script src="signup.js"></script>
+
+    <title>Sign Up</title>
+</head>
+<body class="container" ng-app="signup">
+	<header class="page-header">
+		<h1>Ready to Access the Coolest Page in the World?</h1>
+	</header>	
+	<h2>Create an account</h2>
+	 <!--action="/api/signup" method="post" id="signup-form"  -->
+
+	<form ng-submit="submit()" ng-controller="SignUpController">
+	  <div class="form-group">
+	    <label for="emalSignUp">Email address</label>
+	    <input type="email" name="email" class="form-control" id="emailSignUp" placeholder="Email" ng-model="email" required>
+	  </div>
+	  <div class="form-group">
+	  	<label for="usernameSignUp">Choose display name</label>
+	  	<input class="form-control" id="displayName" placeholder="Username" name="displayName" ng-model="displayName" required>
+	  </div>
+	  <div class="form-group">
+	    <label for="passwordSignUp">Password</label>
+	    <input type="password" class="form-control" id="password" placeholder="Password" name="password" ng-model="password" required>
+	  </div>
+	  <div class="form-group">
+	    <label for="confirmSignUp">Confirm password</label>
+	    <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password" name="confirm" ng-model="confirmPass" required>
+	  </div>
+	  <div>
+	  	<div class="alert alert-danger" role="alert" ng-show="showPassError">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 			 <span class="sr-only">Error:</span>
+  			Passwords need to match!
+		</div>
+	  	<div class="alert alert-danger" role="alert" ng-show="show">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 			 <span class="sr-only">Error:</span>
+  			Username is taken!
+		</div>
+	  	<div ng-show="loading">
+	  		<span>
+	  			<p>Loading is underway!</p>
+	  			<img src="ajax-loader.gif">
+	  		</span>	
+	  	</div>
+
+	  	<button class="btn btn-primary" type="submit">Get started!</button>
+	  </div>
+	</form>
+
+
+</body>
+</html>

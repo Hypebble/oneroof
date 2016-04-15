@@ -1,0 +1,35 @@
+.body {
+
+}
+
+.signinbox {
+    color: #1a1a1a;
+    margin: auto;
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    left: 40%;
+    top:10%;
+    background: #ededed;
+    border-radius: 25px;
+}
+
+.signindetails {
+    padding: 15px;
+    top: 40px;
+    left: 28px;
+    position: absolute;
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+
+.center {
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+.login {
+    left: 50px;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--
+<html lang="eng">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <script src="profile.js"></script>
+
+    <title>Profile</title>
+</head>
+<body class="container" ng-app="users" ng-controller="UserController">
+	<header class="page-header">
+		<h1>This is you, {{displayName}}!</h1>
+	</header>
+
+	<h3>Not impressed? Check out your profile. You can even edit your stuff!</h3>
+	<button class="btn btn-primary" ng-click="profile()" ng-hide="showProf">View profile information</button>	
+
+	<div ng-show="showProf">
+		<h2>Your life. Right here.</h2>
+		<img src="{{gravatarUrl}}?d=wavatar">
+		<h3>EMAIL: {{email}}</h3>
+		<h3>USERNAME: {{displayName}}</h3>
+
+		<h4>Do you want to change your display name?</h4>
+		<form ng-submit="submit2()">
+			<div class="form-group">
+			  	<label for="displayNameChange">Choose display name</label>
+			  	<input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName" required>
+			</div>
+			<input class="btn btn-info" type="submit">
+		</form>
+
+		<div ng-show="showPass">
+			<h4>Do you want to change your password?</h4>
+			<form ng-submit="submit3()">
+				<div class="form-group">
+					<label for="currPass">Current Password</label>
+					<input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass" required>
+				</div>
+  				<div class="alert alert-danger" role="alert" ng-show="incorrectPass">
+  					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 			 		<span class="sr-only">Error:</span>
+  					Password is incorrect!
+				</div>
+				<div class="form-group">
+					<label for="newPass">New Password</label>
+					<input type="password" class="form-control" id="password" placeholder="New password" name="newPassword" ng-model="newPassword" required>
+				</div>
+				<div class="form-group">
+					<label for="confirmNewPass">Confirm New Password</label>
+					<input type="password" class="form-control" id="password" placeholder="Confirm new password" name="password" ng-model="confirmNewPassword" required>
+				</div>
+				<div class="alert alert-danger" role="alert" ng-show="confirmPass">
+  					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 			 		<span class="sr-only">Error:</span>
+  					Passwords need to match!
+				</div>
+			  	<input class="btn btn-info" type="submit">
+			</form>
+		</div>
+		<h3>Done checking yourself out?</h3>
+		<button class="btn btn-primary" ng-click="hideProfile()">Hide profile information</button>
+	</div>
+
+	<div class="accountInfo">
+		<div ng-hide="showAccount">
+			<h3>Want to see yo' money?</h3>
+			<button class="btn btn-success" ng-click="showAccounts()">
+			Show $</button>
+		</div>
+
+		<div ng-show="showAccount">
+				<h3>Here's yo money</h3>
+				<h4>Create a new account</h4>
+				<form name="newAccountForm" ng-submit="newAccountForm.$valid && addAccount()">
+					<div class="form-group">
+						<label for="accountName">Account Name</label>
+						<input class="form-control" id="accountName" placeholder="Account Name" name="accountName" ng-model="newAccount.accountName" required>
+						<div class="alert alert-danger" role="alert" ng-hide="newAccountForm.$valid || newAccountForm.$pristine">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 							<span class="sr-only">Error:</span>
+							Account name cannot be empty
+						</div>
+					</div>
+					<input class="btn btn-info" type="submit"> ADD </input>
+				</form>
+				
+
+				<ul>
+					<li ng-repeat="account in accounts">
+						<p>{{account.accountName}}</p>
+						<p>{{account.id}}</p>
+						<p>{{account.currBalance}}</p>
+						<div class="row">
+							<button class="btn btn-danger" ng-click="deleteAccount(account.id, $index)">Delete account</button>
+							<button class="btn btn-warning" ng-click="showEditAccountView($index)">Edit account name</button>
+						</div>
+						<form name="editAccountForm" ng-submit="editAccountForm.$valid && editAccount(account.id, newAccountName)" ng-show="checkShowEdit($index)">
+							<div class="form-group">
+								<label for="accountName">New Account Name</label>
+								<input class="form-control" id="accountName" placeholder="New Account Name" ng-model="newAccountName" required>
+							</div>
+							<input class="btn btn-info" type="submit"></input>
+							<div class="alert alert-danger" role="alert" ng-hide="editAccountForm.$valid || editAccountForm.$pristine">
+  								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		 						<span class="sr-only">Error:</span>
+  								Account name cannot be empty
+							</div>
+						</form>
+					</li>
+				</ul>
+
+				<h4>Done with this now...</h4>
+				<button class="btn btn-success" ng-click="hideAccounts()">Hide $</button>
+		</div>
+	</div>
+
+	<div class="transactionInfo">
+		<div ng-hide="transactionView">
+			<h3>Transactions- Home</h3>
+			<button class="btn btn-warning" ng-click="showTransactionView()">Show transaction stuff</button>
+		</div>
+		<div ng-show="transactionView">
+			<h3>Make a transaction</h3>
+			<form name="newTransactionForm" ng-submit="addTransaction()">
+					<div class="form-group">
+						<label for="sourceAccountName">Source Account</label>
+						<input class="form-control" placeholder="Source Account ID" ng-model="sourceAccountID" required>
+					</div>
+					<div class="form-group">
+						<label for="targetAccountName">Target Account</label>
+						<input class="form-control" placeholder="Target Account Name/Username" ng-model="destAccountID" required>
+					</div>
+					<div class="form-group">
+						<label for="targetAccountName">Transfer Amount</label>
+						<input class="form-control" placeholder="Transfer Amount" ng-model="transactionAmt" required>
+					</div>
+					<div class="form-group">
+						<label for="targetAccountName">Description</label>
+						<input class="form-control" placeholder="Description" ng-model="transDescription" required>
+					</div>
+					<input class="btn btn-info" type="submit"></input>
+			</form>
+
+			<h3>View recent transactions</h3>
+			<div ng-show="showTransactions">
+				<ul>
+					<li ng-repeat="transaction in transactions">
+						<p>Transaction Amount: {{transaction.transactionAmt}}</p>
+						<p>Description: {{transaction.transDescription}}</p>
+						<p>Transaction Date: {{transaction.createdOn}}</p>
+					</li>
+				</ul>
+			</div>
+			<button class="btn btn-info" ng-click="showTransactionList()">Check em out!</button>
+
+			<h3>I'm done with these now...</h3>
+			<button class="btn btn-warning" ng-click="hideTransactionView()">Bye.</button>
+		</div>
+	</div>
+
+	<h4>Done?</h4>
+	<a href="/api/signout" class="btn btn-danger">Sign out!</button>
+
+
+
+</body>
+</html>-->

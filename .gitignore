@@ -1,0 +1,16 @@
+
+node_modules
+.idea
+.DS_Store
+
+# ignore all files in any directory named `secret`
+**/secret/*
+
+# ignore .vagrant directory
+.vagrant
+
+# and the VSCode typings directory
+typings
+
+# ignore .key files
+*.key
