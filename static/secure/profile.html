@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--
+
 <html lang="eng">
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -67,24 +67,24 @@
 		<button class="btn btn-primary" ng-click="hideProfile()">Hide profile information</button>
 	</div>
 
-	<div class="accountInfo">
-		<div ng-hide="showAccount">
-			<h3>Want to see yo' money?</h3>
-			<button class="btn btn-success" ng-click="showAccounts()">
+	<div class="taskInfo">
+		<div ng-hide="showTasks">
+			<h3>Want to see yo' chores</h3>
+			<button class="btn btn-success" ng-click="showTasks()">
 			Show $</button>
 		</div>
 
-		<div ng-show="showAccount">
-				<h3>Here's yo money</h3>
-				<h4>Create a new account</h4>
-				<form name="newAccountForm" ng-submit="newAccountForm.$valid && addAccount()">
+		<div ng-show="showTask">
+				<h3>Here's yo chores</h3>
+				<h4>Create a new task</h4>
+				<form name="newTaskForm" ng-submit="newTaskForm.$valid && addTask()">
 					<div class="form-group">
-						<label for="accountName">Account Name</label>
-						<input class="form-control" id="accountName" placeholder="Account Name" name="accountName" ng-model="newAccount.accountName" required>
-						<div class="alert alert-danger" role="alert" ng-hide="newAccountForm.$valid || newAccountForm.$pristine">
+						<label for="taskName">Task Name</label>
+						<input class="form-control" id="taskName" placeholder="Task Name" name="taslName" ng-model="newTask.taskName" required>
+						<div class="alert alert-danger" role="alert" ng-hide="newTaskForm.$valid || newTaskForm.$pristine">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
  							<span class="sr-only">Error:</span>
-							Account name cannot be empty
+							Task name cannot be empty
 						</div>
 					</div>
 					<input class="btn btn-info" type="submit"> ADD </input>
@@ -92,31 +92,31 @@
 				
 
 				<ul>
-					<li ng-repeat="account in accounts">
-						<p>{{account.accountName}}</p>
-						<p>{{account.id}}</p>
-						<p>{{account.currBalance}}</p>
+					<li ng-repeat="task in tasks">
+						<p>{{task.taskName}}</p>
+						<p>{{task.id}}</p>
+						<p>{{task.currBalance}}</p>
 						<div class="row">
-							<button class="btn btn-danger" ng-click="deleteAccount(account.id, $index)">Delete account</button>
-							<button class="btn btn-warning" ng-click="showEditAccountView($index)">Edit account name</button>
+							<button class="btn btn-danger" ng-click="deleteTask(task.id, $index)">Delete task</button>
+							<button class="btn btn-warning" ng-click="showEditTaskView($index)">Edit task name</button>
 						</div>
-						<form name="editAccountForm" ng-submit="editAccountForm.$valid && editAccount(account.id, newAccountName)" ng-show="checkShowEdit($index)">
+						<form name="editTaskForm" ng-submit="editTaskForm.$valid && editTask(task.id, newTaskName)" ng-show="checkShowEdit($index)">
 							<div class="form-group">
-								<label for="accountName">New Account Name</label>
-								<input class="form-control" id="accountName" placeholder="New Account Name" ng-model="newAccountName" required>
+								<label for="taskName">New Task Name</label>
+								<input class="form-control" id="taskName" placeholder="New Task Name" ng-model="newTaskName" required>
 							</div>
 							<input class="btn btn-info" type="submit"></input>
-							<div class="alert alert-danger" role="alert" ng-hide="editAccountForm.$valid || editAccountForm.$pristine">
+							<div class="alert alert-danger" role="alert" ng-hide="editTaskForm.$valid || editTaskForm.$pristine">
   								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 		 						<span class="sr-only">Error:</span>
-  								Account name cannot be empty
+  								Task name cannot be empty
 							</div>
 						</form>
 					</li>
 				</ul>
 
 				<h4>Done with this now...</h4>
-				<button class="btn btn-success" ng-click="hideAccounts()">Hide $</button>
+				<button class="btn btn-success" ng-click="hideTasks()">Hide $</button>
 		</div>
 	</div>
 

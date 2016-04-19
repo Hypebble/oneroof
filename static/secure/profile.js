@@ -9,14 +9,14 @@
 var app = angular.module('users', [])
 	.controller('UserController', function($scope, $http) {
 		$scope.newUser = {};
-		$scope.newAccount = {};
+		$scope.newTask = {};
 		//$scope.editAccount = {};
 
 		$scope.showPass = false;
 		$scope.showProf = false;
 		$scope.confirmPass = false;
 		$scope.incorrectPass = false;
-		$scope.showAccount = false;
+		$scope.showTask = false;
 		$scope.transactionView = false;
 		$scope.showTransactions = false;
 		$scope.editViewIndex = false;
@@ -92,58 +92,63 @@ var app = angular.module('users', [])
 
 		}
 
-		$scope.showAccounts = function() {
-			console.log("Show accounts");
-			$scope.showAccount = true;
-			$http.get("/api/accounts")
+		$scope.showTasks = function() {
+			console.log("Show tasks");
+			$scope.showTasks = true;
+			//$http.get("/api/accounts")
+            $http.get("/api/tasks")
 				.then(function(response) {
-					$scope.accounts = response.data;
+					$scope.tasks = response.data;
 				});
 
 		}
 
-		$scope.addAccount = function() {
-			console.log("Start add account");
+		$scope.addTasks = function() {
+			console.log("Start add task");
 
-			$http.post("/api/accounts", $scope.newAccount)
+			//$http.post("/api/accounts", $scope.newAccount)
+            $http.post("/api/tasks", $scope.newTask)
 				.then(function(response) {
-					$scope.accounts.push(response.data);
-					$scope.newAccount = {};
-					return $scope.newAccount;
+					$scope.tasks.push(response.data);
+					$scope.newTasks = {};
+					return $scope.newTask;
 				})
 				.then(function() {
-					$http.get("/api/accounts")
+					//$http.get("/api/accounts")
+                    $http.get("/api/tasks")
 						.then(function(response) {
-							$scope.accounts = response.data;
+							$scope.tasks = response.data;
 						});
 				});
 			
 		}
 
-		$scope.deleteAccount = function(accountID, index) {
+		$scope.deleteTask = function(taskID, index) {
 			console.log("Start delete account");
 			console.log(index);
-			console.log(accountID);
+			console.log(taskID);
 
-			var account = {
-				accountId : accountID
+			var task = {
+				taskId : taskID
 				//indexNew : index
 			}
 
-			$http.post('/api/delete', account)
+			$http.post('/api/delete', task)
 				.then(function() {
-					$scope.accounts.splice(index, 1);
+					//$scope.accounts.splice(index, 1);
+                    $scope.tasks.splice(index, 1);
 				})
 				.then(function() {
-					$http.get("/api/accounts")
-						.then(function(response) {
-							$scope.accounts = response.data;
+					//$http.get("/api/accounts")
+					$http.get("api/tasks")
+                    	.then(function(response) {
+							$scope.tasks = response.data;
 						});
 				});
 		}
 
-		$scope.showEditAccountView = function(index) {
-			console.log("Show editAccount");
+		$scope.showEditTaskView = function(index) {
+			console.log("Show editTask");
 			$scope.editViewIndex = index;
 		}
 
@@ -151,22 +156,22 @@ var app = angular.module('users', [])
 			return $scope.editViewIndex === index;
 		}
 
-		$scope.editAccount = function(newId, newAccountName) {
-			console.log("Entered editAccount");
-			console.log("changed name = " + newAccountName);
+		$scope.editTask = function(newId, newTaskName) {
+			console.log("Entered editTask");
+			console.log("changed name = " + newTaskName);
 
-			var newAccountInfo = {
+			var newTaskInfo = {
 				id : newId,
-				accountName : newAccountName
+				TaskName : newTaskName
 			};
 
-			if(newAccountName.length <= 50) {
-				$http.post('/api/updateAccountName', newAccountInfo)
+			if(newTaskName.length <= 50) {
+				$http.post('/api/updateTaskName', newTaskInfo)
 					.then(function() {
-						window.alert("Account Name Changed!")
+						window.alert("Task Name Changed!")
 					})
 					.catch(function() {
-						window.alert("Something went wrong updating your account");
+						window.alert("Something went wrong updating your task");
 					});
 			} else {
 				window.alert("New name is too long");
@@ -189,17 +194,17 @@ var app = angular.module('users', [])
         			scope.transactions.push(response.data);
         		})
         		.then(function() {
-        			$http.get("/api/accounts")
+        			$http.get("/api/tasks")
 						.then(function(response) {
-							$scope.accounts = response.data;
+							$scope.tasks = response.data;
 						});
         		});
    
 		}
 
-		$scope.hideAccounts = function() {
-			console.log("Hide accounts");
-			$scope.showAccount = false;
+		$scope.hideTasks = function() {
+			console.log("Hide tasks");
+			$scope.showTasks = false;
 		}
 
 		$scope.showTransactionView = function() {

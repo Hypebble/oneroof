@@ -74,31 +74,32 @@ module.exports = function(passport, bankData) {
         });
 
     //get all accounts for user
-    router.get('/api/accounts', function(req, res, next) {
-        console.log("Entered get accounts");
-        bankData.getAllAccountsForUser(req.user.id)
+    //router.get('/api/accounts', function(req, res, next) {
+        router.get('/api/tasks', function(req, res, next) {
+        console.log("Entered get tasks");
+        bankData.getAllTasksForUser(req.user.id)
             .then(function(rows) {
                 res.json(rows);
             })
             .catch(function() {
-                res.status("404").send("Accounts query failed");
+                res.status("404").send("Tasks query failed");
             });
     });
 
     //create a new account for the user
-    router.post('/api/accounts', function(req, res, next) {
-        
-        var accountInfo = {
+    //router.post('/api/accounts', function(req, res, next) {
+    router.post('/api/tasks', function(req, res, next) {    
+        var taskInfo = {
             userID : req.user.id,
-            accountName : req.body.accountName
+            taskName : req.body.taskName
         };
 
-        bankData.getAllAccountsForUser(req.user.id)
+        bankData.getAllTasksForUser(req.user.id)
             .then(function(rows) {
                 if(rows.length <= 4) {
-                    return bankData.createAccount(accountInfo, false);
+                    return bankData.createTask(taskInfo, false);
                 } else {
-                    res.status("400").send("Too many accounts");
+                    res.status("400").send("Too many tasks");
                 }
             })
             .then(function(rows) {
@@ -136,10 +137,10 @@ module.exports = function(passport, bankData) {
             });
     });
 
-    //update the name of a user's individual account
-    router.post('/api/updateAccountName', function(req, res, next) {
-        console.log("Entered update account route");
-        bankData.updateAccountName(req.body.id, req.body.accountName)
+    //update the name of a user's individual task
+    router.post('/api/updateTaskName', function(req, res, next) {
+        console.log("Entered update task route");
+        bankData.updateTaskName(req.body.id, req.body.taskName)
             .then(function(rows) {
                 console.log("Successfully changed name");
                 res.json(rows);
@@ -149,14 +150,14 @@ module.exports = function(passport, bankData) {
             });
     });
 
-    //grab all transactions for all accounts
+    //grab all transactions for all tasks
     router.get('/api/transactions', function(req, res, next) {
 
         var rowsArray;
         var resultsArray = [];
-        bankData.getAllAccountsForUser(req.user.id)
+        bankData.getAllTasksForUser(req.user.id)
             .then(function(rows) {
-                console.log("Succesfully grabbed accounts");
+                console.log("Succesfully grabbed tasks");
                 rowsArray = rows;
                 return rows;
             })
