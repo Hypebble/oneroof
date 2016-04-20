@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- this is the most klugeyist of kludges, I need to brush up on angular and express -->
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no. initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <script src="settings.js"></script>
+</head>
+	
+<body class="container" ng-app="settings" ng-controller="SettingController">
+	<header class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h1>Welcome Back, <!-- {{displayName}} --> oneRoofUser!</h1>
+			</div>
+			<div class="col-md-1">
+				<a href="/api/settings" class="btn btn-primary">Settings</a>
+			</div>
+			<div class="col-md-1">
+				<a href="/api/signout" class="btn btn-danger">Sign out!</a>
+			</div>
+		</div>
+	</header>
+	<div class="col-md-4">
+		<h1>Personal Information</h1>
+
+		<h3>email: <!--{{email}}--> oneUser@oneroofapp.com </h3>
+		<h3>username: <!--{{displayName}}--> oneRoofUser</h3>
+
+		<h2>Update Name</h2>
+		<form ng-submit="submit2()">
+			<div class="form-group">
+			  	<label for="displayNameChange"></label>
+			  	<input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName" required>
+			</div>
+			<input class="btn btn-info" type="submit">
+		</form>
+
+			<h2>Change Password</h2>
+			<form ng-submit="submit3()">
+				<div class="form-group">
+					<label for="currPass">Current Password</label>
+					<input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass" required>
+				</div>
+					<div class="alert alert-danger" role="alert" ng-show="incorrectPass">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				 		<span class="sr-only">Error:</span>
+						Password is incorrect!
+				</div>
+				<div class="form-group">
+					<label for="newPass">New Password</label>
+					<input type="password" class="form-control" id="password" placeholder="New password" name="newPassword" ng-model="newPassword" required>
+				</div>
+				<div class="form-group">
+					<label for="confirmNewPass">Confirm New Password</label>
+					<input type="password" class="form-control" id="password" placeholder="Confirm new password" name="password" ng-model="confirmNewPassword" required>
+				</div>
+				<div class="alert alert-danger" role="alert" ng-show="confirmPass">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				 		<span class="sr-only">Error:</span>
+						Passwords need to match!
+				</div>
+			  	<input class="btn btn-info" type="submit">
+			</form>
+	</div>
+	<div class="col-md-4">
+		<h2>House Information</h2>
+
+		<div class="row" ng-show="!house">
+
+			<div class="col-md-6 col-sm-2">
+			<p style="border-style: solid"><i>Enter House Name</i></p>
+			<a class="btn btn-primary" ng-click="createHouse()" ng-show="!houseCreated">CREATE HOUSE</a>
+			</div>
+
+			<div class="col-md-6 col-sm-2">
+			<p style="border-style: solid">HXDC12G</p>
+			<a class="btn btn-success" ng-click="joinHouse()" ng-show="!houseJoined">JOIN HOUSE</a></div>
+		</div>
+		<div class="row" ng-show="house">
+			<div class="col-md-6">
+			<p>Your House Name: INFO TOWER!</p>
+			<p>Your House Code: HY761J1</p>
+			<a class="btn btn-danger" ng-click="leaveHouse()">LEAVE HOUSE</a></div>
+		</div>
+		<div ng-show="house">
+		<h3>Manage Groups</h3>
+		<div class="row">
+			<div class="col-md-6">
+				<p style="border-style: solid"><i>New Group Name</i></p>
+				<button class="btn btn-primary" ng-click="createGroup()">CREATE GROUP</button></div>
+			<div class="col-md-6" ng-show="houseJoined">
+			<p style="border-style: solid">Downstairs Roommates</p>
+			<button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button></div>			
+		</div>
+			
+			<h2>User Groups</h2>
+			<!--Smoke and Mirrors time-->
+			<ul>
+				<div ng-show="houseJoined">
+				<li><button ng-click="selectDefaultG()" class="btn btn-secondary">Kitchen Crew</button></li></div>
+				<div ng-show="groupJoined">
+					<li><button ng-click="selectOtherG()" class="btn btn-secondary">Downstairs Roommates</button></li>
+				</div>
+				<div ng-show="groupCreated">
+				<li><button ng-click="selectCreateG()" class="btn btn-secondary">New Group Name</button></li>
+				</div>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div ng-hide="!defaultGroup" ng-show="defaultGroup">
+			<h2>Group Members for Kitchen Crew</h2>
+			<ul>
+				<li><a href="/profile.html">Dan</a></li>
+				<li><a href="/profile.html">Dani</a></li>
+				<li><a href="/profile.html">Jonathan</a></li>
+				<li><a href="/profile.html">Christoff</a></li>
+				<li><a href="/profile.html">Kevie</a></li>
+				<li><a href="/profile.html">Alli</a></li>
+			</ul>
+
+			<div class="col-md-6"><a class="btn btn-warning" ng-click="leaveOther()">LEAVE GROUP</a></div>
+		</div>
+		<div ng-hide="!otherGroup" ng-show="otherGroup">
+			<h2>Group Members for Downstairs Roomates</h2>
+
+			<ul>
+				<li><a href="/profile.html">Jonathan</a></li>
+				<li><a href="/profile.html">Christoff</a></li>
+				<li><a href="/profile.html">Kevie</a></li>
+			</ul>
+
+			<div class="col-md-6"><a class="btn btn-warning" ng-click="leaveOther()">LEAVE GROUP</a></div>
+		</div>
+
+		<div ng-hide="!createdGroup" ng-show="createdGroup">
+			<h2>Group Members for New Group Name</h2>
+
+			<p> there are currently no other members in this group</p>
+
+			<div class="col-md-6"><a class="btn btn-warning" ng-click="leaveCreated()">LEAVE GROUP</a></div>
+		</div>
+	</div>
+</body>
+
+</html>
+<!--
