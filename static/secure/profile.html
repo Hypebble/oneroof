@@ -16,7 +16,9 @@
 				<h1>Welcome Back, {{displayName}}!</h1>
 			</div>
 			<div class="col-md-1">
+				<form ng-submit="goto_settings()">
 				<a href="/api/settings" class="btn btn-primary">Settings</a>
+				</form>
 			</div>
 			<div class="col-md-1">
 				<a href="/api/signout" class="btn btn-danger">Sign out!</a>
@@ -25,50 +27,10 @@
 	</header>
 	<div class="col-md-4">
 		<h1>Personal Information</h1>
-
-		<img src="{{gravatarUrl}}?d=wavatar">
-		<h3>email: {{email}} </h3>
-		<h3>username: {{displayName}}</h3>
-
-		<h2>Update Name</h2>
-		<form ng-submit="submit2()">
-			<div class="form-group">
-			  	<label for="displayNameChange"></label>
-			  	<input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName" required>
-			</div>
-			<input class="btn btn-info" type="submit">
-		</form>
-
-		<div ng-show="showPass">
-			<h2>Change Password</h2>
-			<form ng-submit="submit3()">
-				<div class="form-group">
-					<label for="currPass">Current Password</label>
-					<input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass" required>
-				</div>
-					<div class="alert alert-danger" role="alert" ng-show="incorrectPass">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				 		<span class="sr-only">Error:</span>
-						Password is incorrect!
-				</div>
-				<div class="form-group">
-					<label for="newPass">New Password</label>
-					<input type="password" class="form-control" id="password" placeholder="New password" name="newPassword" ng-model="newPassword" required>
-				</div>
-				<div class="form-group">
-					<label for="confirmNewPass">Confirm New Password</label>
-					<input type="password" class="form-control" id="password" placeholder="Confirm new password" name="password" ng-model="confirmNewPassword" required>
-				</div>
-				<div class="alert alert-danger" role="alert" ng-show="confirmPass">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				 		<span class="sr-only">Error:</span>
-						Passwords need to match!
-				</div>
-			  	<input class="btn btn-info" type="submit">
-			</form>
-		</div>
 	</div>
-	<div class="col-md-8" ></div>
+	<div class="col-md-8" >
+		<h1>TASKS AND BILLS</h1>
+	</div>
 </body>
 
 </html>
