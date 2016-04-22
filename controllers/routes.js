@@ -16,6 +16,11 @@ module.exports = function(passport, bankData) {
         req.logout();
         res.redirect('/'); 
     });
+    
+    router.get('/api/settings', function(req, res) {
+        console.log("passed into settings")
+        res.redirect('/settings.html')
+    })
 
     //loads the profile information for each user
     router.get('/api/profile', function(req, res) {
@@ -25,7 +30,8 @@ module.exports = function(passport, bankData) {
     //logs a user in
     router.post('/api/login', passport.authenticate('local-login'),
         function(req, res) {
-            res.json(req.user);
+            console.log('in login route!!!!! bitch3z');
+            res.json(req.newUser);
         });
 
     //updates a user's display name

@@ -58,6 +58,8 @@ var bankData = {
 	
 	getTasksForUser() {
 		console.log(TAG + "getting tasks for user");
+		var sql = 'select * from tblTASK where '
+		var params = [username];
 	},
 	
 	getTasksforHouse() {

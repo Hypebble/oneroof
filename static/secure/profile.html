@@ -6,14 +6,41 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-    <script src="profile.js"></script>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="normalize.css">
+	<script src="profile.js"></script>
+
 </head>
 	
 <body class="container" ng-app="users" ng-controller="UserController">
+	<header class = "page-header">
+		<h6>Welcome Back to {{ houseName }}, {{ name }} <br>
+		<form ng-submit="goto_settings()">
+			<a href="/api/settings" class="btn btn-primary">Settings</a>
+		</form> or 			
+		<div class="col-md-1">
+			<a href="/api/signout" class="btn btn-danger">Sign out!</a>
+		</div>
+		</h6>
+	</header>
+	<div class = "profile-sidebar">
+		
+	</div>
+		
+	<div class = "profile-main">
+		<h1>
+			Welcome to your feed!  You have things to do.
+		</h1>
+		<div class ="tasks">
+			
+		</div>
+	</div>
+			
+	<!--
 	<header class="page-header">
 		<div class="row">
 			<div class="col-md-6">
-				<h1>Welcome Back, {{displayName}}!</h1>
+				<h1>Welcome Back, {name}}!</h1>
 			</div>
 			<div class="col-md-1">
 				<form ng-submit="goto_settings()">
@@ -30,7 +57,7 @@
 	</div>
 	<div class="col-md-8" >
 		<h1>TASKS AND BILLS</h1>
-	</div>
+	</div> -->
 </body>
 
 </html>

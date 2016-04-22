@@ -12,7 +12,7 @@
 	<script src="index.js"></script>
   <title>Welcome to OneRoof!</title>
 </head>
-<body class="container">
+<body class="container" ng-app="signin">
     <!--
         
         Current form of data sent to server
@@ -22,18 +22,20 @@
         sends "password" 
         -->
 
-<form action="/" method="post" class ="form-small centered" id ="loginForm" ng-controller="SignInController" ng-submit="submit()">
+<form class ="form-small centered" id ="loginForm" ng-controller="SignInController" ng-submit="submit()">
     <p><b>Welcome to OneRoof!</b><br>  Login, or create your account.</p>
     <div class="form-group">
-        <div class="center text-left"><b>Email: </b><input type="text" name="username"><br></div>
-        <div class="center text-left"><b>Password: </b><input type="password" name="password"><br></div>
+        <div class="center text-left"><b>Email: </b><input type="text" name="username" ng-model="email"><br></div>
+        <div class="center text-left"><b>Password: </b><input type="password" name="password" ng-model="password"><br></div>
     </div>
+    <!--
+        Daniel says, I'll fix this later!
     <% if (message.length > 0) { %>
     <div class="alert alert-danger"><%= message %></div>
     <% } %>
 
     <br>
-    <div class="clear"></div>
+    <div class="clear"></div>-->
     <div class = "middle">
         <p>or</p><br>
     </div><br>
@@ -48,7 +50,7 @@
         <a href="/signin/facebook" class="btn btn-primary"><b>Facebook Sign-In</b></a>
     </div>
     <div class="clear"></div>
-    <button type="submit" class="btn btn-warning btn-lg">
+    <button type="submit" class="btn btn-warning btn-lg" >
         <b>Login</b>
     </button>
 </form>

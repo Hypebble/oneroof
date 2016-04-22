@@ -82,13 +82,19 @@ module.exports = function(passport) {
         passReqToCallback : true
         }, function(req, username, password, done) {
             console.log('made it into local login');
-            console.log("" + req.user);
+            console.log("" + req);
+            console.log(username);
             bankUser.getUser(username)
                 .then(function(rows) {
+                    console.log(rows);
                     if(rows.length == 0) {
+                        console.log("rows.length = 0");
                         return done(null, false);
                     } else {
-                        if(!bCrypt.compareSync(password, rows[0].password)) {
+                        console.log("password: " , password);
+                        console.log("hashed: " , createHash(password));
+                        console.log("rows hashpass: " , rows[0].hash_pass);
+                        if(!bCrypt.compareSync(password, rows[0].hash_pass)) {
                             console.log('Invalid Password');
                             return done(null, false);
                         } else {
