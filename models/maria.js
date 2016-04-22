@@ -66,11 +66,20 @@ var bankData = {
 		console.log(TAG + "getting tasks for entire house");
 	},
 	
-	createTask() {
+	createTask(task) {
 		console.log(TAG + "creating a task");
-		var sql = 'insert into tblTASK (house_name, rent_total) values (?, ?)';
-		var params = [houseName, rentAmount];
+		console.log(task.taskName);
+		var sql = 'insert into tblTASK (task_name, task_time, task_type, task_status, task_due_date) values (?, ?, ?, ?, ?)';
+		var params = [task.taskName, task.taskTime, task.taskType, task.taskStatus, task.taskDueDate];
 		return connPool.queryAsync(sql, params)	
+	},
+
+	updateUserTaskTable(info) {
+		console.log(TAG + "adding a task into USERTASK");
+		console.log(info);
+		var sql = 'insert into tblUSER_TASK (task_id, task_owner_id, task_creator_id) values (?, ?, ?)';
+		var params = [info.taskID, info.taskOwnerIDInfo, info.taskCreatorIDInfo];
+		return connPool.queryAsync(sql, params);
 	},
 	
 	removeTask() {

@@ -39,26 +39,26 @@ CREATE TABLE tblUSER_GROUPS (
 );
 
 CREATE TABLE tblTASK (
-	task_id INT NOT NULL AUTO_INCREMENT,
+	task_id VARCHAR(100) NOT NULL,
 	task_name VARCHAR(30) NOT NULL,
 	task_descr VARCHAR(500),
-	task_time TIME NOT NULL,
+	task_time VARCHAR(60) NOT NULL,
 	task_type VARCHAR(30) NOT NULL,
 	task_status VARCHAR(30) NOT NULL,
-	task_due_date DATE NOT NULL,
-	task_archived_date DATE,
+	task_due_date VARCHAR(60) NOT NULL,
+	task_archived_date VARCHAR (60),
 	PRIMARY KEY (task_id)
 );
 
 CREATE TABLE tblBILL (
-	task_id INT NOT NULL AUTO_INCREMENT,
+	task_id VARCHAR(100) NOT NULL,
 	bill_amount INT NOT NULL,
 	PRIMARY KEY (task_id),
 	FOREIGN KEY (task_id) REFERENCES tblTASK(task_id)
 );
 
 CREATE TABLE tblCHORE (
-	task_id INT NOT NULL AUTO_INCREMENT,
+	task_id VARCHAR(100) NOT NULL,
 	priority VARCHAR(30) NOT NULL,
 	PRIMARY KEY (task_id),
 	FOREIGN KEY (task_id) REFERENCES tblTASK(task_id)
@@ -66,13 +66,13 @@ CREATE TABLE tblCHORE (
 
 CREATE TABLE tblUSER_TASK (
 	user_task_id INT NOT NULL AUTO_INCREMENT,
-	task_id INT NOT NULL,
+	task_id VARCHAR(100) NOT NULL,
 	task_owner_id INT NOT NULL,
 	task_creator_id INT NOT NULL,
-	PRIMARY KEY (user_task_id),
+	PRIMARY KEY (user_task_id) /*,
 	FOREIGN KEY (task_id) REFERENCES tblTASK(task_id),
 	FOREIGN KEY (task_owner_id) REFERENCES tblUSER(user_id),
-	FOREIGN KEY (task_creator_id) REFERENCES tblUSER(user_id)
+	FOREIGN KEY (task_creator_id) REFERENCES tblUSER(user_id)*/
 );
 
 CREATE TABLE tblCOMMENT (

@@ -187,54 +187,83 @@ module.exports = function(passport, bankData) {
             })
     });
 
-    //create a transaction between two accounts
+    //create a task between two accounts
     //checks that user owns first account, and that destination 
-    router.post('/api/addTransaction', function(req, res, next) {
-        console.log("Entered addTransaction route");
-
-        var transaction = {
-            sendingUserID : req.user.id,
-            sourceAccountID : req.body.sourceAccountID,
-            destAccountID : req.body.destAccountID,
-            transactionAmt : req.body.transactionAmt,
-            transDescription : req.body.transDescription
-        };
+    router.post('/api/addTask', function(req, res, next) {
+        console.log("Entered addTask route");
         
-        var sourceAccount;
-        bankData.getTransactionAccount(transaction.sourceAccountID)
-            .then(function(sourceRows) {
-                sourceAccount = sourceRows;
-                if(sourceRows[0].userID == req.user.id) {
-                    if(sourceRows[0].currBalance >= transaction.transactionAmt) {
-                        return bankData.getTransactionAccount(transaction.destAccountID)
-                    } else {
-                        res.status("405").send("Insufficient funds");
-                    }
-                } else {
-                    res.status("403").send("Unauthorized to send money from that account");
-                }
+        var taskCreatorID;
+        var taskOwnerID;
+        var generatedTaskID;
+
+        //if redis has the same user id as our system, this will want to change
+        //also, may want to check if they're in the same house in the future
+
+        //grab current user id
+        bankData.getUser(req.user.email)
+            .then(function(currUserResponse) {
+                console.log("Grabbing curr userID");
+                taskCreatorID = currUserResponse[0].user_id;
+                console.log("task creator id is " + taskCreatorID);
             })
-            .then(function(destRows) {
-                if(destRows.length != 0) {
-                    return bankData.updateAccount(destRows[0].currBalance + Number(transaction.transactionAmt), transaction.destAccountID);
-                } else {
-                    res.status("404").send("Account not found");
-                }
+            //check desired email
+            .then(function() {
+                console.log("grabbing other user")
+                return bankData.getUser(req.body.taskOwner);
+            })
+            //grab other user id
+            .then(function(otherUserResponse) {
+                taskOwnerID = otherUserResponse[0].user_id;
+                console.log("task OWNER id is " + taskOwnerID);
+            })
+            //creates the task in the database
+            .then(function() {
+                var creationTime = new Date();
+                generatedTaskID = guid();
+
+                var task = {
+                    //may not be same as redis id
+                    //taskCreator : req.user.id,
+                    taskName : req.body.taskName,
+                    taskID : generatedTaskID,
+                    //TODO: MAKE TASKTYPE NOT TOTALLY ARBITRARY
+                    taskType : req.body.taskType,
+                    taskDueDate : req.body.taskDueDate,
+                    taskDescription : req.body.transDescription,
+                    taskStatus : "incomplete",
+                    taskTime : creationTime
+                };
+
+                return bankData.createTask(task);
             })
             .then(function() {
-                return bankData.updateAccount(sourceAccount[0].currBalance - transaction.transactionAmt, transaction.sourceAccountID);
-            })
-            .then(function() {
-                return bankData.createTransaction(transaction);
+                console.log("made it to usertask update")
+                var info = {
+                    taskOwnerIDInfo : taskOwnerID,
+                    taskCreatorIDInfo : taskCreatorID,
+                    taskID : generatedTaskID
+                }
+
+                return bankData.updateUserTaskTable(info);
             })
             .catch(function() {
-                res.status("404").send("Some transaction failed");
+                res.status("404").send("Something's fucky");
             });
     });
 
     //compares the given password and user's set pass
     var isValidPassword = function(user, password){
       return bCrypt.compareSync(password, user.password);
+    }
+
+    var guid = function() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
     }
 
     return router;

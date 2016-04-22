@@ -1,31 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no. initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
     <link rel="stylesheet" href="style1.css">
-    <link rel="stylesheet" href="normalize.css">
 	<script src="profile.js"></script>
 
 </head>
 	
 <body class="container" ng-app="users" ng-controller="UserController">
 	<header class = "page-header">
-		<h6>Welcome Back to {{ houseName }}, {{ name }} <br>
+		<h6>Welcome Back to {{ houseName }}, {{ name }}</h6>
 		<form ng-submit="goto_settings()">
 			<a href="/api/settings" class="btn btn-primary">Settings</a>
-		</form> or 			
-		<div class="col-md-1">
+		</form> 			
+		<!--<div class="col-sm-6">-->
 			<a href="/api/signout" class="btn btn-danger">Sign out!</a>
-		</div>
+		<!--</div>-->
 		</h6>
 	</header>
+
 	<div class = "profile-sidebar">
 		
 	</div>
+
+	<div id="createTask">
+		<h3>Create a task</h3>
+		<form name="createTaskForm" ng-submit="addTask()">
+				<div class="form-group">
+					<label for="taskOwner">Assign to:</label>
+					<input type="email" class="form-control" placeholder="Roommate email" ng-model="taskOwner" required>
+				</div>
+				<div class="form-group">
+					<label for="taskName">Task name</label>
+					<input class="form-control" placeholder="Task name" ng-model="taskName" required>
+				</div>
+				<div class="form-group">
+				    <label for="taskType">Task Type (required)</label>
+				    <select class="form-control" placeholder="Choose a type of task" ng-model="taskType" required>
+					    <option>Bill</option>
+					    <option>Chore</option>
+				    </select>
+				</div>
+				<div class="form-group">
+					<label for="taskDueDate">Task Due Date</label>
+					<input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
+				</div>
+				<div class="form-group">
+					<label for="taskDescription">Task Description (optional) </label>
+					<input class="form-control" placeholder="Task description" ng-model="taskDescription">
+				</div>
+				<input class="btn btn-info" type="submit"></input>
+		</form>
+	</div>
+
 		
 	<div class = "profile-main">
 		<h1>

@@ -211,6 +211,31 @@ var app = angular.module('users', [])
    
 		}
 
+		$scope.addTask = function() {
+			console.log("Start adding task");
+
+			var task = {
+	            taskOwner : $scope.taskOwner,
+	            taskName : $scope.taskName,
+	            taskType : $scope.taskType,
+	            taskDueDate : $scope.taskDueDate,
+	            taskDescription : $scope.taskDescription
+        	}
+
+        	$http.post('/api/addTask', task)
+        		.then(function() {
+        			//DANIEL- THIS IS WHERE YOU WOULD MAKE IT UPDATE THE LIST
+        			scope.transactions.push(response.data);
+        		})
+        		.then(function() {
+        			$http.get("/api/accounts")
+						.then(function(response) {
+							$scope.accounts = response.data;
+						});
+        		});
+   
+		}
+
 		$scope.hideAccounts = function() {
 			console.log("Hide accounts");
 			$scope.showAccount = false;
