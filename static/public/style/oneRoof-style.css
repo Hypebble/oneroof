@@ -1,0 +1,99 @@
+body {
+  background-image: url("/assets/images/placeholderbackground2.png");
+  background-color: #9f7cb8;
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;
+}
+
+.btn-primary {
+  background-color: #9f7cb8;
+  border-color: #9f7cb8;
+}
+
+a.btn-primary:hover {
+  background-color: #9f7cb8;
+}
+
+a {
+  background-color: #9f7cb8;
+}
+
+#feed-sidebar {
+  float: left;
+  width: 20%;
+}
+
+#profile-main {
+  width: 50%;
+  display: inline-block;
+}
+
+#task-details {
+  float: right;
+  width:30%;
+}
+
+.feed-column {
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+.lower {
+   padding: 10px;
+}
+
+.task {
+  background-color: #9f7cb8;
+}
+
+.task img {
+  float: left;
+  position: relative;
+}
+
+.task-headline{
+  display: inline-block;
+} 
+
+.task-details {
+  float: right;
+}
+
+.headline {
+  background-color: #9f7cb8;
+  color: #eeeeee;
+  padding: 0px;
+  margin: 0px;
+}
+
+.signinbox {
+    color: #1a1a1a;
+    margin: auto;
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    left: 40%;
+    top:10%;
+    background: #ededed;
+    border-radius: 25px;
+}
+
+.signindetails {
+    padding: 15px;
+    top: 40px;
+    left: 28px;
+    position: absolute;
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+
+.center {
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+.login {
+    left: 50px;
+}
