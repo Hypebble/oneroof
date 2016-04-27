@@ -18,10 +18,52 @@ a {
   background-color: #9f7cb8;
 }
 
+#feed-sidebar {
+  float: left;
+  width: 20%;
+}
+
+#profile-main {
+  width: 50%;
+  display: inline-block;
+}
+
+#task-details {
+  float: right;
+  width:30%;
+}
+
+.feed-column {
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+.lower {
+   padding: 10px;
+}
+
+.task {
+  background-color: #9f7cb8;
+}
+
+.task img {
+  float: left;
+  position: relative;
+}
+
+.task-headline{
+  display: inline-block;
+} 
+
+.task-details {
+  float: right;
+}
+
 .headline {
-    background-color: #9f7cb8;
-    width: 5%;
-    
+  background-color: #9f7cb8;
+  color: #eeeeee;
+  padding: 0px;
+  margin: 0px;
 }
 
 .signinbox {
@@ -54,24 +96,4 @@ a {
 
 .login {
     left: 50px;
-}
-
-body {
-  background-image: url("/assets/images/placeholderbackground2.png");
-  background-color: #9f7cb8;
-  font-family: "Open Sans", sans-serif;
-  height: 100vh;
-}
-
-.btn-primary {
-  background-color: #9f7cb8;
-  border-color: #9f7cb8;
-}
-
-a.btn-primary:hover {
-  background-color: #9f7cb8;
-}
-
-a {
-  background-color: #9f7cb8;
 }

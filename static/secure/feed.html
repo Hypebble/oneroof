@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <link rel="stylesheet" href="/style/oneRoof-style.css">
+	<link rel="stylesheet" href="/style/normalize.css">
+	<link rel="stylesheet" href="/style/style.css">
+	<script src="feed.js"></script>
+
+</head>
+	
+<body ng-app="users" ng-controller="UserController">
+
+	<div id="feed-sidebar" class ="feed-column">
+		<div class="headline">
+		<h3>Welcome Back to {{ houseName }}, {{ name }}</h3>
+		
+		</div>
+		<form action ="#">
+			<input type="radio" name="feed" value="personal">Personal<br>
+			<input type="radio" name="feed" value= "group">Group
+		</form>
+		<a href="/api/profile/id" class="btn btn-primary">Your Profile</a>
+		<a href="/api/settings" class="btn btn-primary">Settings</a>
+		<a href="/api/signout" class="btn btn-danger">Sign out!</a>
+		
+	</div>
+	
+	<div id="profile-main" class ="feed-column">
+		<div class="headline">
+			<h3>
+				Welcome to your feed!  You have things to do.
+			</h3>	
+		</div>
+		<div class="lower">
+			<div id="tasks">
+				
+				<div class = "task">
+					<img src="/images/bill.png" style="width:64px;height64px;" />
+					<span class="task-headline">Pay Rent ($675) </span>
+					<span class="task-details">Due in <b>2d</b> (5/27)</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="task-details" class="feed-column">
+		<div class="headline">
+			<h3>More details about {{ choreName }}</h3>
+		</div>
+	</div>
+		
+	<!--
+	<div id="create-task" class ="feed-column">
+		<div class="headline">
+			<h3>Create a task</h3>
+		</div>
+		<form name="createTaskForm" ng-submit="addTask()" >
+				<div class="form-group">
+					<label for="taskOwner">Assign to:</label>
+					<input type="email" class="form-control" placeholder="Roommate email" ng-model="taskOwner" required>
+				</div>
+				<div class="form-group">
+					<label for="taskName">Task name</label>
+					<input class="form-control" placeholder="Task name" ng-model="taskName" required>
+				</div>
+				<div class="form-group">
+				    <label for="taskType">Task Type (required)</label>
+				    <select class="form-control" placeholder="Choose a type of task" ng-model="taskType" required>
+					    <option>Bill</option>
+					    <option>Chore</option>
+				    </select>
+				</div>
+				<div class="form-group">
+					<label for="taskDueDate">Task Due Date</label>
+					<input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
+				</div>
+				<div class="form-group">
+					<label for="taskDescription">Task Description (optional) </label>
+					<input class="form-control" placeholder="Task description" ng-model="taskDescription">
+				</div>
+				<input class="btn btn-info" type="submit"></input>
+		</form>
+	</div>
+
+		-->
+
+</body>
+
+</html>

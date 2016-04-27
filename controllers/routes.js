@@ -22,8 +22,8 @@ module.exports = function(passport, bankData) {
         res.redirect('/settings.html')
     })
 
-    //loads the profile information for each user
-    router.get('/api/profile', function(req, res) {
+    //loads the main information for each user
+    router.get('/api/feed', function(req, res) {
         res.json(req.user);
     });
 
@@ -33,6 +33,13 @@ module.exports = function(passport, bankData) {
             console.log('in login route!!!!! bitch3z');
             res.json(req.newUser);
         });
+        
+    router.get('/api/facebook', passport.authenticate('facebook-login', { scope: ['email']}));
+    
+    router.get('/api/facebook/callback', passport.authenticate('facebook-login', {
+            successRedirect: '/feed.html',
+            failureRedirect: '/'
+    }));
 
     //updates a user's display name
     router.put('/api/updateDispl', function(req, res) {

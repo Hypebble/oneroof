@@ -8,9 +8,13 @@ CREATE TABLE tblHOUSE (
 CREATE TABLE tblUSER (
 	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	name VARCHAR(60) NOT NULL,
-	hash_pass VARCHAR(64) NOT NULL,
+	facebook_id VARCHAR(64),
+	facebook_name VARCHAR(64),
+	facebook_email VARCHAR(64),
+	facebook_token VARCHAR(64),
+	hash_pass VARCHAR(64),
 	phone_num VARCHAR(10),
-	email VARCHAR(60) NOT NULL
+	email VARCHAR(60)
 );
 
 CREATE TABLE tblHOUSE_USER (

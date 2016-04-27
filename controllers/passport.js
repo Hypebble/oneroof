@@ -12,6 +12,7 @@ var bCrypt = require('bcrypt');
 var crypto = require('crypto');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
+var fbConfig = require('../secret/config-facebook.json');
 var dbConfig = require('../secret/config-maria.json');
 var bluebird = require('bluebird');
 var mysql = require('mysql');
@@ -103,6 +104,57 @@ module.exports = function(passport) {
                     }
                 });
         }));
+        
+        // logs user in via facebook
+        passport.use('facebook-login', new FacebookStrategy(fbConfig,
+            function(token, refreshToken, profile, done) {
+                process.nextTick(function() {
+                    console.log("we out here!");
+                    console.log(profile);
+                    console.log(refreshToken);
+                    console.log(token);
+                    bankUser.getUserFB(profile.id)
+                        .then(function(rows) {
+                            console.log(rows);
+                            if(rows.length == 0) {
+                               console.log("token: " + token);
+                               console.log("refreshToken: " + refreshToken);
+                               console.log("profile: " , profile);
+                               console.log("done: " , done);
+                                //var gravatarUrlNew = "http://www.gravatar.com/avatar/" + gravHashNew;
+
+                                //var userIDNew = uuid.v1();
+                                var newUser = {
+                                //  id : userIDNew,
+                                    facebook_email: profile.emails[0].value, 
+                                    displayName : profile.displayName,
+                                    facebook_token : token,
+                                    facebook_id : profile.id
+                                // gravatarUrl : gravatarUrlNew, 
+                                };
+                                console.log("HERERERERERE round 2");
+                                
+                                var newAccount = {
+                                //  userID : userIDNew,
+                                    accountName : "Default"
+                                };
+
+                                bankUser.createUser(newUser)
+                                    .then(function() {
+                                        console.log("facebook user created");
+                                        return done(null, newUser);
+                                    })
+                                    .catch(function() {
+                                        return done(null, false);
+                                    });
+                                } else {
+                                    console.log("user exists!!!")
+                                    console.log(rows[0]);
+                                }
+                            });
+                        });
+                    }));
+                
     
     //creates hashes
     var createHash = function(password){

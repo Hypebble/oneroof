@@ -22,7 +22,7 @@ var app = angular.module('users', [])
 		$scope.editViewIndex = false;
 		$scope.numOffset = 0;
 
-		$http.get('/api/profile')
+		$http.get('/api/feed')
 			.then(function(response) {
 				$scope.email = response.data.email;
 				$scope.displayName = response.data.displayName;
@@ -35,13 +35,13 @@ var app = angular.module('users', [])
 				console.log("ruh roh");
 			})
 
-		$scope.profile = function() {
-			console.log("made it to the profile view");
+		$scope.feed = function() {
+			console.log("made it to the feed view");
 			$scope.showProf = true;
 		}
 
-		$scope.hideProfile = function() {
-			console.log("hide profile");
+		$scope.hideFeed = function() {
+			console.log("hide feed");
 			$scope.showProf = false;
 		}
 
