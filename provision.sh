@@ -18,7 +18,7 @@ sudo -E apt-get update
 # -y immediately puts in a yes w/o user input
 sudo -E apt-get install -y git
 
-sudo -E apt-get install build-essential
+sudo -E apt-get install -y build-essential
 
 sudo -E apt-get install -y tcl8.5
 
@@ -42,25 +42,24 @@ DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.
 DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';
 FLUSH PRIVILEGES;
+CREATE DATABASE IF NOT EXISTS oneRoof;
+
 EOF
+
+echo "."
+echo "."
+echo "JUST DID DATABASES YO DID IT WORK"
+echo "."
+echo "."
+
+mysql -u root oneRoof < /vagrant/models/database_creation.sql
 
 # install MariaDB 10.1
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
-apt-get update
 apt-get install -y mariadb-server
 
 # set the loglevel for npm to show errors only
 npm config set loglevel error -g
-
-
-#install mongo
-sudo -E apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo -E tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-sudo -E apt-get update
-sudo -E apt-get install -y mongodb-org
-
-# kerberos library which is needed to build Mongo on node during npm install
-sudo -E apt-get install -y libkrb5-dev
 
 sudo -E npm install --no-bin-links
