@@ -20,7 +20,7 @@ sudo -E apt-get install -y git
 
 sudo -E apt-get install build-essential
 
-sudo -E apt-get install tcl8.5
+sudo -E apt-get install -y tcl8.5
 
 # install node
 # curl returns the stuff stored at a https
@@ -63,4 +63,4 @@ sudo -E apt-get install -y mongodb-org
 # kerberos library which is needed to build Mongo on node during npm install
 sudo -E apt-get install -y libkrb5-dev
 
-sudo -E npm install
+sudo -E npm install --no-bin-links
