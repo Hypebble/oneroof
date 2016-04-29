@@ -27,7 +27,7 @@ sudo -E apt-get install -y tcl8.5
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo -E apt-get install -y nodejs
 
-sudo -E apt-get install -y build-essential
+#sudo -E apt-get install -y build-essential
 
 #allow Node.js servers to bind to low ports
 sudo -E apt-get install -y chase
@@ -45,12 +45,6 @@ FLUSH PRIVILEGES;
 CREATE DATABASE IF NOT EXISTS oneRoof;
 
 EOF
-
-echo "."
-echo "."
-echo "JUST DID DATABASES YO DID IT WORK"
-echo "."
-echo "."
 
 mysql -u root oneRoof < /vagrant/models/database_creation.sql
 
