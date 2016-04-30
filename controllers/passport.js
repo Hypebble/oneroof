@@ -109,30 +109,38 @@ module.exports = function(passport) {
         passport.use('facebook-login', new FacebookStrategy(fbConfig,
             function(token, refreshToken, profile, done) {
                 process.nextTick(function() {
-                    console.log("we out here!");
-                    console.log(profile);
-                    console.log(refreshToken);
-                    console.log(token);
+                    //console.log("we out here!");
+                    //console.log(profile);
+                    // console.log(refreshToken);
+                    // console.log(token);
                     bankUser.getUserFB(profile.id)
                         .then(function(rows) {
                             console.log(rows);
                             if(rows.length == 0) {
-                               console.log("token: " + token);
-                               console.log("refreshToken: " + refreshToken);
-                               console.log("profile: " , profile);
-                               console.log("done: " , done);
+                               // console.log("token: " + token);
+                               // console.log("refreshToken: " + refreshToken);
+                               // console.log("profile: " , profile);
+                               // console.log("done: " , done);
                                 //var gravatarUrlNew = "http://www.gravatar.com/avatar/" + gravHashNew;
 
                                 //var userIDNew = uuid.v1();
+                                var name;
+                                console.log(profile)
+                                if(profile.displayName == undefined) {
+                                    name = profile.name.givenName + " " + profile.name.familyName;
+                                } else {
+                                    console.log("Kept display name");
+                                    name = profile.displayName;
+                                }
                                 var newUser = {
                                 //  id : userIDNew,
                                     facebook_email: profile.emails[0].value, 
-                                    displayName : profile.displayName,
+                                    displayName : name,
                                     facebook_token : token,
                                     facebook_id : profile.id
                                 // gravatarUrl : gravatarUrlNew, 
                                 };
-                                console.log("HERERERERERE round 2");
+                                //console.log("HERERERERERE round 2");
                                 
                                 var newAccount = {
                                 //  userID : userIDNew,

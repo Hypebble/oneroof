@@ -34,7 +34,7 @@ module.exports = function(passport, bankData) {
             res.json(req.newUser);
         });
         
-    router.get('/api/facebook', passport.authenticate('facebook-login', { scope: ['email']}));
+    router.get('/api/facebook', passport.authenticate('facebook-login', { scope: 'email'}));
     
     router.get('/api/facebook/callback', passport.authenticate('facebook-login', {
             successRedirect: '/feed.html',
