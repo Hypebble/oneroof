@@ -236,7 +236,7 @@ module.exports = function(passport, bankData) {
                     //TODO: MAKE TASKTYPE NOT TOTALLY ARBITRARY
                     taskType : req.body.taskType,
                     taskDueDate : req.body.taskDueDate,
-                    taskDescription : req.body.transDescription,
+                    taskDescription : req.body.taskDescription,
                     taskStatus : "incomplete",
                     taskTime : creationTime
                 };
@@ -252,6 +252,19 @@ module.exports = function(passport, bankData) {
                 }
 
                 return bankData.updateUserTaskTable(info);
+            })
+            .then(function() {
+                var info = {
+                    taskID : generatedTaskID,
+                    amount : req.body.amount,
+                    priority : req.body.priority
+                }
+
+                if(req.body.taskType == "Chore") {
+                    return bankData.updateChoreTable(info);
+                } else {
+                    return bankData.updateBillTable(info);
+                }
             })
             .catch(function() {
                 res.status("404").send("Something's fucky");

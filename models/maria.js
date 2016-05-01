@@ -85,9 +85,9 @@ var bankData = {
 	
 	createTask(task) {
 		console.log(TAG + "creating a task");
-		console.log(task.taskName);
-		var sql = 'insert into tblTASK (task_name, task_time, task_type, task_status, task_due_date) values (?, ?, ?, ?, ?)';
-		var params = [task.taskName, task.taskTime, task.taskType, task.taskStatus, task.taskDueDate];
+		console.log(task);
+		var sql = 'insert into tblTASK (task_id, task_name, task_time, task_type, task_status, task_due_date) values (?, ?, ?, ?, ?, ?)';
+		var params = [task.taskID, task.taskName, task.taskTime, task.taskType, task.taskStatus, task.taskDueDate];
 		return connPool.queryAsync(sql, params)	
 	},
 
@@ -96,6 +96,21 @@ var bankData = {
 		console.log(info);
 		var sql = 'insert into tblUSER_TASK (task_id, task_owner_id, task_creator_id) values (?, ?, ?)';
 		var params = [info.taskID, info.taskOwnerIDInfo, info.taskCreatorIDInfo];
+		return connPool.queryAsync(sql, params);
+	},
+
+	updateBillTable(info) {
+		console.log(TAG + "adding information to tblBILL");
+		var convertedAmount = parseInt(info.amount);
+		var sql = 'insert into tblBILL (task_id, bill_amount) values (?, ?)';
+		var params = [info.taskID, convertedAmount];
+		return connPool.queryAsync(sql, params);
+	},
+
+	updateChoreTable(info) {
+		console.log(TAG + "adding information of tblCHORE");
+		var sql = 'insert into tblCHORE (task_id, priority) values (?, ?)';
+		var params = [info.taskID, task.priority];
 		return connPool.queryAsync(sql, params);
 	},
 	

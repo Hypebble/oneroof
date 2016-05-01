@@ -219,7 +219,9 @@ var app = angular.module('users', [])
 	            taskName : $scope.taskName,
 	            taskType : $scope.taskType,
 	            taskDueDate : $scope.taskDueDate,
-	            taskDescription : $scope.taskDescription
+	            taskDescription : $scope.taskDescription,
+	            amount : $scope.billAmount,
+	            priority : $scope.chorePriority
         	}
 
         	$http.post('/api/addTask', task)

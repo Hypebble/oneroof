@@ -38,6 +38,7 @@ app.use(session({
 passport.serializeUser(function(user, done) {
     console.log('serializing user: ');
     console.log(user);
+    user.houseid = 'daniel is a boss'
     done(null, user); 
 });
 
