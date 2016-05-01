@@ -1,8 +1,14 @@
 body {
   background-image: url("/assets/images/placeholderbackground2.png");
-  background-color: #9f7cb8;
+  background-color: #ebe4f0;
   font-family: "Open Sans", sans-serif;
   height: 100vh;
+}
+
+.headerWord {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 25px;
 }
 
 .btn-primary {
@@ -51,7 +57,7 @@ a {
   position: relative;
 }
 
-.task-headline{
+.task-headline {
   display: inline-block;
 } 
 
@@ -62,8 +68,17 @@ a {
 .headline {
   background-color: #9f7cb8;
   color: #eeeeee;
-  padding: 0px;
+  padding: 10px;
   margin: 0px;
+  display: block;
+}
+
+#header > div {
+  background-color: #9f7cb8;
+  font-size: 22px;
+  padding-left: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .signinbox {
@@ -73,7 +88,7 @@ a {
     height: 350px;
     position: absolute;
     left: 40%;
-    top:10%;
+    top: 10%;
     background: #ededed;
     border-radius: 25px;
 }

@@ -6,52 +6,62 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-    <link rel="stylesheet" href="/style/oneRoof-style.css">
-	<link rel="stylesheet" href="/style/normalize.css">
-	<link rel="stylesheet" href="/style/style.css">
-	<script src="feed.js"></script>
+	<link rel="stylesheet" href="/css/normalize.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/oneRoof-style.css">
+	<script src="/js/feed.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/feed.js"></script>
 
 </head>
 	
 <body ng-app="users" ng-controller="UserController">
-
-	<div id="feed-sidebar" class ="feed-column">
-		<div class="headline">
-		<h3>Welcome Back to {{ houseName }}, {{ name }}</h3>
-		
+	
+	<div id="header" class = "headline">
+		<div class ="col-md-3">
+			Home
 		</div>
+		
+		<div class ="col-md-6">
+			Tasks
+			
+		<a href="/api/profile/id" class="btn btn-primary">Your Profile</a>
+		<a href="/api/settings" class="btn btn-primary">Settings</a>
+		<a href="/api/signout" class="btn btn-danger">Sign out!</a>
+		</div>
+		
+		<div class ="col-md-3">
+			Details
+		</div>
+	</div>
+	
+	
+	<div id="profile-main" class ="col-md-6"">
+		<div class = "headerWord">
+			Tasks
+		</div>
+				
 		<form action ="#">
 			<input type="radio" name="feed" value="personal">Personal<br>
 			<input type="radio" name="feed" value= "group">Group
 		</form>
-		<a href="/api/profile/id" class="btn btn-primary">Your Profile</a>
-		<a href="/api/settings" class="btn btn-primary">Settings</a>
-		<a href="/api/signout" class="btn btn-danger">Sign out!</a>
 		
-	</div>
-	
-	<div id="profile-main" class ="feed-column">
-		<div class="headline">
-			<h3>
-				Welcome to your feed!  You have things to do.
-			</h3>	
-		</div>
-		<div class="lower">
 			<div id="tasks">
-				
+
 				<div class = "task">
 					<img src="/images/bill.png" style="width:64px;height64px;" />
 					<span class="task-headline">Pay Rent ($675) </span>
 					<span class="task-details">Due in <b>2d</b> (5/27)</span>
 				</div>
-			</div>
 		</div>
 	</div>
 	
-	<div id="task-details" class="feed-column">
-		<div class="headline">
-			<h3>More details about {{ choreName }}</h3>
+	<div id="task-details" class="col-md-3"">
+		<div class = "headerWord">
+			Tasks
 		</div>
+
 	</div>
 		
 	<!--
