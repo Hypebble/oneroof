@@ -25,7 +25,7 @@ var bankData = {
 	createUser(user) {
 		console.log("Begin create user");
 		console.log(user);
-		if (user.hasOwnProperty() ) {
+		if (user.hasOwnProperty("facebook_id") ) {
 			console.log("creating facebook user!!!");
 			var sql = 'insert into tblUSER (facebook_email, name, facebook_token, facebook_id) values (?, ?, ?, ?)';
 			var params = [user.facebook_email, user.displayName, user.facebook_token, user.facebook_id];
