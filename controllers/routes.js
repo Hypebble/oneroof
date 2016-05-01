@@ -18,13 +18,29 @@ module.exports = function(passport, bankData) {
     });
     
     router.get('/api/settings', function(req, res) {
-        console.log("passed into settings")
-        res.redirect('/settings.html')
+        console.log("passed into settings");
+        res.json(req.user);
     })
 
     //loads the main information for each user
     router.get('/api/feed', function(req, res) {
         res.json(req.user);
+    });
+
+    router.get('/api/profile/:id', function(req,res){
+        res.json(req.user);
+    });
+
+    router.get('/api/refreshUserData', function(req, res) {
+        bankData.getUser(req.user.email)
+        .then(function(rows) {
+            console.log("new user?", rows[0])
+           res.json(rows[0]); 
+        })
+        .catch(function() {
+
+        });
+
     });
 
     //logs a user in
@@ -45,8 +61,11 @@ module.exports = function(passport, bankData) {
     router.put('/api/updateDispl', function(req, res) {
         bankData.getUser(req.user.email)
             .then(function(rows) {
+                console.log(rows);
                 if(rows.length != 0) {
-                    bankData.updateUserDisplayName(req.body.displayName, req.user.id)
+                    console.log("", req.body.displayName);
+                    console.log("", req.user.user_id);
+                    bankData.updateUserDisplayName(req.body.displayName, req.user.user_id)
                     res.json(req.user);
                 } else {
                     res.status("403").send("You're not authorized to do that");
@@ -62,9 +81,15 @@ module.exports = function(passport, bankData) {
         bankData.getUser(req.user.email)
             .then(function(rows) {
                 if(rows.length != 0) {
+                    console.log("req body", req.body);
+                    console.log("user data", rows);
+                    console.log("old pass", req.body.oldPass);
+                    console.log("what is row at 0", rows[0]);
+                    console.log("the hash pass of rows[0]: ", rows[0].hash_pass);
+
                     if(isValidPassword(rows[0], req.body.oldPass)) {
                         console.log("Updating password");
-                        bankData.updateUserPass(req.body.newPass, req.user.id);
+                        bankData.updateUserPass(req.body.newPass, req.user.user_id);
                         res.json(req.user);
                     } else {
                         res.status("401").send("Wrong password");
@@ -260,7 +285,8 @@ module.exports = function(passport, bankData) {
 
     //compares the given password and user's set pass
     var isValidPassword = function(user, password){
-      return bCrypt.compareSync(password, user.password);
+        console.log("user object", user);
+      return bCrypt.compareSync(password, user.hash_pass);
     }
 
     var guid = function() {

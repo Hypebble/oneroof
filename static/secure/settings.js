@@ -19,6 +19,23 @@ var app = angular.module('settings', [])
 		$scope.otherGroup = false;
 		$scope.createdGroup = false;
 
+
+		$http.get('/api/settings')
+			.then(function(response) {
+				console.log(response)
+				$scope.email = response.data.email;
+				console.log("", $scope.email);
+				$scope.displayName = response.data.displayName;
+				console.log("", $scope.displayName);
+				$scope.gravatarUrl = response.data.gravatarUrl;
+				if(!response.data.oAuth) {
+					$scope.showPass = true;
+				} 
+			})
+			.catch(function(err) {
+				console.log("ruh roh");
+			})
+
 		$scope.joinHouse = function() {
 			$scope.houseJoined = true;
 			$scope.house = true;
@@ -97,6 +114,61 @@ var app = angular.module('settings', [])
 			$scope.createdGroup = false;
 			$scope.groupCreated = false;
 		};
+
+		// update user display name
+		$scope.updateName = function() {
+
+			var newData = {
+				displayName : $scope.changeDisplayName
+			}
+
+			$http.put('/api/updateDispl', newData)
+				.then(function(response) {
+					$scope.displayName = $scope.changeDisplayName;
+					window.alert("Display name changed!");
+					$scope.changeDisplayName = "";
+					// $http.get('/api/settings')
+					// 	.then(function(response) {
+					// 		console.log("response ", response);
+					// 		$scope.displayName = response.data.name;
+					// 	})
+					// 	.catch(function(){});
+				})
+				.catch(function(err) {
+					console.log("newDispl fail");
+					console.log(err);
+				})
+		}
+
+		// update user password
+		$scope.updatePassword = function() {
+
+			var data = {
+				oldPass : $scope.curPass,
+				newPass : $scope.newPassword,
+				confirmPass : $scope.confirmNewPassword
+			}
+
+			if($scope.newPassword == $scope.confirmNewPassword) {
+				$scope.confirmPass = false;
+				$http.put('/api/updatePass', data)
+				.then(function(response) {
+					$scope.incorrectPass = false;
+					window.alert("Password changed!");
+					$scope.curPass = "";
+					$scope.newPassword = "";
+					$scope.confirmNewPassword = "";
+				})
+				.catch(function(response) {
+					$scope.incorrectPass = true;
+				})
+			} else {
+				$scope.confirmPass = true;
+				console.log("passwords don't match up");
+			}
+
+
+		}
 
 
 	});

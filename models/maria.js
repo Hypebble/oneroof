@@ -40,14 +40,16 @@ var bankData = {
 	},
 
 	updateUserDisplayName(displayName, id) {
-		var sql = 'update tblUSER set name=? where id=?'
+		console.log("", displayName);
+		console.log("", id);
+		var sql = 'update tblUSER set name=? where user_id=?'
 		return connPool.queryAsync(sql, [displayName, id]);
 	}, 
 
 	updateUserPass(pass, id) {
 		console.log("Making it in, but not past hash")
 		var newPassword = createHash(pass);
-		var sql = 'update tblUSER set password=? where id=?';
+		var sql = 'update tblUSER set hash_pass=? where user_id=?';
 		return connPool.queryAsync(sql, [newPassword, id]);
 	}, 
 	

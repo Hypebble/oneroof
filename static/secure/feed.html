@@ -17,15 +17,15 @@
 
 	<div id="feed-sidebar" class ="feed-column">
 		<div class="headline">
-		<h3>Welcome Back to {{ houseName }}, {{ name }}</h3>
+		<h3>Welcome Back to {{ houseName }}, {{ displayName }}</h3>
 		
 		</div>
 		<form action ="#">
 			<input type="radio" name="feed" value="personal">Personal<br>
 			<input type="radio" name="feed" value= "group">Group
 		</form>
-		<a href="/api/profile/id" class="btn btn-primary">Your Profile</a>
-		<a href="/api/settings" class="btn btn-primary">Settings</a>
+		<a href="/api/profile/" class="btn btn-primary">Your Profile</a>
+		<a href="settings.html" class="btn btn-primary">Settings</a>
 		<a href="/api/signout" class="btn btn-danger">Sign out!</a>
 		
 	</div>
