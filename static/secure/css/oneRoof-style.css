@@ -1,42 +1,146 @@
+/**********GENERAL*********/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
+
+
 body {
-  background-image: url("/assets/images/placeholderbackground2.png");
   background-color: #ebe4f0;
   font-family: "Open Sans", sans-serif;
   height: 100vh;
 }
 
+.clear {
+  clear: both;
+}
+
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/****HEADLINE****/
+
+.links {
+  margin: 0;
+  padding: 20px 25px;
+  overflow: hidden;
+  color: #eeeeee;
+}
+
+.head-link {
+  display: block;
+  color: #eeeeee;
+  float: left;
+}
+
+.headlink .logo {
+  margin:5px;
+}
+
+.head-link a {
+  color: #eeeeee;
+  font-size:18px;
+}
+
+.head-link .btn {
+  padding: 16px 16px;
+}
+
+.prof-link {
+  width:64px;
+  float: right;
+}
+
+.header-title {
+  width:250px;
+}
+
+.headline {
+  background-color: #9f7cb8;
+    font-family: "Open Sans Bold", sans-serif;
+  font-weight: bold;
+}
+
 .headerWord {
-  text-align: center;
-  font-size: 20px;
+  font-size: 24px;
   margin-top: 25px;
 }
 
-.btn-primary {
-  background-color: #9f7cb8;
-  border-color: #9f7cb8;
+.logo {
+  font-size:32px;
+  padding-top: 16px;
 }
 
-a.btn-primary:hover {
-  background-color: #9f7cb8;
+.prof-link img {
+  border-radius: 2px 2px 2px 2px;
+  border: black;
 }
 
-a {
-  background-color: #9f7cb8;
+/**/
+
+
+
+
+/*****SIDEBAR *******/
+
+.box-down {
+  box-shadow: 3px 3px 8px grey;
+}
+
+.box-right {
+  box-shadow: 0px 25px 0px grey;
+}
+
+
+.sidebar {
+  background-color: #B9B4BD;
+  color: #9f7cb8;
+  z-index:  -1;
+  padding:0px;
+  padding-right: 60px;
+
 }
 
 #feed-sidebar {
   float: left;
   width: 20%;
 }
+.sidebar input {
+    visibility:hidden;
+}
+
+.sidebar label {
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  font-weight:400;
+  padding: 20px;
+}
+
+input:checked + label {
+    border-radius: 0px 8px 8px 0px; 
+    border: solid #9f7cb8;
+    background: #9f7cb8;
+    font-weight: 700;
+    color:#eeeeee;
+}
+
+
+/**************TASKS *******/
+
 
 #profile-main {
   width: 50%;
   display: inline-block;
 }
 
-#task-details {
+.task-details {
   float: right;
-  width:30%;
+  color: #eeeeee;
+  font-size:22px;
+  padding-right:16px;
+  padding-top: 12px;
 }
 
 .feed-column {
@@ -50,37 +154,43 @@ a {
 
 .task {
   background-color: #9f7cb8;
+  height:60px;
+  border-radius: 34px 34px 34px 34px;
 }
 
 .task img {
   float: left;
   position: relative;
+  border: black;
+  color: #eeeeee;;
 }
 
 .task-headline {
-  display: inline-block;
+  float: left;
+  color: #eeeeee;
+  font-size:22px;
+  padding-left:16px;
+  padding-top: 12px;
 } 
 
-.task-details {
-  float: right;
-}
 
-.headline {
+
+/*******INPUT*******/
+.btn-primary {
   background-color: #9f7cb8;
-  color: #eeeeee;
-  padding: 10px;
-  margin: 0px;
-  display: block;
+  border-color: #9f7cb8;
 }
 
-#header > div {
+a.btn-primary:hover {
   background-color: #9f7cb8;
-  font-size: 22px;
-  padding-left: 14px;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
+a {
+  background-color: #9f7cb8;
+}
+
+
+/*********LOGIN*******/
 .signinbox {
     color: #1a1a1a;
     margin: auto;
@@ -101,11 +211,6 @@ a {
     clear: both;
     display: block;
     overflow: hidden;
-}
-
-.center {
-    width: 50%;
-    margin: 0 auto;
 }
 
 

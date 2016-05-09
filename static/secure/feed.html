@@ -1,70 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-	<link rel="stylesheet" href="/css/normalize.css">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/oneRoof-style.css">
-	<script src="/js/feed.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/feed.js"></script>
+    <script src="/js/feed.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/feed.js"></script>
 
 </head>
-	
+
 <body ng-app="users" ng-controller="UserController">
-	
-	<div id="header" class = "headline">
-		<div class ="col-md-3">
-			Home
-		</div>
-		
-		<div class ="col-md-6">
-			Tasks
-			
-		<a href="/api/profile/id" class="btn btn-primary">Your Profile</a>
-		<a href="/api/settings" class="btn btn-primary">Settings</a>
-		<a href="/api/signout" class="btn btn-danger">Sign out!</a>
-		</div>
-		
-		<div class ="col-md-3">
-			Details
-		</div>
-	</div>
-	
-	
-	<div id="profile-main" class ="col-md-6"">
-		<div class = "headerWord">
-			Tasks
-		</div>
-				
-		<form action ="#">
-			<input type="radio" name="feed" value="personal">Personal<br>
-			<input type="radio" name="feed" value= "group">Group
-		</form>
-		
-			<div id="tasks">
 
-				<div class = "task">
-					<img src="/images/bill.png" style="width:64px;height64px;" />
-					<span class="task-headline">Pay Rent ($675) </span>
-					<span class="task-details">Due in <b>2d</b> (5/27)</span>
+    <div id="header" class="headline box-down">
+		<div class="links">
+			<div class="head-link col-md-3">
+				<a href="feed.html"><img src="./img/newlogo2-04.png" width="48" height="48"><span class="logo">Home</span></a>
+			</div>
+
+			<div class="col-md-9">
+				<div class="head-link">
+					<a href="/api/settings" class="btn btn-primary">Settings</a>
+					<a href="/api/signout" class="btn btn-danger">Sign out!</a>
 				</div>
+				<div class="head-link prof-link">
+					<a href="/api/profile/id"><img src="img/icon/dj.png" alt="Your Profile" width= "48" height="48"></a>
+				</div>
+			</div>	
+			<div class="clear"></div>
 		</div>
+			
+    </div>
+
+
+	<div class="sidebar col-md-3">
+		<div class="headerWord text-center">
+			<b>Views</b>
+		</div>
+		
+		<input type="radio" value="personal" name="focus" id="radio1" checked/>
+		<label for="radio1" class = "sidebar-link text-center">
+			My Tasks
+		</label>	
+		
+		
+		<input type="radio" value="house" name="focus" id="radio2"/>
+		<label for="radio2" class = "sidebar-link center">
+			House Tasks
+		</label>	
 	</div>
-	
-	<div id="task-details" class="col-md-3"">
-		<div class = "headerWord">
+
+	<div id="tasks" class="col-md-6">
+		<div class="headerWord">
 			Tasks
 		</div>
 
+		<div class="task">
+			<img src="/img/icon/money.png" style="width:64px;height64px;" class="img-circle" />
+			<span class="task-headline">Pay Rent ($675) </span>
+			<span class="task-details">Due in <b>2d</b> (5/27)</span>
+		</div>
 	</div>
-		
-	<!--
+
+
+	<div id="task-details" class="col-md-3">
+		<div class="headerWord">
+			Details about <b>pay rent</b>
+		</div>
+	</div>
+
+</body>
+
+</html>
+<!--
 	<div id="create-task" class ="feed-column">
 		<div class="headline">
 			<h3>Create a task</h3>
@@ -98,7 +114,3 @@
 	</div>
 
 		-->
-
-</body>
-
-</html>
