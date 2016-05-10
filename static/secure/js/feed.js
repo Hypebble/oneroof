@@ -24,8 +24,9 @@ var app = angular.module('users', [])
 
 		$http.get('/api/feed')
 			.then(function(response) {
+				console.log(response)
 				$scope.email = response.data.email;
-				$scope.displayName = response.data.displayName;
+				$scope.displayName = response.data.name;
 				$scope.gravatarUrl = response.data.gravatarUrl;
 				if(!response.data.oAuth) {
 					$scope.showPass = true;
@@ -61,20 +62,6 @@ var app = angular.module('users', [])
 					console.log("newDispl fail");
 					console.log(err);
 				})
-		}
-
-		$scope.goto_settings = function() {
-			$http.get('/api/settings')
-			.then(function(response){
-				console.log("accessing settings")
-				$scope.loading = false;
-				$window.location.href = '/settings.html';
-			})
-			.catch(function(err) {
-				$scope.loading = false;
-				$scope.show = true;
-				console.log("something broke the settings page");
-			});
 		}
 
 		$scope.submit3 = function() {

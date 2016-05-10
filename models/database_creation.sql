@@ -2,7 +2,7 @@ CREATE TABLE tblHOUSE (
 	house_id INT NOT NULL AUTO_INCREMENT,
 	house_name VARCHAR(30) NOT NULL,
 	rent_total INT,
-	PRIMARY KEY(house_id)
+	 house_code VARCHAR(30) NOT NULL, PRIMARY KEY(house_id)
 );
 
 

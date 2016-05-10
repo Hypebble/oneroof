@@ -17,7 +17,7 @@ angular.module('signup', [])
 				email : $scope.email,
 				password : $scope.password,
 				confirmPass : $scope.confirmPass,
-				displayName : $scope.displayName
+				displayName : $scope.name
 			};
 
 			//double check passwords match

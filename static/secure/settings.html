@@ -18,10 +18,10 @@
 	<header class="page-header">
 		<div class="row">
 			<div class="col-md-6">
-				<h1>Welcome Back, <!-- {{displayName}} --> oneRoofUser!</h1>
+				<h1>Welcome Back, {{ displayName }}</h1>
 			</div>
 			<div class="col-md-1">
-				<a href="/api/settings" class="btn btn-primary">Settings</a>
+				<a href="settings.html" class="btn btn-primary">Settings</a>
 			</div>
 			<div class="col-md-1">
 				<a href="/api/signout" class="btn btn-danger">Sign out!</a>
@@ -31,11 +31,11 @@
 	<div class="col-md-4">
 		<h1>Personal Information</h1>
 
-		<h3>email: <!--{{email}}--> oneUser@oneroofapp.com </h3>
-		<h3>username: <!--{{displayName}}--> oneRoofUser</h3>
+		<h3>email: {{ email }}</h3>
+		<h3>username: {{ displayName }} </h3>
 
 		<h2>Update Name</h2>
-		<form ng-submit="submit2()">
+		<form ng-submit="updateName()">
 			<div class="form-group">
 			  	<label for="displayNameChange"></label>
 			  	<input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName" required>
@@ -44,7 +44,7 @@
 		</form>
 
 			<h2>Change Password</h2>
-			<form ng-submit="submit3()">
+			<form ng-submit="updatePassword()">
 				<div class="form-group">
 					<label for="currPass">Current Password</label>
 					<input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass" required>
@@ -75,22 +75,33 @@
 
 		<div class="row" ng-show="!house">
 
-			<div class="col-md-6 col-sm-2">
-			<p style="border-style: solid"><i>Enter House Name</i></p>
-			<a class="btn btn-primary" ng-click="createHouse()" ng-show="!houseCreated">CREATE HOUSE</a>
+			<div class="col-md-6 col-sm-2" ng-hide="inHouse">
+				<p style="border-style: solid"><i>Enter House Name</i></p>
+				<form ng-submit="createHouse()">
+					<div class="form-group">
+			  			<label for="createNewHouse"></label>
+			  			<input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
+					</div>
+					<input class="btn btn-info" type="submit">
+				</form>
 			</div>
 
-			<div class="col-md-6 col-sm-2">
-			<p style="border-style: solid">HXDC12G</p>
-			<a class="btn btn-success" ng-click="joinHouse()" ng-show="!houseJoined">JOIN HOUSE</a></div>
+			<div class="col-md-6 col-sm-2" ng-hide="inHouse">
+				<form ng-submit="joinHouse()">
+					<div class="form-group">
+			  			<label for="joinAHouse"></label>
+			  			<input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
+					</div>
+					<input class="btn btn-info" type="submit">
+				</form>
 		</div>
-		<div class="row" ng-show="house">
+		<div class="row" ng-show="!house">
 			<div class="col-md-6">
-			<p>Your House Name: INFO TOWER!</p>
-			<p>Your House Code: HY761J1</p>
+			<p>Your House Name: {{ houseNAME }}</p>
+			<p>Your House Code: {{ houseCODE }}</p>
 			<a class="btn btn-danger" ng-click="leaveHouse()">LEAVE HOUSE</a></div>
 		</div>
-		<div ng-show="house">
+		<div ng-hide="inHouse">
 		<h3>Manage Groups</h3>
 		<div class="row">
 			<div class="col-md-6">
