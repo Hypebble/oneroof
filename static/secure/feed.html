@@ -76,6 +76,7 @@
 			<img src="/img/icon/money.png" class="img-circle" />
 			<span class="task-headline"<b>Pay Rent ($675)</b> </span>
 			<span class="task-details">Due in <b>2d</b> (5/27)</span>
+		<div class="lower">
 		</div>
 	</div>
 
@@ -124,6 +125,19 @@
 
 </html>
 <!--
+=======
+		
+	<div id="tasks">
+		<li ng-repeat="task in tasks">
+			<p>{{task.task_name}}</p>
+			<p>{{task.task_descr}}</p>
+			<p>{{task.task_time}}</p>
+			<p>{{task.task_status}}</p>
+			<p>{{task.due_date}}</p>
+		</li>
+	</div>
+	
+>>>>>>> feed_feature
 	<div id="create-task" class ="feed-column">
 		<div class="headline">
 			<h3>Create a task</h3>
@@ -144,6 +158,16 @@
 					    <option>Chore</option>
 				    </select>
 				</div>
+				<div class="input-group">
+					<label for="billAmount">Bill Amount</label>
+      				<div class="input-group-addon">$</div>
+      				<input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
+      				<div class="input-group-addon">.00</div>
+    			</div>
+    			<div class="form-group">
+    				<label for="chorePriority">Chore Priority</label>
+					<input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
+    			</div>
 				<div class="form-group">
 					<label for="taskDueDate">Task Due Date</label>
 					<input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
@@ -156,4 +180,8 @@
 		</form>
 	</div>
 
+<<<<<<< HEAD
 		-->
+</body>
+
+</html>
