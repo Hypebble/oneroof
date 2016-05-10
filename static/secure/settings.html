@@ -74,22 +74,33 @@
 
 		<div class="row" ng-show="!house">
 
-			<div class="col-md-6 col-sm-2">
-			<p style="border-style: solid"><i>Enter House Name</i></p>
-			<a class="btn btn-primary" ng-click="createHouse()" ng-show="!houseCreated">CREATE HOUSE</a>
+			<div class="col-md-6 col-sm-2" ng-hide="inHouse">
+				<p style="border-style: solid"><i>Enter House Name</i></p>
+				<form ng-submit="createHouse()">
+					<div class="form-group">
+			  			<label for="createNewHouse"></label>
+			  			<input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
+					</div>
+					<input class="btn btn-info" type="submit">
+				</form>
 			</div>
 
-			<div class="col-md-6 col-sm-2">
-			<p style="border-style: solid">HXDC12G</p>
-			<a class="btn btn-success" ng-click="joinHouse()" ng-show="!houseJoined">JOIN HOUSE</a></div>
+			<div class="col-md-6 col-sm-2" ng-hide="inHouse">
+				<form ng-submit="joinHouse()">
+					<div class="form-group">
+			  			<label for="joinAHouse"></label>
+			  			<input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
+					</div>
+					<input class="btn btn-info" type="submit">
+				</form>
 		</div>
-		<div class="row" ng-show="house">
+		<div class="row" ng-show="!house">
 			<div class="col-md-6">
-			<p>Your House Name: INFO TOWER!</p>
-			<p>Your House Code: HY761J1</p>
+			<p>Your House Name: {{ houseNAME }}</p>
+			<p>Your House Code: {{ houseCODE }}</p>
 			<a class="btn btn-danger" ng-click="leaveHouse()">LEAVE HOUSE</a></div>
 		</div>
-		<div ng-show="house">
+		<div ng-hide="inHouse">
 		<h3>Manage Groups</h3>
 		<div class="row">
 			<div class="col-md-6">

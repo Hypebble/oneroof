@@ -53,26 +53,46 @@ var bankData = {
 		return connPool.queryAsync(sql, [newPassword, id]);
 	}, 
 	
-	getHouse() {
+	getHouse(userId) {
 		console.log(TAG + "getting house info");
+		var sql = 'select * from tblHOUSE_USER where user_id=?';
+		var params = [userId];
+		return connPool.queryAsync(sql, params);
 		
-	}, 
-	
-	createHouse(houseName, rentAmount) {
-		console.log(TAG + "creating house");
-		var sql = 'insert into tblHOUSE (house_name, rent_total) values (?, ?)';
-		var params = [houseName, rentAmount];
-		return connPool.queryAsync(sql, params)	
+	},
+
+	getHouseWithCode(houseCode) {
+		console.log("", houseCode);
+		var sql = 'select * from tblHOUSE where house_code=?';
+		var params = [houseCode];
+		return connPool.queryAsync(sql, params);
 	},
 	
-	getHouseCode() {
+	createHouse(houseName, rentAmount, houseCode) {
+		console.log(TAG + "creating house");
+		var sql = 'insert into tblHOUSE (house_name, rent_total, house_code) values (?, ?, ?)';
+		var params = [houseName, rentAmount, houseCode];
+		console.log(connPool);
+		return connPool.queryAsync(sql, params);
+	},
+	
+	// do we want to get the house code by user or by house?
+	getHouseCode(houseId) {
 		console.log(TAG + "getting house code");
+		var sql = 'select * FROM tblHOUSE WHERE house_id=?'
+		var params = [houseId];
+		return connPool.queryAsync(sql, params);
 	},
 	
 	/*TO DO: edit house stuff needs to go here*/
 	
-	addUserToHouse() {
+	addUserToHouse(houseId, userId) {
 		console.log(TAG + "adding user to house");
+		console.log("", houseId);
+		console.log("", userId);
+		var sql = 'insert into tblHOUSE_USER (house_id, user_id) values (?, ?)';
+		var params = [houseId, userId];
+		return connPool.queryAsync(sql, params);
 	},
 	
 	getTasksForUser() {

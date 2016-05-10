@@ -19,7 +19,17 @@ module.exports = function(passport, bankData) {
     
     router.get('/api/settings', function(req, res) {
         console.log("passed into settings");
-        res.json(req.user);
+        bankData.getHouse(req.user.user_id)
+            .then(function(rows) {
+                console.log(rows[0]);
+                console.log(req.user);
+                bankData.getHouseCode(rows[0].house_id)
+                    .then(function(rs) {
+                        console.log(rs[0]);
+                        res.json([req.user, rs[0]]);
+                    })
+            })
+        //res.json(req.user, rows[0]);
     })
 
     //loads the main information for each user
@@ -31,7 +41,7 @@ module.exports = function(passport, bankData) {
         res.json(req.user);
     });
 
-    router.get('/api/refreshUserData', function(req, res) {
+    /*router.get('/api/refreshUserData', function(req, res) {
         bankData.getUser(req.user.email)
         .then(function(rows) {
             console.log("new user?", rows[0])
@@ -41,7 +51,7 @@ module.exports = function(passport, bankData) {
 
         });
 
-    });
+    });*/
 
     //logs a user in
     router.post('/api/login', passport.authenticate('local-login'),
@@ -59,13 +69,16 @@ module.exports = function(passport, bankData) {
 
     //updates a user's display name
     router.put('/api/updateDispl', function(req, res) {
+        //console.log(req.body);
         bankData.getUser(req.user.email)
             .then(function(rows) {
                 console.log(rows);
                 if(rows.length != 0) {
                     console.log("", req.body.displayName);
                     console.log("", req.user.user_id);
-                    bankData.updateUserDisplayName(req.body.displayName, req.user.user_id)
+                    bankData.updateUserDisplayName(req.body.displayName, req.user.user_id);
+                    console.log("", req.user);
+                    req.user.name = req.body.displayName;
                     res.json(req.user);
                 } else {
                     res.status("403").send("You're not authorized to do that");
@@ -74,6 +87,45 @@ module.exports = function(passport, bankData) {
             .catch(function() {
                 res.status("404").send("User not found");
             });
+    });
+
+    //create a user house
+    router.put('/api/createHouse', function(req, res) {
+        console.log("", req.body);
+        console.log("The button was clicked!");
+        //console.log("req", req);
+        //console.log("req", req);
+        //console.log("res", res);
+        var code = houseCode();
+        console.log("", code);
+        bankData.createHouse(req.body.setHouseName, 100, code)
+            .then(function(rows) {
+                console.log(rows.insertId);
+                bankData.addUserToHouse(rows.insertId, req.user.user_id);
+            })
+            .catch(function(){
+                res.status("404").send("You done broke the machien");
+            });
+    });
+
+    router.put('/api/joinHouse', function(req, res) {
+        console.log(req.body);
+        bankData.getHouseWithCode(req.body.enterHouseCode)
+            .then(function(rows) {
+                console.log(rows[0]);
+                if(rows[0] !== undefined) {
+                    console.log('success house exists');
+                    bankData.addUserToHouse(rows[0].house_id, req.user.user_id);
+                    console.log('user added to house!');
+                }else {
+                    console.log('house doesnt exist');
+                    return res.status("403").send("Hey Man, that house doesn't exist. Maybe create a new house or double check your code!");
+                }
+            })
+            .catch(function(err) {
+                console.log("", err);
+            });
+        console.log(req.user);
     });
 
     //updates a user's password
@@ -142,10 +194,30 @@ module.exports = function(passport, bankData) {
             .then(function(rows) {
                 res.json(rows[0]);
             }) 
-            .catch(function() {
+            .catch(function(err) {
                 res.status("404").send("Can't find user");
             });
     });
+
+    /*router.post('/api/leaveHouse', function(req, res) {
+        .then(function(rows) {
+            // find the id of the house?
+            // delete the record that ties users to a particular house
+        })
+        .catch(function(err) {
+            console.log("", );
+        });
+    })
+
+    router.post('/api/leaveGroup', function(req, res) {
+        .then(function(rows) {
+            // find the id of the group
+            // delete the record that ties users to a particular group
+        })
+        .catch(function(err) {
+            console.log("", );
+        });
+    })*/
 
     //delete an account
     router.post('/api/delete', function(req, res, next) {
@@ -297,6 +369,16 @@ module.exports = function(passport, bankData) {
       }
       return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
+    }
+
+    var houseCode = function() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+              .toString(16)
+              .substring(1);
+        }
+
+        return s4()+s4();
     }
 
     return router;

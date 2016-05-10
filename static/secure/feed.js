@@ -26,7 +26,7 @@ var app = angular.module('users', [])
 			.then(function(response) {
 				console.log(response)
 				$scope.email = response.data.email;
-				$scope.displayName = response.data.displayName;
+				$scope.displayName = response.data.name;
 				$scope.gravatarUrl = response.data.gravatarUrl;
 				if(!response.data.oAuth) {
 					$scope.showPass = true;
