@@ -58,7 +58,7 @@ body {
 
 .headline {
   background-color: #9f7cb8;
-    font-family: "Open Sans Bold", sans-serif;
+  font-family: "Open Sans Bold", sans-serif;
   font-weight: bold;
 }
 
@@ -69,12 +69,14 @@ body {
 
 .logo {
   font-size:32px;
-  padding-top: 16px;
+  margin-top: 25px;
 }
 
 .prof-link img {
-  border-radius: 2px 2px 2px 2px;
-  border: black;
+  border-radius: 100%;
+  height: 48px;
+  width: 48px;
+  border: 2px solid black;
 }
 
 /**/
@@ -100,6 +102,15 @@ body {
   padding:0px;
   padding-right: 60px;
 
+}
+
+.sidebar img {
+  position: relative;
+  top: -10px;
+  margin-left: 10px;
+  width:48px;
+  height:48px;
+  float: left;
 }
 
 #feed-sidebar {
@@ -137,10 +148,20 @@ input:checked + label {
 
 .task-details {
   float: right;
+  margin-right: 16px;
+}
+
+.task-headline {
+  float: left;
+  margin-left: 16px;
+} 
+
+
+.task-details, .task-headline {
   color: #eeeeee;
   font-size:22px;
-  padding-right:16px;
-  padding-top: 12px;
+  margin-top: 14px;
+  position: relative;
 }
 
 .feed-column {
@@ -154,26 +175,49 @@ input:checked + label {
 
 .task {
   background-color: #9f7cb8;
-  height:60px;
-  border-radius: 34px 34px 34px 34px;
+  height:65px;
+  border-radius: 16px 16px 16px 16px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: 1px solid black;
+}
+
+.tasks {
+  height: 100%;
+  border-radius: 0px 0px 0px 2px;
+  border: 1px solid black;
 }
 
 .task img {
+  height: 59px;
+  width: 59px;
   float: left;
-  position: relative;
-  border: black;
-  color: #eeeeee;;
+  margin-top: 2px;
+  margin-left: 5px;
+  border-radius: 100%;
+  border: 1px solid black;
 }
 
-.task-headline {
+
+/********DETAILS**********/
+.details input { 
+  float: right;
+    padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.details .info{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.details .div {
   float: left;
-  color: #eeeeee;
-  font-size:22px;
-  padding-left:16px;
-  padding-top: 12px;
-} 
+}
 
-
+.details {
+  position: inline-block;
+}
 
 /*******INPUT*******/
 .btn-primary {

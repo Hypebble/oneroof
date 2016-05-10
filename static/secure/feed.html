@@ -22,17 +22,17 @@
 
     <div id="header" class="headline box-down">
 		<div class="links">
-			<div class="head-link col-md-3">
-				<a href="feed.html"><img src="./img/newlogo2-04.png" width="48" height="48"><span class="logo">Home</span></a>
+			<div class="head-link col-md-2">
+				<a href="feed.html"><img src="./img/newlogo2-04.png" width="48" height="48"><span class="logo">OneRoof</span></a>
 			</div>
 
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div class="head-link">
 					<a href="/api/settings" class="btn btn-primary">Settings</a>
 					<a href="/api/signout" class="btn btn-danger">Sign out!</a>
 				</div>
 				<div class="head-link prof-link">
-					<a href="/api/profile/id"><img src="img/icon/dj.png" alt="Your Profile" width= "48" height="48"></a>
+					<a href="/api/profile/id"><img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48"></a>
 				</div>
 			</div>	
 			<div class="clear"></div>
@@ -41,39 +41,82 @@
     </div>
 
 
-	<div class="sidebar col-md-3">
+	<div class="tasks sidebar col-md-2">
 		<div class="headerWord text-center">
 			<b>Views</b>
 		</div>
 		
-		<input type="radio" value="personal" name="focus" id="radio1" checked/>
+		
 		<label for="radio1" class = "sidebar-link text-center">
+			<img src="./img/icon/user-silhouette.png">
 			My Tasks
-		</label>	
+		</label>		
+		<input type="radio" value="personal" name="focus" id="radio1" checked>
+		
+			
+
 		
 		
-		<input type="radio" value="house" name="focus" id="radio2"/>
-		<label for="radio2" class = "sidebar-link center">
+		<label for="radio2" class = "sidebar-link text-center">
+			<img src="./img/icon/users-group.png">
 			House Tasks
-		</label>	
+		</label>
+		<input type="radio" value="house" name="focus" id="radio2">
+			
+			
+	
 	</div>
 
-	<div id="tasks" class="col-md-6">
-		<div class="headerWord">
-			Tasks
+	<div class="tasks col-md-7">
+		<div class="headerWord text-center">
+			<b>Tasks<b>
 		</div>
 
 		<div class="task">
-			<img src="/img/icon/money.png" style="width:64px;height64px;" class="img-circle" />
-			<span class="task-headline">Pay Rent ($675) </span>
+			<img src="/img/icon/money.png" class="img-circle" />
+			<span class="task-headline"<b>Pay Rent ($675)</b> </span>
 			<span class="task-details">Due in <b>2d</b> (5/27)</span>
 		</div>
 	</div>
 
 
-	<div id="task-details" class="col-md-3">
-		<div class="headerWord">
-			Details about <b>pay rent</b>
+	<div id="tasks task-details" class="col-md-3">
+		<div class="headerWord text-center">
+			<b>Pay Rent</b>
+		</div>
+		<div class ="details">
+		<form>
+			<div>
+			Assigned To:  
+			<input type="text" name="assignee-name" value="You"><br>
+			</div>
+			<div>
+			Assigned By:  
+			<input type="text" name="assigner-name" value="Housemate McGee"><br><br>
+			</div>
+			<div>
+			Due Date:  
+			<input type="date" name="due-date" value="2016-05-15"><br>
+			</div>
+			<div>
+			Assigned On:  
+			<input type="date" name="made-date" value="2016-05-10"><br><br>
+			</div>
+			<div>
+			Priority:  
+			<input type="number" name="priority" value="5"><br>
+			</div>
+			<div>
+			Time Left:<br>
+			<input type="text" name="time-left" value="4 days 20 hrs"><br><br><br>
+			</div>
+			
+			Details
+			<div>
+				This bill is for <b>everyone</b>.  <b>Housemate B</b> collects rent, and you can send him a payment on Venmo <a href="payvenyo">here.</a>	
+			</div>
+			<input type="submit" value="Confirm Bill Paid">
+		</form>
 		</div>
 	</div>
 
