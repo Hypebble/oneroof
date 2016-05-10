@@ -37,8 +37,6 @@
 			</h3>	
 		</div>
 		<div class="lower">
-			<div id="tasks">
-			</div>
 		</div>
 	</div>
 	
@@ -48,6 +46,16 @@
 		</div>
 	</div>
 		
+	<div id="tasks">
+		<li ng-repeat="task in tasks">
+			<p>{{task.task_name}}</p>
+			<p>{{task.task_descr}}</p>
+			<p>{{task.task_time}}</p>
+			<p>{{task.task_status}}</p>
+			<p>{{task.due_date}}</p>
+		</li>
+	</div>
+	
 	<div id="create-task" class ="feed-column">
 		<div class="headline">
 			<h3>Create a task</h3>

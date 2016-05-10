@@ -86,15 +86,17 @@ module.exports = function(passport, bankData) {
             res.json(req.user);
         });
 
-    //get all accounts for user
-    router.get('/api/accounts', function(req, res, next) {
-        console.log("Entered get accounts");
-        bankData.getAllAccountsForUser(req.user.id)
+    //get all tasks for user
+    router.get('/api/tasks', function(req, res, next) {
+        console.log("Entered get tasks");
+        console.log("EMAIL " + req.user.email);
+        bankData.getTasksForUser(req.user.email)
             .then(function(rows) {
+                console.log("ROWS " + rows);
                 res.json(rows);
             })
             .catch(function() {
-                res.status("404").send("Accounts query failed");
+                res.status("404").send("Tasks query failed");
             });
     });
 
@@ -162,7 +164,7 @@ module.exports = function(passport, bankData) {
             });
     });
 
-    //grab all transactions for all accounts
+    //grab all tasks for all accounts
     router.get('/api/transactions', function(req, res, next) {
 
         var rowsArray;
@@ -202,9 +204,10 @@ module.exports = function(passport, bankData) {
         var taskCreatorID;
         var taskOwnerID;
         var generatedTaskID;
+        var taskCreatorHouseID;
+        var taskOwnerHouseID;
 
-        //if redis has the same user id as our system, this will want to change
-        //also, may want to check if they're in the same house in the future
+        //go ahead and use req.user.varName = whatever to plant it in redis, I think?
 
         //grab current user id
         bankData.getUser(req.user.email)
@@ -223,25 +226,40 @@ module.exports = function(passport, bankData) {
                 taskOwnerID = otherUserResponse[0].user_id;
                 console.log("task OWNER id is " + taskOwnerID);
             })
+            //grabs task creator's house id- could perhaps be put in a different area
+            /*
+            .then(function() {
+                console.log("Grabbing task creator House ID")
+                taskCreatorHouseID = bankData.getUserHouse(taskCreatorID);
+            })
+            //grabs task owner house id
+            .then(function() {
+                console.log("Grabbing task owner House ID");
+                taskOwnerHouseID = bankData.getUserHouse(taskOwnerID);
+            })*/
             //creates the task in the database
             .then(function() {
-                var creationTime = new Date();
-                generatedTaskID = guid();
+                //if(taskOwnerHouseID == taskCreatorHouseID) {
+                    var creationTime = new Date();
+                    generatedTaskID = guid();
 
-                var task = {
-                    //may not be same as redis id
-                    //taskCreator : req.user.id,
-                    taskName : req.body.taskName,
-                    taskID : generatedTaskID,
-                    //TODO: MAKE TASKTYPE NOT TOTALLY ARBITRARY
-                    taskType : req.body.taskType,
-                    taskDueDate : req.body.taskDueDate,
-                    taskDescription : req.body.taskDescription,
-                    taskStatus : "incomplete",
-                    taskTime : creationTime
-                };
+                    var task = {
+                        //may not be same as redis id
+                        //taskCreator : req.user.id,
+                        taskName : req.body.taskName,
+                        taskID : generatedTaskID,
+                        taskType : req.body.taskType,
+                        taskDueDate : req.body.taskDueDate,
+                        taskDescription : req.body.taskDescription,
+                        taskStatus : "incomplete",
+                        taskTime : creationTime
+                    };
 
-                return bankData.createTask(task);
+                    return bankData.createTask(task);
+                /*} else {
+                    console.log("House ID's do not match");
+                    res.status("400").send("Not in your house");
+                }*/
             })
             .then(function() {
                 console.log("made it to usertask update")

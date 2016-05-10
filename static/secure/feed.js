@@ -35,6 +35,12 @@ var app = angular.module('users', [])
 				console.log("ruh roh");
 			})
 
+		$http.get("/api/tasks")
+			.then(function(response) {
+				$scope.tasks = response.data;
+				console.log(response.data);
+			});
+
 		$scope.feed = function() {
 			console.log("made it to the feed view");
 			$scope.showProf = true;
@@ -226,13 +232,12 @@ var app = angular.module('users', [])
 
         	$http.post('/api/addTask', task)
         		.then(function() {
-        			//DANIEL- THIS IS WHERE YOU WOULD MAKE IT UPDATE THE LIST
-        			scope.transactions.push(response.data);
+        			scope.tasks.push(response.data);
         		})
         		.then(function() {
-        			$http.get("/api/accounts")
+        			$http.get("/api/tasks")
 						.then(function(response) {
-							$scope.accounts = response.data;
+							$scope.tasks = response.data;
 						});
         		});
    

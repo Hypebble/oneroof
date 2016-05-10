@@ -55,6 +55,12 @@ var bankData = {
 		console.log(TAG + "getting house info");
 		
 	}, 
+
+	getUserHouse(id) {
+		console.log(TAG + "grabbing house for user");
+		var sql = 'select tblHOUSE_USER.house_id from tblUSER join tblHOUSE_USER on tblUSER.user_id = tblHOUSE_USER.user_id where tblUSER.user_id = ?';
+		return connPool.queryAsync(sql, id)
+	},
 	
 	createHouse(houseName, rentAmount) {
 		console.log(TAG + "creating house");
@@ -73,10 +79,10 @@ var bankData = {
 		console.log(TAG + "adding user to house");
 	},
 	
-	getTasksForUser() {
+	getTasksForUser(email) {
 		console.log(TAG + "getting tasks for user");
-		var sql = 'select * from tblTASK where '
-		var params = [username];
+		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id join tblTASK t on t.task_id = ut.task_id where u.email = ?';
+		return connPool.queryAsync(sql, email);
 	},
 	
 	getTasksforHouse() {
@@ -110,7 +116,7 @@ var bankData = {
 	updateChoreTable(info) {
 		console.log(TAG + "adding information of tblCHORE");
 		var sql = 'insert into tblCHORE (task_id, priority) values (?, ?)';
-		var params = [info.taskID, task.priority];
+		var params = [info.taskID, info.priority];
 		return connPool.queryAsync(sql, params);
 	},
 	
