@@ -42,6 +42,7 @@ module.exports = function(passport) {
                         //var gravHashNew = crypto.createHash('md5').update(username).digest('hex');
                         //var gravatarUrlNew = "http://www.gravatar.com/avatar/" + gravHashNew;
                         var displayNameNew = req.body.displayName;
+                        console.log("COLLECTED DISPLAY NAME " + req.body.displayName);
                         //var userIDNew = uuid.v1();
                         var newUser = {
                           //  id : userIDNew,

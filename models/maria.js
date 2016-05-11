@@ -35,6 +35,7 @@ var bankData = {
 			var params = [user.email, user.displayName, user.hashPass];
 			
 		}
+		console.log("SQL " + sql);
 		return connPool.queryAsync(sql, params);
 
 	},
