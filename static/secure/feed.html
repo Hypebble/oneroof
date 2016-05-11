@@ -69,75 +69,25 @@
 
 	<div class="tasks col-md-7">
 		<div class="headerWord text-center">
-			<b>Tasks<b>
+			<b>Tasks</b>
 		</div>
 
 		<div class="task">
-			<img src="/img/icon/money.png" class="img-circle" />
-			<span class="task-headline"<b>Pay Rent ($675)</b> </span>
-			<span class="task-details">Due in <b>2d</b> (5/27)</span>
-		<div class="lower">
-		</div>
-	</div>
-
-
-	<div id="tasks task-details" class="col-md-3">
-		<div class="headerWord text-center">
-			<b>Pay Rent</b>
-		</div>
-		<div class ="details">
-		<form>
-			<div>
-			Assigned To:  
-			<input type="text" name="assignee-name" value="You"><br>
-			</div>
-			<div>
-			Assigned By:  
-			<input type="text" name="assigner-name" value="Housemate McGee"><br><br>
-			</div>
-			<div>
-			Due Date:  
-			<input type="date" name="due-date" value="2016-05-15"><br>
-			</div>
-			<div>
-			Assigned On:  
-			<input type="date" name="made-date" value="2016-05-10"><br><br>
-			</div>
-			<div>
-			Priority:  
-			<input type="number" name="priority" value="5"><br>
-			</div>
-			<div>
-			Time Left:<br>
-			<input type="text" name="time-left" value="4 days 20 hrs"><br><br><br>
-			</div>
-			
-			Details
-			<div>
-				This bill is for <b>everyone</b>.  <b>Housemate B</b> collects rent, and you can send him a payment on Venmo <a href="payvenyo">here.</a>	
-			</div>
-			<input type="submit" value="Confirm Bill Paid">
-		</form>
-		</div>
-	</div>
-
-</body>
-
-</html>
-<!--
-=======
-		
-	<div id="tasks">
-		<li ng-repeat="task in tasks">
+		<li ng-repeat="task in tasks" class="task">
 			<p>{{task.task_name}}</p>
 			<p>{{task.task_descr}}</p>
 			<p>{{task.task_time}}</p>
 			<p>{{task.task_status}}</p>
 			<p>{{task.due_date}}</p>
 		</li>
+				<!-- <img src="/img/icon/money.png" class="img-circle" />
+				<span class="task-headline"<b>Pay Rent ($675)</b> </span>
+				<span class="task-details">Due in <b>2d</b> (5/27)</span> -->
+			<div class="lower">
+		</div>
+		<div id="tasks">
+		</div>
 	</div>
-	
->>>>>>> feed_feature
 	<div id="create-task" class ="feed-column">
 		<div class="headline">
 			<h3>Create a task</h3>
@@ -179,9 +129,50 @@
 				<input class="btn btn-info" type="submit"></input>
 		</form>
 	</div>
+	</div>
+</div>
 
-<<<<<<< HEAD
-		-->
+	<div id="tasks task-details" class="col-md-3">
+		<div class="headerWord text-center">
+			<b>Pay Rent</b>
+		</div>
+		<div class ="details">
+		<form>
+			<div>
+			Assigned To:  
+			<input type="text" name="assignee-name" value="You"><br>
+			</div>
+			<div>
+			Assigned By:  
+			<input type="text" name="assigner-name" value="Housemate McGee"><br><br>
+			</div>
+			<div>
+			Due Date:  
+			<input type="date" name="due-date" value="2016-05-15"><br>
+			</div>
+			<div>
+			Assigned On:  
+			<input type="date" name="made-date" value="2016-05-10"><br><br>
+			</div>
+			<div>
+			Priority:  
+			<input type="number" name="priority" value="5"><br>
+			</div>
+			<div>
+			Time Left:<br>
+			<input type="text" name="time-left" value="4 days 20 hrs"><br><br><br>
+			</div>
+			
+			Details
+			<div>
+				This bill is for <b>everyone</b>.  <b>Housemate B</b> collects rent, and you can send him a payment on Venmo <a href="payvenyo">here.</a>	
+			</div>
+			<input type="submit" value="Confirm Bill Paid">
+		</form>
+		</div>
+	</div>
+		
+	
 </body>
 
 </html>

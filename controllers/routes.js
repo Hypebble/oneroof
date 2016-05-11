@@ -26,6 +26,7 @@ module.exports = function(passport, bankData) {
                 bankData.getHouseCode(rows[0].house_id)
                     .then(function(rs) {
                         console.log(rs[0]);
+                        // req.user.houseID = kfdjhgdkfjkd;
                         res.json([req.user, rs[0]]);
                     })
             })
