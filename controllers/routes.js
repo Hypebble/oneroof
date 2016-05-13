@@ -42,17 +42,18 @@ module.exports = function(passport, bankData) {
         res.json(req.user);
     });
 
-    /*router.get('/api/refreshUserData', function(req, res) {
-        bankData.getUser(req.user.email)
-        .then(function(rows) {
-            console.log("new user?", rows[0])
-           res.json(rows[0]); 
-        })
-        .catch(function() {
-
-        });
-
-    });*/
+    router.get('/api/getUsers', function(req, res) {
+        console.log("middleWare, getting users");
+        bankData.getUsersInHouse(16)
+            .then(function(rows) {
+                console.log(rows);
+                var array = [];
+                for(var i of rows) {
+                    console.log("", i);
+                }
+                res.json(rows);
+            })
+    });
 
     //logs a user in
     router.post('/api/login', passport.authenticate('local-login'),

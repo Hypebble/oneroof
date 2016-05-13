@@ -42,6 +42,21 @@ var app = angular.module('users', [])
 				console.log(response.data);
 			});
 
+		$scope.selectedTestAccount = null;
+    	$scope.testAccounts = [];
+
+    	$http.get("/api/getUsers")
+    		.then(function (response) {
+    			var arr = [];
+    			for(var i of response.data){
+    				console.log(i.name);
+    				arr.push(i);
+    			}
+        		$scope.testAccounts = arr;
+        		console.log("full response", response);
+        		console.log("assigned val", $scope.testAccounts);
+        	});
+
 		$scope.feed = function() {
 			console.log("made it to the feed view");
 			$scope.showProf = true;

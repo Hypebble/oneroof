@@ -73,6 +73,12 @@ var bankData = {
 		var sql = 'select tblHOUSE_USER.house_id from tblUSER join tblHOUSE_USER on tblUSER.user_id = tblHOUSE_USER.user_id where tblUSER.user_id = ?';
 		return connPool.queryAsync(sql, id)
 	},
+
+	getUsersInHouse(houseID) {
+		console.log(TAG, "grabbing all users present in a house");
+		var sql = 'SELECT * FROM tblUSER u join tblHOUSE_USER hu on u.user_id = hu.user_id WHERE hu.house_id = ?';
+		return connPool.queryAsync(sql, houseID);
+	},
 	
 	createHouse(houseName, rentAmount, houseCode) {
 		console.log(TAG + "creating house");

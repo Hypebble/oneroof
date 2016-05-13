@@ -92,9 +92,13 @@
 		<div class="headline">
 			<h3>Create a task</h3>
 		</div>
+		
 		<form name="createTaskForm" ng-submit="addTask()" >
 				<div class="form-group">
 					<label for="taskOwner">Assign to:</label>
+					<select ng-model="taskOwner" ng-options="item.name for item in testAccounts">
+    					<option value="">Select Roommate</option>
+					</select>
 					<input type="email" class="form-control" placeholder="Roommate email" ng-model="taskOwner" required>
 				</div>
 				<div class="form-group">
