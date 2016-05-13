@@ -46,25 +46,17 @@
 			<b>Views</b>
 		</div>
 		
-		
 		<label for="radio1" class = "sidebar-link text-center">
 			<img src="./img/icon/user-silhouette.png">
 			My Tasks
 		</label>		
 		<input type="radio" value="personal" name="focus" id="radio1" checked>
 		
-			
-
-		
-		
 		<label for="radio2" class = "sidebar-link text-center">
 			<img src="./img/icon/users-group.png">
 			House Tasks
 		</label>
 		<input type="radio" value="house" name="focus" id="radio2">
-			
-			
-	
 	</div>
 
 	<div class="tasks col-md-7">
@@ -87,8 +79,7 @@
 		</div>
 		<div id="tasks">
 		</div>
-	</div>
-	<div id="create-task" class ="feed-column">
+		<div id="create-task" class ="feed-column">
 		<div class="headline">
 			<h3>Create a task</h3>
 		</div>
@@ -96,10 +87,9 @@
 		<form name="createTaskForm" ng-submit="addTask()" >
 				<div class="form-group">
 					<label for="taskOwner">Assign to:</label>
-					<select ng-model="taskOwner" ng-options="item.name for item in testAccounts">
+					<select ng-model="taskOwner" class="form-control" ng-options="item.email as item.name for item in testAccounts" required>
     					<option value="">Select Roommate</option>
 					</select>
-					<input type="email" class="form-control" placeholder="Roommate email" ng-model="taskOwner" required>
 				</div>
 				<div class="form-group">
 					<label for="taskName">Task name</label>
@@ -133,8 +123,6 @@
 				<input class="btn btn-info" type="submit"></input>
 		</form>
 	</div>
-	</div>
-</div>
 
 	<div id="tasks task-details" class="col-md-3">
 		<div class="headerWord text-center">

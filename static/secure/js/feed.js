@@ -85,35 +85,6 @@ var app = angular.module('users', [])
 				})
 		}
 
-		$scope.submit3 = function() {
-
-			var data = {
-				oldPass : $scope.curPass,
-				newPass : $scope.newPassword,
-				confirmPass : $scope.confirmNewPassword
-			}
-
-			if($scope.newPassword == $scope.confirmNewPassword) {
-				$scope.confirmPass = false;
-				$http.put('/api/updatePass', data)
-				.then(function(response) {
-					$scope.incorrectPass = false;
-					window.alert("Password changed!");
-					$scope.curPass = "";
-					$scope.newPassword = "";
-					$scope.confirmNewPassword = "";
-				})
-				.catch(function(response) {
-					$scope.incorrectPass = true;
-				})
-			} else {
-				$scope.confirmPass = true;
-				console.log("passwords don't match up");
-			}
-
-
-		}
-
 		$scope.showAccounts = function() {
 			console.log("Show accounts");
 			$scope.showAccount = true;
