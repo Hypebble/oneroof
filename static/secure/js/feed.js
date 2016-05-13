@@ -95,46 +95,6 @@ var app = angular.module('users', [])
 
 		}
 
-		$scope.addAccount = function() {
-			console.log("Start add account");
-
-			$http.post("/api/accounts", $scope.newAccount)
-				.then(function(response) {
-					$scope.accounts.push(response.data);
-					$scope.newAccount = {};
-					return $scope.newAccount;
-				})
-				.then(function() {
-					$http.get("/api/accounts")
-						.then(function(response) {
-							$scope.accounts = response.data;
-						});
-				});
-			
-		}
-
-		$scope.deleteAccount = function(accountID, index) {
-			console.log("Start delete account");
-			console.log(index);
-			console.log(accountID);
-
-			var account = {
-				accountId : accountID
-				//indexNew : index
-			}
-
-			$http.post('/api/delete', account)
-				.then(function() {
-					$scope.accounts.splice(index, 1);
-				})
-				.then(function() {
-					$http.get("/api/accounts")
-						.then(function(response) {
-							$scope.accounts = response.data;
-						});
-				});
-		}
-
 		$scope.showEditAccountView = function(index) {
 			console.log("Show editAccount");
 			$scope.editViewIndex = index;

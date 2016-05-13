@@ -13,6 +13,7 @@ module.exports = function(passport, bankData) {
 
     //signs the user out, and redirects them to home
     router.get('/api/signout', function(req, res) {
+        console.log(req);
         req.logout();
         res.redirect('/'); 
     });
@@ -26,6 +27,7 @@ module.exports = function(passport, bankData) {
                 bankData.getHouseCode(rows[0].house_id)
                     .then(function(rs) {
                         console.log(rs[0]);
+                        req.user.houseID = rs[0].house_id;
                         // req.user.houseID = kfdjhgdkfjkd;
                         res.json([req.user, rs[0]]);
                     })
@@ -44,6 +46,7 @@ module.exports = function(passport, bankData) {
 
     router.get('/api/getUsers', function(req, res) {
         console.log("middleWare, getting users");
+        console.log(req);
         bankData.getUsersInHouse(16)
             .then(function(rows) {
                 console.log(rows);
@@ -118,6 +121,7 @@ module.exports = function(passport, bankData) {
                 if(rows[0] !== undefined) {
                     console.log('success house exists');
                     bankData.addUserToHouse(rows[0].house_id, req.user.user_id);
+                    req.user.houseID = rows[0].house_id;
                     console.log('user added to house!');
                 }else {
                     console.log('house doesnt exist');
