@@ -47,7 +47,7 @@ module.exports = function(passport, bankData) {
     router.get('/api/getUsers', function(req, res) {
         console.log("middleWare, getting users");
         console.log(req);
-        bankData.getUsersInHouse(16)
+        bankData.getUsersInHouse(req.user.houseID)
             .then(function(rows) {
                 console.log(rows);
                 var array = [];

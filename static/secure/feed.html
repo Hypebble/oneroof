@@ -75,53 +75,55 @@
 				<!-- <img src="/img/icon/money.png" class="img-circle" />
 				<span class="task-headline"<b>Pay Rent ($675)</b> </span>
 				<span class="task-details">Due in <b>2d</b> (5/27)</span> -->
-			<div class="lower">
+		<div class="lower">
 		</div>
 		<div id="tasks">
 		</div>
 		<div id="create-task" class ="feed-column">
-		<div class="headline">
-			<h3>Create a task</h3>
+			<div class="headline">
+				<h3>Create a task</h3>
+			</div>
+			
+			<form name="createTaskForm" ng-submit="addTask()" >
+					<div class="form-group">
+						<label for="taskOwner">Assign to:</label>
+						<select ng-model="taskOwner" class="form-control" ng-options="item.email as item.name for item in testAccounts" required>
+	    					<option value="">Select Roommate</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="taskName">Task name</label>
+						<input class="form-control" placeholder="Task name" ng-model="taskName" required>
+					</div>
+					<div class="form-group">
+					    <label for="taskType">Task Type (required)</label>
+					    <select class="form-control" placeholder="Choose a type of task" ng-model="taskType" required>
+						    <option>Bill</option>
+						    <option>Chore</option>
+					    </select>
+					</div>
+					<div class="input-group">
+						<label for="billAmount">Bill Amount</label>
+	      				<div class="input-group-addon">$</div>
+	      				<input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
+	      				<div class="input-group-addon">.00</div>
+	    			</div>
+	    			<div class="form-group">
+	    				<label for="chorePriority">Chore Priority</label>
+						<input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
+	    			</div>
+					<div class="form-group">
+						<label for="taskDueDate">Task Due Date</label>
+						<input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
+					</div>
+					<div class="form-group">
+						<label for="taskDescription">Task Description (optional) </label>
+						<input class="form-control" placeholder="Task description" ng-model="taskDescription">
+					</div>
+					<input class="btn btn-info" type="submit"></input>
+			</form>
 		</div>
-		
-		<form name="createTaskForm" ng-submit="addTask()" >
-				<div class="form-group">
-					<label for="taskOwner">Assign to:</label>
-					<select ng-model="taskOwner" class="form-control" ng-options="item.email as item.name for item in testAccounts" required>
-    					<option value="">Select Roommate</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="taskName">Task name</label>
-					<input class="form-control" placeholder="Task name" ng-model="taskName" required>
-				</div>
-				<div class="form-group">
-				    <label for="taskType">Task Type (required)</label>
-				    <select class="form-control" placeholder="Choose a type of task" ng-model="taskType" required>
-					    <option>Bill</option>
-					    <option>Chore</option>
-				    </select>
-				</div>
-				<div class="input-group">
-					<label for="billAmount">Bill Amount</label>
-      				<div class="input-group-addon">$</div>
-      				<input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
-      				<div class="input-group-addon">.00</div>
-    			</div>
-    			<div class="form-group">
-    				<label for="chorePriority">Chore Priority</label>
-					<input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
-    			</div>
-				<div class="form-group">
-					<label for="taskDueDate">Task Due Date</label>
-					<input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
-				</div>
-				<div class="form-group">
-					<label for="taskDescription">Task Description (optional) </label>
-					<input class="form-control" placeholder="Task description" ng-model="taskDescription">
-				</div>
-				<input class="btn btn-info" type="submit"></input>
-		</form>
+	</div>
 	</div>
 
 	<div id="tasks task-details" class="col-md-3">
