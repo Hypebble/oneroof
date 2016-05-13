@@ -2,7 +2,7 @@
 <!-- this is the most klugeyist of kludges, I need to brush up on angular and express -->
 <html lang="en">
 <head>
-	<meta   name="viewport"   content="width=device-width, user-scalable=no. initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta   name="viewport"   content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta   charset="UTF-8">
 	<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
 	<link   rel="stylesheet"   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"   integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -76,7 +76,6 @@
 		<div class="row" ng-show="!house">
 
 			<div class="col-md-6 col-sm-2" ng-hide="inHouse">
-				<p style="border-style: solid"><i>Enter House Name</i></p>
 				<form ng-submit="createHouse()">
 					<div class="form-group">
 			  			<label for="createNewHouse"></label>
@@ -104,12 +103,18 @@
 		<div ng-hide="inHouse">
 		<h3>Manage Groups</h3>
 		<div class="row">
-			<div class="col-md-6">
-				<p style="border-style: solid"><i>New Group Name</i></p>
-				<button class="btn btn-primary" ng-click="createGroup()">CREATE GROUP</button></div>
 			<div class="col-md-6" ng-show="houseJoined">
-			<p style="border-style: solid">Downstairs Roommates</p>
-			<button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button></div>			
+				<form>
+					<input class="form-control" id="createAGroup" placeholder="Group Name" name="groupName" ng-model="createGroup" required>
+					<button class="btn btn-primary" ng-click="createGroup()">CREATE GROUP</button>
+				</form>
+			</div>
+			<div class="col-md-6" ng-show="houseJoined">
+				<form>
+					<input class="form-control" id="joinAGroup" placeholder="Group Name" name="joinedGroup" ng-model="joinGroup" required>
+					<button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button>
+				</form>
+			</div>			
 		</div>
 			
 			<h2>User Groups</h2>

@@ -39,6 +39,7 @@ module.exports = function(passport, bankData) {
 
     //loads the main information for each user
     router.get('/api/feed', function(req, res) {
+        console.log("feed user", req.user);
         res.json(req.user);
     });
 
@@ -57,7 +58,7 @@ module.exports = function(passport, bankData) {
                 for(var i of rows) {
                     console.log("", i);
                 }
-                res.json(rows);
+                res.json([req.user, rows]);
             })
         }
     });
@@ -172,9 +173,14 @@ module.exports = function(passport, bankData) {
             console.log("Creating user");
             bankData.getUser(req.user.email)
             .then(function(rows){
+                console.log("data!");
+                console.log(rows[0]);
                 req.user.user_id = rows[0].user_id;
+                console.log(req.user);
+                res.json(req.user);
             })
-            res.json(req.user);
+            console.log("sign up user", req.user);
+            
         });
 
     //get all tasks for user

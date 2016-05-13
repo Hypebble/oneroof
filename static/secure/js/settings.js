@@ -24,7 +24,7 @@ var app = angular.module('settings', [])
 			.then(function(response) {
 				console.log(response);
 				console.log(response.data[0]);
-				if(response.data.length < 1) {
+				if(response.data.length <= 2) {
 					$scope.email = response.data[0].email;
 					$scope.displayName = response.data[0].displayName;
 					$scope.gravatarUrl = response.data[0].gravatarUrl;

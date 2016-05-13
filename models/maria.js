@@ -31,7 +31,7 @@ var bankData = {
 			var params = [user.facebook_email, user.displayName, user.facebook_token, user.facebook_id];
 		} else {
 			console.log("creating local user!!!");
-			var sql = 'insert into tblUSER (email, name, hash_pass) values (?, ?, ?)';
+			var sql = 'insert into tblUSER (email, displayName, hash_pass) values (?, ?, ?)';
 			var params = [user.email, user.displayName, user.hashPass];
 			
 		}
