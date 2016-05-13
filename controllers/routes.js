@@ -24,15 +24,17 @@ module.exports = function(passport, bankData) {
             .then(function(rows) {
                 console.log(rows[0]);
                 console.log(req.user);
-                bankData.getHouseCode(rows[0].house_id)
+                if(typeof rows[0] !== "undefined") { 
+                    bankData.getHouseCode(rows[0].house_id)
                     .then(function(rs) {
                         console.log(rs[0]);
                         req.user.houseID = rs[0].house_id;
-                        // req.user.houseID = kfdjhgdkfjkd;
                         res.json([req.user, rs[0]]);
                     })
+                } else {
+                    res.json(req.user);
+                }
             })
-        //res.json(req.user, rows[0]);
     })
 
     //loads the main information for each user
@@ -46,16 +48,18 @@ module.exports = function(passport, bankData) {
 
     router.get('/api/getUsers', function(req, res) {
         console.log("middleWare, getting users");
-        console.log(req);
+        console.log("user house id", req.user.houseID);
+        if(typeof req.user.houseID !== "undefined") {
         bankData.getUsersInHouse(req.user.houseID)
             .then(function(rows) {
-                console.log(rows);
+                console.log("hella stuff", rows);
                 var array = [];
                 for(var i of rows) {
                     console.log("", i);
                 }
                 res.json(rows);
             })
+        }
     });
 
     //logs a user in
@@ -79,11 +83,11 @@ module.exports = function(passport, bankData) {
             .then(function(rows) {
                 console.log(rows);
                 if(rows.length != 0) {
-                    console.log("", req.body.displayName);
+                    console.log("", req.body.name);
                     console.log("", req.user.user_id);
                     bankData.updateUserDisplayName(req.body.displayName, req.user.user_id);
                     console.log("", req.user);
-                    req.user.name = req.body.displayName;
+                    req.user.displayName = req.body.displayName;
                     res.json(req.user);
                 } else {
                     res.status("403").send("You're not authorized to do that");
@@ -166,6 +170,10 @@ module.exports = function(passport, bankData) {
     router.post('/api/signup', passport.authenticate('local-signup'),
          function(req, res, next) {
             console.log("Creating user");
+            bankData.getUser(req.user.email)
+            .then(function(rows){
+                req.user.user_id = rows[0].user_id;
+            })
             res.json(req.user);
         });
 

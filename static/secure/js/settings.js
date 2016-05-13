@@ -22,16 +22,24 @@ var app = angular.module('settings', [])
 
 		$http.get('/api/settings')
 			.then(function(response) {
-				$scope.email = response.data[0].email;
-				$scope.displayName = response.data[0].name;
-				$scope.gravatarUrl = response.data[0].gravatarUrl;
+				console.log(response);
+				console.log(response.data[0]);
+				if(response.data.length < 1) {
+					$scope.email = response.data[0].email;
+					$scope.displayName = response.data[0].displayName;
+					$scope.gravatarUrl = response.data[0].gravatarUrl;
 				
-				if(response.data[1] !== null) {
-					$scope.houseID = response.data[1].house_id;
-					$scope.houseNAME = response.data[1].house_name;
-					$scope.houseCODE = response.data[1].house_code;
-					$scope.inHouse = true;
+					if(response.data[1] !== null) {
+						$scope.houseID = response.data[1].house_id;
+						$scope.houseNAME = response.data[1].house_name;
+						$scope.houseCODE = response.data[1].house_code;
+						$scope.inHouse = true;
+					}
+				} else {
+					$scope.email = response.data.email;
+					$scope.displayName = response.data.displayName;
 				}
+
 				if(!response.data.oAuth) {
 					$scope.showPass = true;
 				} 
