@@ -406,6 +406,15 @@ module.exports = function(passport, bankData) {
             });
     });
 
+    // upload a reference to profile image
+    router.post('/api/uploadProfile', function(req, res) {
+        // take file form angular form
+        // generate a folder on server for file to be put
+        // place file at location
+        // insert location of image file into tblUSER
+        //      - make sure to change the database so that it can handle another field, (it can be null)
+        //      - don't forget to add to the maria.js file so that querying can happen.
+    });
     //compares the given password and user's set pass
     var isValidPassword = function(user, password){
         console.log("user object", user);
