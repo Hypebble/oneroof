@@ -9,7 +9,7 @@ CREATE TABLE tblHOUSE (
 
 CREATE TABLE tblUSER (
 	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	name VARCHAR(60) NOT NULL,
+	displayName VARCHAR(60) NOT NULL,
 	facebook_id VARCHAR(64),
 	facebook_name VARCHAR(64),
 	facebook_email VARCHAR(64),
