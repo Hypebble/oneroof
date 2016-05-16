@@ -149,7 +149,7 @@ module.exports = function(passport, bankData) {
     router.get('/api/getGroups', function(req, res) {
         bankData.getHouseGroups(req.user.houseID)
         .then(function(response) {
-            console.log("", response);
+            console.log("get groups", response);
             res.json(response)
         });
     });

@@ -44,19 +44,21 @@ var app = angular.module('settings', [])
 					$scope.showPass = true;
 				} 
 				console.log(response);
+				$http.get('/api/getGroups')
+				.then(function(response){
+					console.log('getgroups response', response);
+					$scope.groups = response.data;
+				});
 			})
 			.catch(function(err) {
 				console.log("ruh roh");
-			})
-			 
+			});
+
+
 		/*var arr = [];
 
         		$scope.groups = arr;*/
-		$http.get('/api/getGroups')
-		.then(function(response){
-			console.log('getgroups response', response);
-			$scope.groups = response.data;
-		});
+
 
 		$scope.joinHouse = function() {
 			var enteredCode = {
