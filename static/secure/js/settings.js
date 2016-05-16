@@ -67,18 +67,14 @@ var app = angular.module('settings', [])
 
 
 		$scope.leaveHouse = function() {
-			$scope.houseCreated = false;
-			$scope.houseJoined = false;
-			$scope.house = false;
-			
-			// for displaying groups
-			$scope.groupJoined = false;
-			$scope.groupCreated = false;
-
-			// for displaying group members
-			$scope.defaultGroup = false;
-			$scope.otherGroup = false;
-			$scope.createdGroup = false;
+			console.log("clicking leave house");
+			$http.post('/api/leaveHouse')
+			.then(function(response) {
+				console.log("leaving success!", response);
+			})
+			.catch(function(err) {
+				console.log("not good, this is a problem: ", err);
+			})
 		};
 
 		$scope.joinGroup = function (){

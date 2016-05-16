@@ -148,6 +148,12 @@ var bankData = {
 		return connPool.queryAsync(sql, params);
 	},
 	
+	removeUserHouse(user) {
+		var sql = "delete FROM tblHOUSE_USER WHERE house_id=? and user_id=?";
+		var params = [user.houseID, user.user_id];
+		return connPool.queryAsync(sql, params);
+	},
+
 	removeTask() {
 		console.log(TAG + "removing a task");
 	},

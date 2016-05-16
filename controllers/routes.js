@@ -221,17 +221,17 @@ module.exports = function(passport, bankData) {
             });
     });
 
-    /*router.post('/api/leaveHouse', function(req, res) {
+    router.post('/api/leaveHouse', function(req, res) {
+        bankData.removeUserHouse(req.user)
         .then(function(rows) {
-            // find the id of the house?
-            // delete the record that ties users to a particular house
+            console.log("before removing house", req.user);
+            delete req.user.houseID;
+            console.log("after removing house", req.user);
+            res.json(req.user);
         })
-        .catch(function(err) {
-            console.log("", );
-        });
     })
 
-    router.post('/api/leaveGroup', function(req, res) {
+    /*router.post('/api/leaveGroup', function(req, res) {
         .then(function(rows) {
             // find the id of the group
             // delete the record that ties users to a particular group
