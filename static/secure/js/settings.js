@@ -48,18 +48,14 @@ var app = angular.module('settings', [])
 			.catch(function(err) {
 				console.log("ruh roh");
 			})
-
-		$scope.groups = []; 
+			 
 		/*var arr = [];
 
         		$scope.groups = arr;*/
 		$http.get('/api/getGroups')
 		.then(function(response){
 			console.log('getgroups response', response);
-			for(var i of response.data){
-    			console.log(i.name);
-    			$scope.groups.push(i);
-    		}
+			$scope.groups = response.data;
 		});
 
 		$scope.joinHouse = function() {
