@@ -35,7 +35,7 @@ CREATE TABLE tblHOUSE_USER (
 CREATE TABLE tblGROUP (
 	group_id INT NOT NULL AUTO_INCREMENT,
 	group_name VARCHAR(30) NOT NULL,
-	group_descr VARCHAR(30) NOT NULL,
+	group_descr VARCHAR(50) NOT NULL,
 	PRIMARY KEY (group_id)
 );
 
