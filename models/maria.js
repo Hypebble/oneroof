@@ -93,7 +93,13 @@ var bankData = {
 		var params = [groupName, groupDescr];
 		return connPool.queryAsync(sql, params);
 	},
-	
+
+	getHouseGroups(houseID) {
+		var sql = "select * from tblUSER_GROUPS ug join tblUSER u on u.user_id = ug.user_id join tblHOUSE_USER hu on hu.user_id = u.user_id join tblGROUP g on g.group_id= ug.group_id WHERE hu.house_id=?"
+		var params = [houseID];
+		return connPool.queryAsync(sql,params);
+	}, 
+
 	// do we want to get the house code by user or by house?
 	getHouseCode(houseId) {
 		console.log(TAG + "getting house code");

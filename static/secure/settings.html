@@ -100,8 +100,8 @@
 			<p>Your House Code: {{ houseCODE }}</p>
 			<a class="btn btn-danger" ng-click="leaveHouse()">LEAVE HOUSE</a></div>
 		</div>
-		<div ng-hide="inHouse">
-		<h3>Manage Groups</h3>
+		<div ng-hide="">
+		<h3>Manage Responsibility Groups</h3>
 		<div class="row">
 			<div class="col-md-6">
 				<form ng-submit="createGroup()">
@@ -112,13 +112,16 @@
 			</div>
 			<div class="col-md-6">
 				<form>
-					<input class="form-control" id="joinAGroup" placeholder="Group Name" name="joinedGroup" ng-model="joinGroup" required>
+					<!--Need to create get house groups-->
+					<select ng-model="joinIntoGroup" class="form-control" ng-options="item.group_name for item in groups" required>
+	    					<option value="">Select A Responsibility Group</option>
+					</select>
 					<button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button>
 				</form>
 			</div>			
 		</div>
 			
-			<h2>User Groups</h2>
+			<h2>Responsibility Groups</h2>
 			<!--Smoke and Mirrors time-->
 			<ul>
 				<div ng-show="houseJoined">

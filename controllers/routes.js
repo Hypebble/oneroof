@@ -146,6 +146,14 @@ module.exports = function(passport, bankData) {
         console.log(req.user);
     });
 
+    router.get('/api/getGroups', function(req, res) {
+        bankData.getHouseGroups(req.user.houseID)
+        .then(function(response) {
+            console.log("", response);
+            res.json(response)
+        });
+    });
+
     //updates a user's password
     router.put('/api/updatePass', function(req, res) {
         bankData.getUser(req.user.email)
