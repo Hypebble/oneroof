@@ -83,52 +83,15 @@ var app = angular.module('settings', [])
 		};
 
 		$scope.createGroup = function(){
+			var groupInfo = {
+				groupN : $scope.groupName,
+				groupD : $scope.groupDescr
+				//groupD : $scope.groupDescr
+			}
+			console.log("", groupInfo);
+
+			$http.put('/api/createGroup', groupInfo);
 			console.log("created a group");
-			$scope.groupCreated = true;
-		};
-
-		$scope.selectOtherG = function(){
-			console.log("Default Group Selected");
-			$scope.otherGroup = true;
-			if($scope.defaultGroup){
-				$scope.defaultGroup = false;
-			}
-			if($scope.createdGroup){
-				$scope.createdGroup = false;
-			}
-		};
-
-
-		$scope.selectDefaultG = function(){
-			console.log("Default Group Selected");
-			$scope.defaultGroup = true;
-			if($scope.otherGroup){
-				$scope.otherGroup = false;
-			}
-			if($scope.createdGroup){
-				$scope.createdGroup = false;
-			}
-		};
-
-		$scope.selectCreateG = function(){
-			$scope.createdGroup = true;
-			if($scope.otherGroup){
-				$scope.otherGroup = false;
-			}
-			if($scope.defaultGroup){
-				$scope.defaultGroup = false;
-			}
-		};
-
-		$scope.leaveOther = function(){
-			$scope.otherGroup = false;
-			$scope.groupJoined = false;
-			
-		};
-
-		$scope.leaveCreated = function(){
-			$scope.createdGroup = false;
-			$scope.groupCreated = false;
 		};
 
 		// create house for user

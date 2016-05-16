@@ -118,6 +118,13 @@ module.exports = function(passport, bankData) {
             });
     });
 
+    router.put('/api/createGroup', function(req, res) {
+        bankData.createGroup(req.body.groupN, req.body.groupD)
+        .then(function(rows){
+            bankData.addUserToGroup(rows.insertId, req.user.user_id);
+        })
+    });
+
     router.put('/api/joinHouse', function(req, res) {
         console.log(req.body);
         bankData.getHouseWithCode(req.body.enterHouseCode)

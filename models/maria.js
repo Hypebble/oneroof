@@ -88,6 +88,12 @@ var bankData = {
 		return connPool.queryAsync(sql, params);
 	},
 	
+	createGroup(groupName, groupDescr) {
+		var sql = "insert into tblGROUP (group_name, group_descr) values (?, ?)";
+		var params = [groupName, groupDescr];
+		return connPool.queryAsync(sql, params);
+	},
+	
 	// do we want to get the house code by user or by house?
 	getHouseCode(houseId) {
 		console.log(TAG + "getting house code");
@@ -107,6 +113,12 @@ var bankData = {
 		return connPool.queryAsync(sql, params);
 	},
 	
+	addUserToGroup(group, user) {
+		var sql = 'insert into tblUSER_GROUPS (user_id, group_id) values (?, ?)';
+		var params = [user, group];
+		return connPool.queryAsync(sql, params);
+	},
+
 	getTasksForUser(email) {
 		console.log(TAG + "getting tasks for user");
 		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id join tblTASK t on t.task_id = ut.task_id where u.email = ?';
