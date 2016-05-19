@@ -22,6 +22,7 @@ var app = angular.module('users', [])
 		$scope.editViewIndex = false;
 		$scope.numOffset = 0;
 		$scope.userObj = 0;
+		$scope.userPic = "";
 
 		$http.get('/api/feed')
 			.then(function(response) {
@@ -55,6 +56,12 @@ var app = angular.module('users', [])
     			}
         		$scope.testAccounts = arr;
         		$scope.userObj = response.data[0];
+
+        		if($scope.userObj.user_pic != null) {
+        			console.log('not null picture');
+        			$scope.userPic = $scope.userObj.user_pic;
+        			$scope.defaultPic = false;
+        		}
         		console.log("full response", response);
         		console.log("assigned val", $scope.testAccounts);
         	});

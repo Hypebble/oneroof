@@ -11,6 +11,8 @@ var router = express.Router();
 //image uploading
 var multer  = require('multer');
 var upload = multer({ dest: './uploads/'});
+var fs = require('fs');
+var url = require('url');
 
 module.exports = function(passport, bankData) {
     var uploading = multer({
@@ -23,7 +25,10 @@ module.exports = function(passport, bankData) {
             console.log('image perhaps?', req.files);
             console.log(req.body) // form fields
             console.log(req.file) // form files
-            res.status(204).end()
+            req.user.user_pic = './uploads/' + (req.file.filename + '.png')
+            fs.renameSync('./uploads/' + req.file.filename, req.user.user_pic);
+            bankData.updateProfPic(req.user.user_id, req.user.user_pic);
+            res.json(req.user);
             // assign the file name when created, to the user table, so alter user table to have an image file link
             // also get defualt user image
             // look into how to do this with android, which is going to be different
@@ -35,6 +40,15 @@ module.exports = function(passport, bankData) {
         console.log(req);
         req.logout();
         res.redirect('/'); 
+    });
+
+    router.get('/uploads/:id', function(req, res) {
+        console.log('', req.params.id);
+        var request = url.parse(req.url, true);
+        var action = request.pathname;
+        console.log('file path request?', request.pathname);
+        var img = fs.readFileSync('.' + request.pathname);
+        res.end(img);
     });
     
     router.get('/api/settings', function(req, res) {

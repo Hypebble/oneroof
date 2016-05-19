@@ -22,6 +22,12 @@ var bankData = {
 		return connPool.queryAsync(sql, profileId);	
 	},
 
+	updateProfPic(user_id, filename) {
+		var sql = 'update tblUSER SET user_pic=? where user_id=?';
+		var params = [filename, user_id];
+		return connPool.queryAsync(sql, params);
+	},
+
 	createUser(user) {
 		console.log("Begin create user");
 		console.log(user);
