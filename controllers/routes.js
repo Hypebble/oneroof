@@ -24,6 +24,9 @@ module.exports = function(passport, bankData) {
             console.log(req.body) // form fields
             console.log(req.file) // form files
             res.status(204).end()
+            // assign the file name when created, to the user table, so alter user table to have an image file link
+            // also get defualt user image
+            // look into how to do this with android, which is going to be different
         });
     //});
 
