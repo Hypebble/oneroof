@@ -14,7 +14,7 @@ var upload = multer({ dest: './uploads/'});
 
 module.exports = function(passport, bankData) {
     var uploading = multer({
-        dest: __dirname + '../public/uploads/',
+        dest: __dirname + './public/uploads/',
         limits: {fileSize: 1000000, files:1},
     })
 
