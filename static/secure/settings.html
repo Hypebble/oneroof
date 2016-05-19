@@ -69,7 +69,14 @@
 				</div>
 			  	<input class="btn btn-info" type="submit">
 			</form>
-	</div>
+
+			<h2>Upload Profile Pic</h2>
+			<form action="/api/upload" method="POST" enctype="multipart/form-data">
+			  Select an image to upload:
+			  <input type="file" name="image"> 
+			  <input type="submit" value="Upload Image">
+			</form>	
+</div>
 	<div class="col-md-4">
 		<h2>House Information</h2>
 
@@ -135,38 +142,14 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div ng-hide="!defaultGroup" ng-show="defaultGroup">
-			<h2>Group Members for Kitchen Crew</h2>
-			<ul>
-				<li><a href="/feed.html">Dan</a></li>
-				<li><a href="/feed.html">Dani</a></li>
-				<li><a href="/feed.html">Jonathan</a></li>
-				<li><a href="/feed.html">Christoff</a></li>
-				<li><a href="/feed.html">Kevie</a></li>
-				<li><a href="/feed.html">Alli</a></li>
-			</ul>
+		<div class="col-md-4">
+		<li ng-repeat="u in houseUsers">
+			<!-- Make this link to profiles where you pass in a user object to be displayed -->
+			<p>{{ u.displayName }}</p>
+			<p>{{ u.email }}</p>
+		</li>
 
-			<div class="col-md-6"><a class="btn btn-warning" ng-click="leaveOther()">LEAVE GROUP</a></div>
-		</div>
-		<div ng-hide="!otherGroup" ng-show="otherGroup">
-			<h2>Group Members for Downstairs Roomates</h2>
-
-			<ul>
-				<li><a href="/feed.html">Jonathan</a></li>
-				<li><a href="/feed.html">Christoff</a></li>
-				<li><a href="/feed.html">Kevie</a></li>
-			</ul>
-
-			<div class="col-md-6"><a class="btn btn-warning" ng-click="leaveOther()">LEAVE GROUP</a></div>
-		</div>
-
-		<div ng-hide="!createdGroup" ng-show="createdGroup">
-			<h2>Group Members for New Group Name</h2>
-
-			<p> there are currently no other members in this group</p>
-
-			<div class="col-md-6"><a class="btn btn-warning" ng-click="leaveCreated()">LEAVE GROUP</a></div>
+		
 		</div>
 	</div>
 </body>

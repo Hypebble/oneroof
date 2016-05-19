@@ -14,11 +14,7 @@ var app = angular.module('settings', [])
 		$scope.groupJoined = false;
 		$scope.groupCreated = false;
 
-		// for displaying group members
-		$scope.defaultGroup = false;
-		$scope.otherGroup = false;
-		$scope.createdGroup = false;
-
+		$scope.houseUsers = [];
 
 		$http.get('/api/settings')
 			.then(function(response) {
@@ -48,6 +44,13 @@ var app = angular.module('settings', [])
 				.then(function(response){
 					console.log('getgroups response', response);
 					$scope.groups = response.data;
+				});
+
+				$http.get('/api/getUsers')
+				.then(function(response){
+					console.log('getUsers in house', response.data);
+					$scope.houseUsers = response.data[1];
+					console.log('users', $scope.houseUsers);
 				});
 			})
 			.catch(function(err) {
@@ -179,5 +182,22 @@ var app = angular.module('settings', [])
 
 		}
 
+		$scope.uploadFile = function(){
+ 
+ 	$scope.fileSelected = function(files) {
+     if (files && files.length) {
+        $scope.file = files[0];
+     }
+ 
+     $upload.upload({
+       url: '/api/upload',
+       file: $scope.file
+     })
+     .success(function(data) {
+       console.log(data, 'uploaded');
+      });
+ 
+    };
+};
 
 	});

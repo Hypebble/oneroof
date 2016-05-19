@@ -8,8 +8,24 @@ var express = require('express');
 var bluebird = require('bluebird');
 var bCrypt = require('bcrypt-nodejs');
 var router = express.Router();
+//image uploading
+var multer  = require('multer');
+var upload = multer({ dest: './uploads/'});
 
 module.exports = function(passport, bankData) {
+    var uploading = multer({
+        dest: __dirname + '../public/uploads/',
+        limits: {fileSize: 1000000, files:1},
+    })
+
+    //router.post('/api/upload', function (req, res) {
+        router.post('/api/upload', upload.single('image'), function(req, res){
+            console.log('fuck', req.files);
+            console.log(req.body) // form fields
+            console.log(req.file) // form files
+            res.status(204).end()
+        });
+    //});
 
     //signs the user out, and redirects them to home
     router.get('/api/signout', function(req, res) {

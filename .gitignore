@@ -14,3 +14,4 @@ typings
 
 # ignore .key files
 *.key
+/uploads/
