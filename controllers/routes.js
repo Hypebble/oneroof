@@ -20,7 +20,7 @@ module.exports = function(passport, bankData) {
 
     //router.post('/api/upload', function (req, res) {
         router.post('/api/upload', upload.single('image'), function(req, res){
-            console.log('fuck', req.files);
+            console.log('image perhaps?', req.files);
             console.log(req.body) // form fields
             console.log(req.file) // form files
             res.status(204).end()
