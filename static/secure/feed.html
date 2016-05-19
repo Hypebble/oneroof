@@ -32,7 +32,14 @@
 					<a href="/api/signout" class="btn btn-danger">Sign out!</a>
 				</div>
 				<div class="head-link prof-link">
-					<a href="/profile.html"><img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48"></a>
+					<a href="/profile.html">
+					<div ng-show="defaultPic">
+						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48"></a>
+					</div>
+					<div ng-hide="defaultPic">
+						glsjdflkgnsdog
+					</div>
+
 				</div>
 			</div>	
 			<div class="clear"></div>
@@ -87,7 +94,7 @@
 			<form name="createTaskForm" ng-submit="addTask()" >
 					<div class="form-group">
 						<label for="taskOwner">Assign to:</label>
-						<select ng-model="taskOwner" class="form-control" ng-options="item.email as item.name for item in testAccounts" required>
+						<select ng-model="taskOwner" class="form-control" ng-options="item.email as item.displayName for item in testAccounts" required>
 	    					<option value="">Select Roommate</option>
 						</select>
 					</div>

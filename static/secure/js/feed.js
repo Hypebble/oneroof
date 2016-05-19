@@ -11,7 +11,7 @@ var app = angular.module('users', [])
 		$scope.newUser = {};
 		$scope.newAccount = {};
 		//$scope.editAccount = {};
-
+		$scope.defaultPic = true;
 		$scope.showPass = false;
 		$scope.showProf = false;
 		$scope.confirmPass = false;
@@ -21,6 +21,7 @@ var app = angular.module('users', [])
 		$scope.showTransactions = false;
 		$scope.editViewIndex = false;
 		$scope.numOffset = 0;
+		$scope.userObj = 0;
 
 		$http.get('/api/feed')
 			.then(function(response) {
@@ -48,11 +49,12 @@ var app = angular.module('users', [])
     	$http.get("/api/getUsers")
     		.then(function (response) {
     			var arr = [];
-    			for(var i of response.data){
+    			for(var i of response.data[1]){
     				console.log(i.name);
     				arr.push(i);
     			}
         		$scope.testAccounts = arr;
+        		$scope.userObj = response.data[0];
         		console.log("full response", response);
         		console.log("assigned val", $scope.testAccounts);
         	});
