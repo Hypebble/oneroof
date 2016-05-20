@@ -61,7 +61,14 @@ var app = angular.module('settings', [])
 		/*var arr = [];
 
         		$scope.groups = arr;*/
+        $scope.loadProf = function(arg) {
+			var email = {
+				loadEmail : arg
+			}
 
+			console.log('this should have a value', email);
+			$http.post("/api/loadProfile", email);
+		}
 
 		$scope.joinHouse = function() {
 			var enteredCode = {

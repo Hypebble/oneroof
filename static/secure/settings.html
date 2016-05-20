@@ -75,7 +75,7 @@
 				
 
 			</div>
-			
+
 			<form action="/api/upload" method="POST" enctype="multipart/form-data">
 			  Select an image to upload:
 			  <input type="file" name="image"> 
@@ -150,8 +150,10 @@
 		<div class="col-md-4">
 		<li ng-repeat="u in houseUsers">
 			<!-- Make this link to profiles where you pass in a user object to be displayed -->
-			<p>{{ u.displayName }}</p>
-			<p>{{ u.email }}</p>
+			<form>
+				<a href="/profile.html" ng-click="loadProf(u.email)"><p>{{ u.displayName }}</p>
+				<p ng-model="loadedEmail">{{ u.email }}</p></a>
+			</form>
 		</li>
 
 		

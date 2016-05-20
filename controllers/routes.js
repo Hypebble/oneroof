@@ -196,6 +196,16 @@ module.exports = function(passport, bankData) {
         });
     });
 
+    router.get('/api/viewUserGroups', function(req, res) {
+        bankData.getUser(req.user.requestedProfile)
+        .then(function(response){
+            bankData.getUserGroups(response[0].user_id)
+            .then(function(response) {
+                res.json(response);
+            });
+        })
+    });
+
     router.get('/api/getUserGroups', function(req, res) {
         bankData.getUser(req.user.email)
         .then(function(response){
