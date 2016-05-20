@@ -80,6 +80,12 @@ var bankData = {
 		return connPool.queryAsync(sql, id)
 	},
 
+	getUserGroups(id) {
+		var sql = 'select * from tblUSER_GROUPS ug join tblGROUP g on ug.group_id = g.group_id where ug.user_id=?';
+		var params = [id];
+		return connPool.queryAsync(sql, params);
+	},
+
 	getUsersInHouse(houseID) {
 		console.log(TAG, "grabbing all users present in a house");
 		var sql = 'SELECT * FROM tblUSER u join tblHOUSE_USER hu on u.user_id = hu.user_id WHERE hu.house_id = ?';

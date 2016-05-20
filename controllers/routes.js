@@ -76,7 +76,16 @@ module.exports = function(passport, bankData) {
         res.json(req.user);
     });
 
-    router.get('/api/profile/:id', function(req,res){
+    router.get('/api/profile', function(req, res){
+        bankData.getUser(req.user.requestedProfile)
+        .then(function(response) {
+            console.log('requestedProfile', response);
+            res.json([req.user, response[0]]);
+        });
+    });
+
+    router.post('/api/loadProfile', function(req, res) {
+        req.user.requestedProfile = req.body.loadEmail;
         res.json(req.user);
     });
 
@@ -187,6 +196,16 @@ module.exports = function(passport, bankData) {
         });
     });
 
+    router.get('/api/getUserGroups', function(req, res) {
+        bankData.getUser(req.user.email)
+        .then(function(response){
+            bankData.getUserGroups(req.user.user_id)
+            .then(function(response) {
+                res.json(response);
+            });
+        })
+    });
+
     //updates a user's password
     router.put('/api/updatePass', function(req, res) {
         bankData.getUser(req.user.email)
@@ -236,6 +255,19 @@ module.exports = function(passport, bankData) {
         console.log("Entered get tasks");
         console.log("EMAIL " + req.user.email);
         bankData.getTasksForUser(req.user.email)
+            .then(function(rows) {
+                console.log("ROWS " + rows);
+                res.json(rows);
+            })
+            .catch(function() {
+                res.status("404").send("Tasks query failed");
+            });
+    });
+
+    router.get('/api/viewTasks', function(req, res, next) {
+        console.log("Entered get tasks");
+        console.log("EMAIL " + req.user.email);
+        bankData.getTasksForUser(req.user.requestedProfile)
             .then(function(rows) {
                 console.log("ROWS " + rows);
                 res.json(rows);

@@ -32,13 +32,13 @@
 					<a href="/api/signout" class="btn btn-danger">Sign out!</a>
 				</div>
 				<div class="head-link prof-link">
-					<a href="/profile.html">
+					<a href="profile.html" ng-click="loadProf()">
 					<div ng-show="defaultPic">
-						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48"></a>
+						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48">
 					</div>
 					<div ng-hide="defaultPic">
 						<img ng-Src="./{{ userPic }}" />
-					</div>
+					</div></a>
 
 				</div>
 			</div>	

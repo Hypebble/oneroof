@@ -76,6 +76,14 @@ var app = angular.module('users', [])
 			$scope.showProf = false;
 		}
 
+		$scope.loadProf = function() {
+			var email = {
+				loadEmail : $scope.userObj.email
+			}
+
+			$http.post("/api/loadProfile", email);
+		}
+
 		$scope.submit2 = function() {
 
 			var newData = {
