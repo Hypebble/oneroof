@@ -7,9 +7,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
         <link rel="stylesheet" href="/style/normalize.css">
-        <link rel="stylesheet" href="/style/oneRoof-style.css">
         <link rel="stylesheet" href="/style/style.css">
-
+        <link rel="stylesheet" href="/style/oneRoof-style.css">
         <link rel="stylesheet" href="/style/background-style.css">
         <link rel="shortcut icon" href="/favicon.ico" />
         <!-- Fonts -->
@@ -22,33 +21,34 @@
         <script src="index.js"></script>
         <title>Welcome to OneRoof!</title>
     </head>
-    <body class="container" ng-app="signin">
+    <body ng-app="signin">
         <div id= "background">
-            <img src = "/img/chores/vaccuuming.jpg" id ="background" alt="">
-            <div id="backgroundOverlay">
-          
-        <form class ="form-small centered" id ="formLogin" ng-controller="SignInController" ng-submit="submit()">
-            <p span class="login-logo"><b>O</b>ne<b>R</b>oof</p>
-            <div id="createFacebook">
-                <h6> 
-                    Haven't moved in? Create an account or join with Facebook.  
-                </h6>
-                <div class = "middle">
-                    <a href = "signup.html" class="btn btn-primary"><b>Create Account</b></a>
-                    <a href="/api/facebook" class="btn btn-primary"><b>Facebook Sign-In</b></a>  
-                </div><br>
+            <div id= "backgroundImage">
+                <div class="container">
+                    <div id="backgroundOverlay">
+                        <form class ="form-small centered" id ="formLogin" ng-controller="SignInController" ng-submit="submit()">
+                            <p span class="login-logo"><b>O</b>ne<b>R</b>oof</p>
+                            <div id="createFacebook">
+                                <h6> 
+                                    Haven't moved in? Create an account or join with Facebook.  
+                                </h6>
+                                <div class = "middle">
+                                    <a href = "signup.html" class="btn btn-primary"><b>Create Account</b></a>
+                                    <a href="/api/facebook" class="btn btn-primary"><b>Facebook Sign-In</b></a>  
+                                </div>
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <div class="center text-left"><b>Email: </b><input type="text" name="username" ng-model="email"><br></div>
+                                <div class="center text-left"><b>Password: </b><input type="password" name="password" ng-model="password"><br></div>
+                            </div>
+                            <button type="submit" class="btn btn-warning btn-lg" >
+                            <b>Login</b>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <div class="center text-left"><b>Email: </b><input type="text" name="username" ng-model="email"><br></div>
-                <div class="center text-left"><b>Password: </b><input type="password" name="password" ng-model="password"><br></div>
-            </div>
-            <button type="submit" class="btn btn-warning btn-lg" >
-                <b>Login</b>
-            </button>
-        </form>
         </div>
-        </div>
-        </div>  
     </body>
 </html>
