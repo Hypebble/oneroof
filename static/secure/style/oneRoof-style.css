@@ -9,6 +9,7 @@ body {
 
 .clear {
   clear: both;
+  overflow: hidden;
 }
 
 
@@ -234,16 +235,27 @@ a {
 
 
 /*********LOGIN*******/
-.signinbox {
+.form-small {
     color: #1a1a1a;
-    margin: auto;
-    width: 300px;
-    height: 350px;
-    position: absolute;
-    left: 40%;
-    top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33%;
+    min-width: 225px;
+    height: 425px;
+    position: fixed;
+    display:block;
+    right: 0;
+    left: 0;
+    margin-top:auto;
     background: #ededed;
-    border-radius: 25px;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-right-radius:25px;
+    border-bottom-left-radius:25px;
+}
+
+#createFacebook {
+   padding-bottom: 15px;
 }
 
 .signindetails {
@@ -259,4 +271,33 @@ a {
 
 .login {
     left: 50px;
+}
+
+.login-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  color: #9f7cb8;
+}
+
+#backgroundOverlay {
+  position: fixed; 
+  background-color: rgba(159,124,184, .4);
+  /*background-color: rgba(159,124,184, .8);*/
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+
+#background img {
+    max-width: 150%;
+    max-height: 150%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: -100;
 }

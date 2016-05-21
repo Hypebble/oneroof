@@ -18,6 +18,16 @@ body {
     text-align: center;
 }
 
+.form-label {
+  width:100%;
+}
+
+.btn-primary {
+  border-top-left-radius:0px;
+  border-top-right-radius:0px;
+  border-bottom-right-radius:25px;
+  border-bottom-left-radius:25px;
+}
 
 /****HEADLINE****/
 
@@ -290,7 +300,7 @@ a {
 }
 
 #background img {
-    max-width: 150%;
+    min-height:100%;
     max-height: 150%;
     bottom: 0;
     left: 0;
