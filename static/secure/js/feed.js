@@ -14,13 +14,6 @@ var app = angular.module('users', [])
 		$scope.defaultPic = true;
 		$scope.showPass = false;
 		$scope.showProf = false;
-		$scope.confirmPass = false;
-		$scope.incorrectPass = false;
-		$scope.showAccount = false;
-		$scope.transactionView = false;
-		$scope.showTransactions = false;
-		$scope.editViewIndex = false;
-		$scope.numOffset = 0;
 		$scope.userObj = 0;
 		$scope.userPic = "";
 
@@ -84,89 +77,6 @@ var app = angular.module('users', [])
 			$http.post("/api/loadProfile", email);
 		}
 
-		$scope.submit2 = function() {
-
-			var newData = {
-				displayName : $scope.changeDisplayName
-			}
-
-			$http.put('/api/updateDispl', newData)
-				.then(function(response) {
-					$scope.displayName = $scope.changeDisplayName;
-					window.alert("Display name changed!");
-					$scope.changeDisplayName = "";
-				})
-				.catch(function(err) {
-					console.log("newDispl fail");
-					console.log(err);
-				})
-		}
-
-		$scope.showAccounts = function() {
-			console.log("Show accounts");
-			$scope.showAccount = true;
-			$http.get("/api/accounts")
-				.then(function(response) {
-					$scope.accounts = response.data;
-				});
-
-		}
-
-		$scope.showEditAccountView = function(index) {
-			console.log("Show editAccount");
-			$scope.editViewIndex = index;
-		}
-
-		$scope.checkShowEdit = function(index) {
-			return $scope.editViewIndex === index;
-		}
-
-		$scope.editAccount = function(newId, newAccountName) {
-			console.log("Entered editAccount");
-			console.log("changed name = " + newAccountName);
-
-			var newAccountInfo = {
-				id : newId,
-				accountName : newAccountName
-			};
-
-			if(newAccountName.length <= 50) {
-				$http.post('/api/updateAccountName', newAccountInfo)
-					.then(function() {
-						window.alert("Account Name Changed!")
-					})
-					.catch(function() {
-						window.alert("Something went wrong updating your account");
-					});
-			} else {
-				window.alert("New name is too long");
-			}
-
-		} 
-
-		$scope.addTransaction = function() {
-			console.log("Start adding transaction");
-
-			var transaction = {
-	            sourceAccountID : $scope.sourceAccountID,
-	            destAccountID : $scope.destAccountID,
-	            transactionAmt : $scope.transactionAmt,
-	            transDescription : $scope.transDescription
-        	}
-
-        	$http.post('/api/addTransaction', transaction)
-        		.then(function() {
-        			scope.transactions.push(response.data);
-        		})
-        		.then(function() {
-        			$http.get("/api/accounts")
-						.then(function(response) {
-							$scope.accounts = response.data;
-						});
-        		});
-   
-		}
-
 		$scope.addTask = function() {
 			console.log("Start adding task");
 
@@ -191,36 +101,6 @@ var app = angular.module('users', [])
 						});
         		});
    
-		}
-
-		$scope.hideAccounts = function() {
-			console.log("Hide accounts");
-			$scope.showAccount = false;
-		}
-
-		$scope.showTransactionView = function() {
-			console.log("Show the transaction stuff");
-			$scope.transactionView = true;
-		}
-
-		$scope.startTransaction = function() {
-			console.log("Start a transaction");
-
-		}
-
-		$scope.showTransactionList = function() {
-			$scope.showTransactions = true;
-			
-			$http.get('/api/transactions')
-				.then(function(response) {
-					console.log(response.data);
-					$scope.transactions = response.data;
-				});
-		}
-
-		$scope.hideTransactionView = function() {
-			console.log("Hide transaction stuff");
-			$scope.transactionView = false;
 		}
 
 	});
