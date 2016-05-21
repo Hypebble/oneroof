@@ -104,18 +104,18 @@
 					</div>
 					<div class="form-group">
 					    <label for="taskType">Task Type (required)</label>
-					    <select class="form-control" placeholder="Choose a type of task" ng-model="taskType" required>
+					    <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
 						    <option>Bill</option>
 						    <option>Chore</option>
 					    </select>
 					</div>
-					<div class="input-group">
+					<div class="input-group" ng-show="showBillForm">
 						<label for="billAmount">Bill Amount</label>
 	      				<div class="input-group-addon">$</div>
 	      				<input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
 	      				<div class="input-group-addon">.00</div>
 	    			</div>
-	    			<div class="form-group">
+	    			<div class="form-group" ng-show="showChoreForm">
 	    				<label for="chorePriority">Chore Priority</label>
 						<input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
 	    			</div>

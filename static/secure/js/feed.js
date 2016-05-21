@@ -16,6 +16,8 @@ var app = angular.module('users', [])
 		$scope.showProf = false;
 		$scope.userObj = 0;
 		$scope.userPic = "";
+		$scope.showChoreForm = false;
+		$scope.showBillForm = false;
 
 		$http.get('/api/feed')
 			.then(function(response) {
@@ -101,6 +103,22 @@ var app = angular.module('users', [])
 						});
         		});
    
+		}
+
+		//currently only works for our binary set up
+		$scope.chooseTaskType = function() {
+			console.log($scope.selectedTaskType)
+			console.log("entered change task type")
+			$scope.taskType = $scope.selectedTaskType;
+			if($scope.selectedTaskType == "Chore") {
+				$scope.showChoreForm = true;
+				$scope.showBillForm = false;
+				console.log("Switched to chore view")
+			} else {
+				$scope.showBillForm = true;
+				$scope.showChoreForm = false;
+				console.log("Switched to bill view")
+			}
 		}
 
 	});
