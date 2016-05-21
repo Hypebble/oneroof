@@ -1,102 +1,53 @@
 <!DOCTYPE html>
 <html lang="eng">
-<head>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta charset="UTF-8">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-    <link rel="stylesheet" href="/style/oneRoof-style.css">
-    <link rel="stylesheet" href="/style/normalize.css">
-    <link rel="stylesheet" href="/style/style.css">
-	<script src="index.js"></script>
-  <title>Welcome to OneRoof!</title>
-</head>
-<body class="container" ng-app="signin">
-    <!--
-        
-        Current form of data sent to server
-        Route sent to: POST to "/"
-        
-        sends "username" (which is email)
-        sends "password" 
-        -->
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+        <link rel="stylesheet" href="/style/normalize.css">
+        <link rel="stylesheet" href="/style/style.css">
+        <link rel="stylesheet" href="/style/oneRoof-style.css">
+        <link rel="stylesheet" href="/style/background-style.css">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <!-- Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700' rel='stylesheet' type='text/css'>
+        <!-- -->
+        <script src="index.js"></script>
+        <title>Welcome to OneRoof!</title>
+    </head>
+    <body class="container" ng-app="signin">
+        <div id= "background">
+            <img src = "/img/chores/vaccuuming.jpg" id ="background" alt="">
+            <div id="backgroundOverlay">
+          
+        <form class ="form-small centered" id ="formLogin" ng-controller="SignInController" ng-submit="submit()">
+            <p span class="login-logo"><b>O</b>ne<b>R</b>oof</p>
+            <div id="createFacebook">
+                <h6> 
+                    Haven't moved in? Create an account or join with Facebook.  
+                </h6>
+                <div class = "middle">
+                    <a href = "signup.html" class="btn btn-primary"><b>Create Account</b></a>
+                    <a href="/api/facebook" class="btn btn-primary"><b>Facebook Sign-In</b></a>  
+                </div><br>
+            </div>
 
-<form class ="form-small centered" id ="loginForm" ng-controller="SignInController" ng-submit="submit()">
-    <p><b>Welcome to OneRoof!</b><br>  Login, or create your account.</p>
-    <div class="form-group">
-        <div class="center text-left"><b>Email: </b><input type="text" name="username" ng-model="email"><br></div>
-        <div class="center text-left"><b>Password: </b><input type="password" name="password" ng-model="password"><br></div>
-    </div>
-    <!--
-        Daniel says, I'll fix this later!
-    <% if (message.length > 0) { %>
-    <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-
-    <br>
-    <div class="clear"></div>-->
-    <div class = "middle">
-        <p>or</p><br>
-    </div><br>
-
-    <div class = "middle">
-        <a href = "signup.html" class="btn btn-primary">
-            <b>Create Account</b>
-        </a>
-    </div>
-
-        <div class = "middle">
-        <a href="/api/facebook" class="btn btn-primary"><b>Facebook Sign-In</b></a>
-    </div>
-    <div class="clear"></div>
-    <button type="submit" class="btn btn-warning btn-lg" >
-        <b>Login</b>
-    </button>
-</form>
-</div>
-
-<!--
-    <title>MONEY MONEY MONEY</title>
-</head>
-<body class="container" ng-app="signin">
-	<div id="fb-root"></div>
-	<header class="page-header">
-		<h1>The Most Trustworthy Bank Website Ever</h1>
-	</header>	
-	<h1>$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</h1>
-	<h2>Sign in here!</h2>
-
-	<form id="signin-form" ng-controller="SignInController" ng-submit="submit()">
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Email address</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email" ng-model="email" required>
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputPassword1">Password</label>
-	    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" ng-model="password" required>
-	  </div>
-	  <button class="btn btn-primary" type="submit">Sign in!</button>
-	  <div ng-show="loading">
-	  		<span>
-	  			<p>Loading is underway!</p>
-	  			<img src="ajax-loader.gif">
-	  		</span>	
-	  	</div>
-	  		<div class="alert alert-danger" role="alert" ng-show="show">
-  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
- 			 <span class="sr-only">Error:</span>
-  			Username/Pass combo is incorrect!
-		</div>
-	</form>
-	
-
-	<h2>Don't have an account yet?</h2>
-	<h3>Sign up now!</h3>
-
-	<a href="signup.html" type="button" class="btn btn-info">Go!</a>
--->
-
-</body>
+            <div class="form-group">
+                <div class="center text-left"><b>Email: </b><input type="text" name="username" ng-model="email"><br></div>
+                <div class="center text-left"><b>Password: </b><input type="password" name="password" ng-model="password"><br></div>
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg" >
+                <b>Login</b>
+            </button>
+        </form>
+        </div>
+        </div>
+        </div>  
+    </body>
 </html>
