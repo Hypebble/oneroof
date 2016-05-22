@@ -46,6 +46,35 @@
 		</div>
 			
     </div>
+    
+    <div id="instructionModal" class="modal fade" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div id="firstInstructions" ng-show="showFirstHouseQuestion">
+                    <h4>Are you part of an existing house?</h4>
+                    <button type="button" class="btn btn-success" ng-click="confirmExistingHouse()">Yes</button>
+                    <button type="button" class="btn btn-danger" ng-click="noHouse()">No</button>
+                </div>
+                <div id="createHouse" ng-show="showCreateHouse">
+                    <input class="form-control" placeholder="House Name" ng-model="modalHouseName" required>
+                    <button type="button" class="btn btn-info" ng-click="createHouse()">Create House</button>
+                </div>
+                <div id="enterCode" ng-show="showHouseCodeEntry">
+                    <input class="form-control" placeholder="Enter House Code" ng-model="modalHouseCode" required>
+                    <button type="button" class="btn btn-info" ng-click="joinHouse()">Join House</button>
+                </div>
+                <div id="showCode" ng-show="showCode">
+                    <h2> {{ generatedHouseCode }}<h2>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 	<div class="tasks sidebar col-md-2">
@@ -79,9 +108,7 @@
 			<p>{{task.task_status}}</p>
 			<p>{{task.due_date}}</p>
 		</li>
-				<!-- <img src="/img/icon/money.png" class="img-circle" />
-				<span class="task-headline"<b>Pay Rent ($675)</b> </span>
-				<span class="task-details">Due in <b>2d</b> (5/27)</span> -->
+
 		<div class="lower">
 		</div>
 		<div id="tasks">

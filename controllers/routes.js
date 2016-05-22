@@ -60,11 +60,14 @@ module.exports = function(passport, bankData) {
                 if(typeof rows[0] !== "undefined") { 
                     bankData.getHouseCode(rows[0].house_id)
                     .then(function(rs) {
+                        console.log("user is in a house");
                         console.log(rs[0]);
                         req.user.houseID = rs[0].house_id;
                         res.json([req.user, rs[0]]);
                     })
                 } else {
+                    // needs to create house
+                    console.log("user is not in a house");
                     res.json(req.user);
                 }
             })
@@ -74,6 +77,23 @@ module.exports = function(passport, bankData) {
     router.get('/api/feed', function(req, res) {
         console.log("feed user", req.user);
         res.json(req.user);
+    });
+    
+    // returns the code of the house the user is in
+    router.get('/api/house', function(req, res) {
+        console.log("HOUSE API grabbing house");
+        bankData.getHouse(req.user.user_id)
+            .then(function(response) {
+               console.log("HOUSE API RESPONSE ")
+               console.log(response);
+               if(typeof response[0] == 'undefined') {
+                   console.log("HOUSE API UNDEFINED")
+               } else {
+                   console.log("AYYY LMAO")
+                  req.user.houseID = response[0].house_id;
+               }
+               res.json(req.user);
+            })
     });
 
     router.get('/api/profile', function(req, res){
@@ -90,7 +110,7 @@ module.exports = function(passport, bankData) {
     });
 
     router.get('/api/getUsers', function(req, res) {
-        console.log("middleWare, getting users");
+        console.log("routes: getting users");
         console.log("user house id", req.user.houseID);
         if(typeof req.user.houseID !== "undefined") {
         bankData.getUsersInHouse(req.user.houseID)
@@ -102,6 +122,10 @@ module.exports = function(passport, bankData) {
                 }
                 res.json([req.user, rows]);
             })
+        } else {
+            //in house
+            console.log("user is not in a house");
+            console.log(req.user.houseID);
         }
     });
 
@@ -154,6 +178,7 @@ module.exports = function(passport, bankData) {
             .then(function(rows) {
                 console.log(rows.insertId);
                 bankData.addUserToHouse(rows.insertId, req.user.user_id);
+                res.json(code);
             })
             .catch(function(){
                 res.status("404").send("You done broke the machien");

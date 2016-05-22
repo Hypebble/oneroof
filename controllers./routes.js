@@ -75,6 +75,7 @@ module.exports = function(passport, bankData) {
         console.log("feed user", req.user);
         res.json(req.user);
     });
+    
 
     router.get('/api/profile', function(req, res){
         bankData.getUser(req.user.requestedProfile)
@@ -266,7 +267,7 @@ module.exports = function(passport, bankData) {
         console.log("EMAIL " + req.user.email);
         bankData.getTasksForUser(req.user.email)
             .then(function(rows) {
-                console.log("ROWS " + rows);
+                console.log("Tasks assigned " , rows);
                 res.json(rows);
             })
             .catch(function() {
@@ -279,7 +280,7 @@ module.exports = function(passport, bankData) {
         console.log("EMAIL " + req.user.email);
         bankData.getTasksForUser(req.user.requestedProfile)
             .then(function(rows) {
-                console.log("ROWS " + rows);
+                console.log("Tasks assigned: " , rows);
                 res.json(rows);
             })
             .catch(function() {
