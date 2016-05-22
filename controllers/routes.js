@@ -13,6 +13,7 @@ var multer  = require('multer');
 var upload = multer({ dest: './uploads/'});
 var fs = require('fs');
 var url = require('url');
+var TAG = "ROUTES "
 
 module.exports = function(passport, bankData) {
     var uploading = multer({
@@ -432,93 +433,53 @@ module.exports = function(passport, bankData) {
     //checks that user owns first account, and that destination 
     router.post('/api/addTask', function(req, res, next) {
         console.log("Entered addTask route");
-        
-        var taskCreatorID;
-        var taskOwnerID;
-        var generatedTaskID;
-        var taskCreatorHouseID;
-        var taskOwnerHouseID;
+        console.log(req.body);
+        var taskOwners = req.body.taskOwner;
+        console.log(TAG + " TASK OWNERS LIST ", req.body.taskOwner);
+        var creationTime = new Date();
+        var generatedTaskID = guid();
 
-        //go ahead and use req.user.varName = whatever to plant it in redis, I think?
+        var task = {
+            taskName : req.body.taskName,
+            taskID : generatedTaskID,
+            taskType : req.body.taskType,
+            taskDueDate : req.body.taskDueDate,
+            taskDescription : req.body.taskDescription,
+            taskStatus : "incomplete",
+            taskTime : creationTime
+        };
 
-        //grab current user id
-        bankData.getUser(req.user.email)
-            .then(function(currUserResponse) {
-                console.log("Grabbing curr userID");
-                taskCreatorID = currUserResponse[0].user_id;
-                console.log("task creator id is " + taskCreatorID);
-            })
-            //check desired email
-            .then(function() {
-                console.log("grabbing other user")
-                return bankData.getUser(req.body.taskOwner);
-            })
-            //grab other user id
-            .then(function(otherUserResponse) {
-                taskOwnerID = otherUserResponse[0].user_id;
-                console.log("task OWNER id is " + taskOwnerID);
-            })
-            //grabs task creator's house id- could perhaps be put in a different area
-            /*
-            .then(function() {
-                console.log("Grabbing task creator House ID")
-                taskCreatorHouseID = bankData.getUserHouse(taskCreatorID);
-            })
-            //grabs task owner house id
-            .then(function() {
-                console.log("Grabbing task owner House ID");
-                taskOwnerHouseID = bankData.getUserHouse(taskOwnerID);
-            })*/
-            //creates the task in the database
-            .then(function() {
-                //if(taskOwnerHouseID == taskCreatorHouseID) {
-                    var creationTime = new Date();
-                    generatedTaskID = guid();
-
-                    var task = {
-                        //may not be same as redis id
-                        //taskCreator : req.user.id,
-                        taskName : req.body.taskName,
-                        taskID : generatedTaskID,
-                        taskType : req.body.taskType,
-                        taskDueDate : req.body.taskDueDate,
-                        taskDescription : req.body.taskDescription,
-                        taskStatus : "incomplete",
-                        taskTime : creationTime
-                    };
-
-                    return bankData.createTask(task);
-                /*} else {
-                    console.log("House ID's do not match");
-                    res.status("400").send("Not in your house");
-                }*/
-            })
-            .then(function() {
-                console.log("made it to usertask update")
+      bankData.createTask(task)
+        .then(function() {
+            console.log( TAG + "created task, now creating usertasks");
+            for (var i = 0; i < taskOwners.length; i++) {
+                console.log(TAG + "ENTERED FOR EACH")
+                console.log(TAG + "", taskOwners[i]);
                 var info = {
-                    taskOwnerIDInfo : taskOwnerID,
-                    taskCreatorIDInfo : taskCreatorID,
+                    taskOwnerID : taskOwners[i].user_id,
+                    taskCreatorID : req.user.user_id,
                     taskID : generatedTaskID
                 }
+                console.log(TAG + "INFO FOR CREATE USER TASK")
+                bankData.updateUserTaskTable(info);
+            } 
+        })
+        .then(function() {
+            var info = {
+                taskID : generatedTaskID,
+                amount : req.body.amount,
+                priority : req.body.priority
+            }
 
-                return bankData.updateUserTaskTable(info);
-            })
-            .then(function() {
-                var info = {
-                    taskID : generatedTaskID,
-                    amount : req.body.amount,
-                    priority : req.body.priority
-                }
-
-                if(req.body.taskType == "Chore") {
-                    return bankData.updateChoreTable(info);
-                } else {
-                    return bankData.updateBillTable(info);
-                }
-            })
-            .catch(function() {
-                res.status("404").send("Something's fucky");
-            });
+            if(req.body.taskType == "Chore") {
+                return bankData.updateChoreTable(info);
+            } else {
+                return bankData.updateBillTable(info);
+            }
+        })
+        .catch(function() {
+            res.status("404").send("Something's fucky");
+        });
     });
 
     // upload a reference to profile image

@@ -120,9 +120,14 @@
 			
 			<form name="createTaskForm" ng-submit="addTask()" >
 					<div class="form-group">
+                        <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
+                            <p> {{assignee.displayName}} </p>
+                            <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
+                        </div>
 						<label for="taskOwner">Assign to:</label>
-						<select ng-model="taskOwner" class="form-control" ng-options="item.email as item.displayName for item in testAccounts" required>
+						<select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
 	    					<option value="">Select Roommate</option>
+                            <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
 						</select>
 					</div>
 					<div class="form-group">

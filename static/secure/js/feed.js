@@ -20,6 +20,7 @@ var app = angular.module('users', [])
 		$scope.showChoreForm = false;
 		$scope.showBillForm = false;
         $scope.showModal = false;
+        $scope.assignees = [];
         
         
         // http get the house code with api/house
@@ -38,12 +39,12 @@ var app = angular.module('users', [])
                console.log("HOUSE ", ifHouseID)
                $http.get("/api/getUsers")
                     .then(function (response) {
-                    
+                    console.log("housemates: ", $scope.housemates)
                         for(var i of response.data[1]){
                             console.log(i.name);
                             $scope.housemates.push(i);
                         }
-                        $scope.testAccounts = $scope.housemates;
+                        console.log("new housemates: ", $scope.housemates)
                         $scope.userObj = response.data[0];
 
                         if($scope.userObj.user_pic != null) {
@@ -103,9 +104,9 @@ var app = angular.module('users', [])
 
 		$scope.addTask = function() {
 			console.log("Start adding task");
-
+                console.log("assignees in feed ", $scope.assignees);
 			var task = {
-	            taskOwner : $scope.taskOwner,
+	            taskOwner : $scope.assignees,
 	            taskName : $scope.taskName,
 	            taskType : $scope.taskType,
 	            taskDueDate : $scope.taskDueDate,
@@ -113,10 +114,11 @@ var app = angular.module('users', [])
 	            amount : $scope.billAmount,
 	            priority : $scope.chorePriority
         	}
+            console.log("tasky task: " , task);
 
         	$http.post('/api/addTask', task)
-        		.then(function() {
-        			scope.tasks.push(response.data);
+        		.then(function(response) {
+        			$scope.tasks.push(response.data);
         		})
         		.then(function() {
         			$http.get("/api/tasks")
@@ -193,5 +195,36 @@ var app = angular.module('users', [])
 					console.log('not good this is a problem: ', err);
 				})
 		};
+        
+        $scope.removeAssignee = function(value) {
+            console.log("remove assignee", value)
+            console.log("ASSIGNEES:", $scope.assignees)
+            $scope.assignees.splice($scope.assignees.indexOf(value), 1);
+            $scope.housemates.push(value);
+            console.log("ASSIGNEES AFTER:", $scope.assignees)
+            console.log("HOUSEMATES", $scope.housemates)
+            //$("#" + id).style("display", "none");
+        }
+        
+        $scope.addAssignee = function() {
+            console.log("add assignee ", $scope.currentHousemate)
+            console.log("housemates: ", $scope.housemates);
+            console.log("assignees: " , $scope.assignees);
+            console.log(JSON.parse($scope.currentHousemate));
+            var temp = JSON.parse($scope.currentHousemate);
+            var index = -1;
+            for (var i = 0; i < $scope.housemates.length; i++){
+                if ($scope.housemates[i].email == temp.email) {
+                    index = i;
+                }
+            }
+            console.log("index: " + index);
+            console.log("INDEX", $scope.housemates.indexOf(temp))
+            if(index != -1) {
+               $scope.housemates.splice(index, 1);
+               $scope.assignees.push(temp); 
+            }
+            console.log("assignees after: " , $scope.assignees);
+        }
 
 	});

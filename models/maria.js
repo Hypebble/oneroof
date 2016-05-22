@@ -159,7 +159,7 @@ var bankData = {
 		console.log(TAG + "adding a task into USERTASK");
 		console.log(info);
 		var sql = 'insert into tblUSER_TASK (task_id, task_owner_id, task_creator_id) values (?, ?, ?)';
-		var params = [info.taskID, info.taskOwnerIDInfo, info.taskCreatorIDInfo];
+		var params = [info.taskID, info.taskOwnerID, info.taskCreatorID];
 		return connPool.queryAsync(sql, params);
 	},
 
