@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/oneRoof-style.css">
+    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/oneRoof-style.css">
     <script src="/js/feed.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/feed.js"></script>
@@ -20,13 +20,31 @@
 
 <body ng-app="users" ng-controller="UserController">
 
+    <div class="smallSidebar sidebar">
+		<div class = "home-button">
+            <a href="/"><img src="./img/newlogo2-04.png" width="48" height="48"></a>
+        </div>
+		<label for="radio1" class = "sidebar-link text-center">
+			<img src="./img/icon/user-silhouette.png">
+		</label>		
+		<input type="radio" value="personal" name="radio1" id="radio1" checked>
+		
+		<label for="radio2" class = "sidebar-link text-center">
+			<img src="./img/icon/users-group.png">
+		</label>
+		<input type="radio" value="house" name="radio2" id="radio2">
+    </div>
+    
+    
+
+
     <div id="header" class="headline box-down">
 		<div class="links">
-			<div class="head-link col-md-2">
-				<a href="feed.html"><img src="./img/newlogo2-04.png" width="48" height="48"><span class="logo"> OneRoof</span></a>
+			<div class="head-link col-md-3">
+				<a href="feed.html"><span class="logo"> OneRoof</span></a>
 			</div>
 
-			<div class="col-md-10">
+			<div class="col-md-8">
 				<div class="head-link">
 					<a href="/settings.html" class="btn btn-primary">Settings</a>
 					<a href="/api/signout" class="btn btn-danger">Sign out!</a>
@@ -42,7 +60,7 @@
 
 				</div>
 			</div>	
-			<div class="clear"></div>
+
 		</div>
 			
     </div>
@@ -76,27 +94,9 @@
         </div>
     </div>
 
-
-	<div class="tasks sidebar col-md-2">
-		<div class="headerWord text-center">
-			<b>Views</b>
-		</div>
-		
-		<label for="radio1" class = "sidebar-link text-center">
-			<img src="./img/icon/user-silhouette.png">
-			My Tasks
-		</label>		
-		<input type="radio" value="personal" name="focus" id="radio1" checked>
-		
-		<label for="radio2" class = "sidebar-link text-center">
-			<img src="./img/icon/users-group.png">
-			House Tasks
-		</label>
-		<input type="radio" value="house" name="focus" id="radio2">
-	</div>
-
-	<div class="tasks col-md-7">
-		<div class="headerWord text-center">
+	<div class="tasks col-md-3">
+		<input type="checkbox" name="history" value="history" ng-model="history" ng-click="changeStatus()">See Completed Tasks<br>
+        <div class="headerWord text-center">
 			<b>Tasks</b>
 		</div>
 
@@ -107,6 +107,7 @@
 			<p>{{task.task_time}}</p>
 			<p>{{task.task_status}}</p>
 			<p>{{task.due_date}}</p>
+            <button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>
 		</li>
 
 		<div class="lower">
@@ -165,7 +166,7 @@
 	</div>
 	</div>
 
-	<div id="tasks task-details" class="col-md-3">
+	<div id="tasks task-details" class="col-md-8">
 		<div class="headerWord text-center">
 			<b>Pay Rent</b>
 		</div>

@@ -287,10 +287,11 @@ module.exports = function(passport, bankData) {
         });
 
     //get all tasks for user
-    router.get('/api/tasks', function(req, res, next) {
+    router.post('/api/tasks', function(req, res, next) {
         console.log("Entered get tasks");
         console.log("EMAIL " + req.user.email);
-        bankData.getTasksForUser(req.user.email)
+        console.log("SELECTED TASK TYPE: " , req.body.status);
+        bankData.getTasksForUser(req.user.email, req.body.status)
             .then(function(rows) {
                 console.log("ROWS " + rows);
                 res.json(rows);
@@ -481,6 +482,13 @@ module.exports = function(passport, bankData) {
             res.status("404").send("Something's fucky");
         });
     });
+    
+    router.post('/api/deleteTask', function(req, res) {
+        var completedTime = new Date();
+        req.body.completedDate = completedTime;
+        console.log(TAG , req.body)
+        bankData.removeTask(req.body);
+    })
 
     // upload a reference to profile image
     router.post('/api/uploadProfile', function(req, res) {

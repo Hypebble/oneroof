@@ -137,10 +137,10 @@ var bankData = {
 		return connPool.queryAsync(sql, params);
 	},
 
-	getTasksForUser(email) {
+	getTasksForUser(email, status) {
 		console.log(TAG + "getting tasks for user");
-		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id join tblTASK t on t.task_id = ut.task_id where u.email = ?';
-		return connPool.queryAsync(sql, email);
+		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id join tblTASK t on t.task_id = ut.task_id where u.email = ? AND t.task_status=?';
+		return connPool.queryAsync(sql, [email, status]);
 	},
 	
 	getTasksforHouse() {
@@ -184,8 +184,17 @@ var bankData = {
 		return connPool.queryAsync(sql, params);
 	},
 
-	removeTask() {
-		console.log(TAG + "removing a task");
+	removeTask(data) {
+		console.log(TAG + "removing a task and task id " + data.id);
+        console.log("and the date is " + data.completedDate);
+        // updateUserDisplayName(displayName, id) {
+		// console.log("", displayName);
+		// console.log("", id);
+		// var sql = 'update tblUSER set name=? where user_id=?'
+        var sql = 'update tblTASK set task_archived_date=?, task_status=? where task_id=?'
+		var params = [data.completedDate, 'complete', data.id];
+        return connPool.queryAsync(sql, params);
+        
 	},
 	
 	/*TO DO: edit task stuff needs to get added*/
@@ -196,7 +205,11 @@ var bankData = {
 	
 	removeTaskComment() {
 		console.log(TAG + "removing comment from task");
-	}
+        
+	}, 
+
+    
+    
 	
 	/*TO DO: edit task stuff here*/
 	

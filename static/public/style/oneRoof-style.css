@@ -33,7 +33,6 @@ body {
 
 .links {
   margin: 0;
-  padding: 20px 25px;
   overflow: hidden;
   color: #eeeeee;
 }
@@ -89,6 +88,10 @@ body {
   border: 2px solid black;
 }
 
+.header {
+    height: 64px;
+}
+
 /**/
 
 
@@ -104,6 +107,11 @@ body {
   box-shadow: 0px 25px 0px grey;
 }
 
+.home-button {
+    height: 56px;
+    width: 56x;
+}
+
 
 .sidebar {
   background-color: #B9B4BD;
@@ -116,8 +124,6 @@ body {
 
 .sidebar img {
   position: relative;
-  top: -10px;
-  margin-left: 10px;
   width:48px;
   height:48px;
   float: left;
@@ -136,7 +142,6 @@ body {
   display: block;
   font-size: 20px;
   font-weight:400;
-  padding: 20px;
 }
 
 input:checked + label {
@@ -147,6 +152,13 @@ input:checked + label {
     color:#eeeeee;
 }
 
+.smallSidebar {
+    background-color: #694489;
+    height:100%;
+    padding: 4px;
+    width:56px;
+    float: left;
+}
 
 /**************TASKS *******/
 

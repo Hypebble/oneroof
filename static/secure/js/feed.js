@@ -21,6 +21,7 @@ var app = angular.module('users', [])
 		$scope.showBillForm = false;
         $scope.showModal = false;
         $scope.assignees = [];
+        $scope.statusType = 'incomplete'
         
         
         // http get the house code with api/house
@@ -73,8 +74,12 @@ var app = angular.module('users', [])
 				console.log("ruh roh");
 			});
             
-
-		$http.get("/api/tasks")
+        //update this so that it gets the value of current or 
+        // past button when thats added to UI
+        
+		$http.post("/api/tasks", {
+            status: $scope.statusType
+        })
 			.then(function(response) {
 				$scope.tasks = response.data;
 				console.log(response.data);
@@ -225,6 +230,34 @@ var app = angular.module('users', [])
                $scope.assignees.push(temp); 
             }
             console.log("assignees after: " , $scope.assignees);
+        }
+        
+        $scope.completeTask = function(id) {
+            console.log(id);
+            var data = {
+                id: id
+            }
+            $http.post('/api/deleteTask', data) 
+                .then(function(response) {
+                    console.log(response);
+                })
+            
+        }
+        
+        $scope.changeStatus = function() {
+            if ($scope.statusType == 'incomplete') {
+                $scope.statusType = 'complete';
+            } else {
+                $scope.statusType = 'incomplete';
+            }
+            $http.post("/api/tasks", {
+                status: $scope.statusType
+            })
+			.then(function(response) {
+				$scope.tasks = response.data;
+				console.log(response.data);
+			});
+
         }
 
 	});
