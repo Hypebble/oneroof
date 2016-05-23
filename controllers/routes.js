@@ -293,7 +293,7 @@ module.exports = function(passport, bankData) {
             
         });
 
-    //get all tasks for user
+    //get all tasks for user, when you are the current user
     router.post('/api/tasks', function(req, res, next) {
         console.log("Entered get tasks");
         console.log("EMAIL " + req.user.email);
@@ -308,6 +308,7 @@ module.exports = function(passport, bankData) {
             });
     });
 
+    //get all tasks for user, when its a different user
     router.get('/api/viewTasks', function(req, res, next) {
         console.log("Entered get tasks");
         console.log("EMAIL " + req.user.email);

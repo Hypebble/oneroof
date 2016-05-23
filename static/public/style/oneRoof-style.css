@@ -216,10 +216,10 @@ input:checked + label {
 
 .tasks {
   margin-left: 56px;
-  overflow: hidden;
+  /*overflow: hidden;*/
   height: 100vh;
   border-radius: 0px 0px 0px 2px;
-  border-right: 1px solid black;
+  /*border-right: 1px solid black;*/
 }
 
 .task img {
@@ -358,4 +358,34 @@ a {
 
 .navbar-fixed-top {
   margin-left: 56px;
+}
+
+#content-page {
+  margin-top: 60px;
+}
+
+#task-menu {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+#task-menu li {
+  display: inline;
+  padding: 0px 10px;
+}
+
+.task-icon {
+  background-color: purple;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  font-size: 20px;
+  font-style: bold;
+  height:30px;
+  width:30px;
+  line-height: 30px;
+  color:#FFF;
+  display: block;
+  text-align: center;
+  font-size: 2em;
 }
