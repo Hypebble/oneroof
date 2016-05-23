@@ -34,9 +34,6 @@
 		</label>
 		<input type="radio" value="house" name="radio2" id="radio2">
     </div>
-    
-    
-
 
     <div id="header" class="headline box-down">
 		<div class="links">
@@ -44,25 +41,23 @@
 				<a href="feed.html"><span class="logo"> OneRoof</span></a>
 			</div>
 
-			<div class="col-md-8">
-				<div class="head-link">
-					<a href="/settings.html" class="btn btn-primary">Settings</a>
-					<a href="/api/signout" class="btn btn-danger">Sign out!</a>
-				</div>
-				<div class="head-link prof-link">
-					<a href="profile.html" ng-click="loadProf()">
-					<div ng-show="defaultPic">
-						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48">
-					</div>
-					<div ng-hide="defaultPic">
-						<img ng-Src="./{{ userPic }}" />
-					</div></a>
-
-				</div>
+			<div class="col-md-9">
+                    <div class="head-link sign-out">
+                        <!--<a href="/settings.html" class="btn btn-primary">Settings</a>-->
+                        <a href="/api/signout" class="btn btn-danger">Sign out!</a>
+                    </div>
+                    <div class="head-link prof-link">
+    					<a href="profile.html" ng-click="loadProf()">
+    					<div ng-show="defaultPic">
+    						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48">
+    					</div>
+    					<div ng-hide="defaultPic">
+    						<img ng-Src="./{{ userPic }}" />
+    					</div></a>
+    				</div>
+                </div>
 			</div>	
-
 		</div>
-			
     </div>
     
     <div id="instructionModal" class="modal fade" role="dialog">
@@ -95,24 +90,24 @@
     </div>
 
 	<div class="tasks col-md-3">
-		<input type="checkbox" name="history" value="history" ng-model="history" ng-click="changeStatus()">See Completed Tasks<br>
-        <div class="headerWord text-center">
-			<b>Tasks</b>
-		</div>
-
-		<div class="task">
-            <div id="choreBoard">
-                <li ng-repeat="task in tasks" class="task" ng-click="taskSelect(task)">
-                    <p>{{task.task_name}}</p>
-                    <p>{{task.due_date}}</p>
-                    <button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>
-                </li>
+		<row>
+            <input type="checkbox" name="history" value="history" ng-model="history" ng-click="changeStatus()">See Completed Tasks<br></row>
+            <div class="headerWord text-center">
+                <b>Tasks</b>
             </div>
-
-            <div class="lower">
+        </row>
+		<row>
+            <div class="task">
+                <div id="choreBoard">
+                    <li ng-repeat="task in tasks" class="task" ng-click="taskSelect(task)">
+                        <p>{{task.task_name}}</p>
+                        <p>{{task.due_date}}</p>
+                        <button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>
+                    </li>
+                </div>
             </div>
-            <div id="tasks">
-            </div>
+        </row>
+        <row>
             <div id="create-task" class ="feed-column">
                 <div class="headline">
                     <h3>Create a task</h3>
@@ -163,7 +158,7 @@
                     <input class="btn btn-info" type="submit"></input>
                 </form>
             </div>
-        </div>
+        </row>
 	</div>
 
 	<div id="tasks task-details" class="col-md-8">

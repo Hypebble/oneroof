@@ -1,7 +1,6 @@
 /**********GENERAL*********/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
 
-
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
@@ -16,6 +15,14 @@ body {
 .center {
     margin: 0 auto;
     text-align: center;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(0%, -50%);
 }
 
 .form-label {
@@ -58,7 +65,8 @@ body {
 
 .prof-link {
   width:64px;
-  float: right;
+  float: left;
+  margin-top: auto;
 }
 
 .header-title {
@@ -158,6 +166,7 @@ input:checked + label {
     padding: 4px;
     width:56px;
     float: left;
+    overflow: hidden;
 }
 
 /**************TASKS *******/
@@ -187,7 +196,6 @@ input:checked + label {
 }
 
 .feed-column {
-    height: 100%;
     background-color: #eeeeee;
 }
 
@@ -205,9 +213,10 @@ input:checked + label {
 }
 
 .tasks {
-  height: 100%;
+  overflow: hidden;
+  height: 100vh;
   border-radius: 0px 0px 0px 2px;
-  border: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .task img {
@@ -301,6 +310,12 @@ a {
   color: #9f7cb8;
 }
 
+.login-logo-small {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  color: #9f7cb8;
+}
+
 #background {
     height: 100%;
     width:100%;
@@ -332,3 +347,8 @@ a {
   height: 200%;
 }
 
+/* Hiram's work keep out for now */
+
+.prof-link, .sign-out {
+  float:right;
+}
