@@ -483,6 +483,33 @@ module.exports = function(passport, bankData) {
         });
     });
     
+    router.post('/api/getComment', function(req, res) {
+       console.log(TAG + "Entered getComments");
+       console.log(TAG + " req.body is ", req.body);
+       bankData.getComment(req.body)
+          .then(function(response) {
+              res.json(response);
+          });
+    });
+    
+    router.post('/api/addComment', function(req, res) {
+       console.log(TAG + " add comment" + req.body);
+       req.body.creatorID = req.user.user_id;
+       bankData.addComment(req.body)
+          .then(function(response) {
+              res.json(response);
+          });
+       
+    });
+    
+    router.put('/api/deleteComment', function(req, res) {
+       console.log(TAG + " delete comment");
+       bankData.deleteComment(req.body.comment_id)
+          .then(function(response) {
+              res.json(response);
+          }) 
+    });
+    
     router.post('/api/deleteTask', function(req, res) {
         var completedTime = new Date();
         req.body.completedDate = completedTime;

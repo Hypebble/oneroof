@@ -22,6 +22,7 @@ var app = angular.module('users', [])
         $scope.showModal = false;
         $scope.assignees = [];
         $scope.statusType = 'incomplete'
+        $scope.selectedTask = "";
         
         
         // http get the house code with api/house
@@ -81,6 +82,7 @@ var app = angular.module('users', [])
             status: $scope.statusType
         })
 			.then(function(response) {
+                $scope.taskSelect(response.data[0]);
 				$scope.tasks = response.data;
 				console.log(response.data);
 			});
@@ -258,6 +260,43 @@ var app = angular.module('users', [])
 				console.log(response.data);
 			});
 
+        }
+        
+        $scope.taskSelect = function(task) {
+            $scope.selectedTask = task;
+            console.log("Entered task select, task = ", task)
+            $http.post('/api/getComment', $scope.selectedTask)
+                .then(function(response) {
+                    console.log("SETTING COMMENTS, RESPONSE =", response);
+                    $scope.comments = response.data;
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+           
+        }
+        
+        $scope.submitComment = function() {
+            console.log("Submitting comment ", $scope.commentDescription);
+            var data = {
+                taskID: $scope.selectedTask.task_id,
+                commentDescr:$scope.commentDescription
+            }
+            $http.post('/api/addComment', data)
+                .then(function(response) {
+                    console.log("SUBMIT COMMENT made it");
+                    $scope.comments.push(response);
+                    //show them the comment made it
+                    //update to show their comment 
+                });
+        }
+        
+        $scope.deleteComment = function(comment) {
+            console.log("FEED, deleting comment", comment);
+            $http.put('/api/deleteComment', comment)
+                .then(function(response) {
+                    //splice shit
+                })
         }
 
 	});

@@ -101,108 +101,130 @@
 		</div>
 
 		<div class="task">
-		<li ng-repeat="task in tasks" class="task">
-			<p>{{task.task_name}}</p>
-			<p>{{task.task_descr}}</p>
-			<p>{{task.task_time}}</p>
-			<p>{{task.task_status}}</p>
-			<p>{{task.due_date}}</p>
-            <button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>
-		</li>
+            <div id="choreBoard">
+                <li ng-repeat="task in tasks" class="task" ng-click="taskSelect(task)">
+                    <p>{{task.task_name}}</p>
+                    <p>{{task.due_date}}</p>
+                    <button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>
+                </li>
+            </div>
 
-		<div class="lower">
-		</div>
-		<div id="tasks">
-		</div>
-		<div id="create-task" class ="feed-column">
-			<div class="headline">
-				<h3>Create a task</h3>
-			</div>
-			
-			<form name="createTaskForm" ng-submit="addTask()" >
-					<div class="form-group">
+            <div class="lower">
+            </div>
+            <div id="tasks">
+            </div>
+            <div id="create-task" class ="feed-column">
+                <div class="headline">
+                    <h3>Create a task</h3>
+                </div>
+                
+                <form name="createTaskForm" ng-submit="addTask()" >
+                    <div class="form-group">
                         <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
                             <p> {{assignee.displayName}} </p>
                             <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
                         </div>
-						<label for="taskOwner">Assign to:</label>
-						<select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
-	    					<option value="">Select Roommate</option>
+                        <label for="taskOwner">Assign to:</label>
+                        <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
+                            <option value="">Select Roommate</option>
                             <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="taskName">Task name</label>
-						<input class="form-control" placeholder="Task name" ng-model="taskName" required>
-					</div>
-					<div class="form-group">
-					    <label for="taskType">Task Type (required)</label>
-					    <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
-						    <option>Bill</option>
-						    <option>Chore</option>
-					    </select>
-					</div>
-					<div class="input-group" ng-show="showBillForm">
-						<label for="billAmount">Bill Amount</label>
-	      				<div class="input-group-addon">$</div>
-	      				<input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
-	      				<div class="input-group-addon">.00</div>
-	    			</div>
-	    			<div class="form-group" ng-show="showChoreForm">
-	    				<label for="chorePriority">Chore Priority</label>
-						<input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
-	    			</div>
-					<div class="form-group">
-						<label for="taskDueDate">Task Due Date</label>
-						<input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
-					</div>
-					<div class="form-group">
-						<label for="taskDescription">Task Description (optional) </label>
-						<input class="form-control" placeholder="Task description" ng-model="taskDescription">
-					</div>
-					<input class="btn btn-info" type="submit"></input>
-			</form>
-		</div>
-	</div>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskName">Task name</label>
+                        <input class="form-control" placeholder="Task name" ng-model="taskName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskType">Task Type (required)</label>
+                        <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
+                            <option>Bill</option>
+                            <option>Chore</option>
+                        </select>
+                    </div>
+                    <div class="input-group" ng-show="showBillForm">
+                        <label for="billAmount">Bill Amount</label>
+                        <div class="input-group-addon">$</div>
+                        <input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
+                        <div class="input-group-addon">.00</div>
+                    </div>
+                    <div class="form-group" ng-show="showChoreForm">
+                        <label for="chorePriority">Chore Priority</label>
+                        <input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDueDate">Task Due Date</label>
+                        <input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Task Description (optional) </label>
+                        <input class="form-control" placeholder="Task description" ng-model="taskDescription">
+                    </div>
+                    <input class="btn btn-info" type="submit"></input>
+                </form>
+            </div>
+        </div>
 	</div>
 
 	<div id="tasks task-details" class="col-md-8">
 		<div class="headerWord text-center">
-			<b>Pay Rent</b>
+			<h4>{{selectedTask.task_name}}</h4>
 		</div>
 		<div class ="details">
-		<form>
-			<div>
-			Assigned To:  
-			<input type="text" name="assignee-name" value="You"><br>
-			</div>
-			<div>
-			Assigned By:  
-			<input type="text" name="assigner-name" value="Housemate McGee"><br><br>
-			</div>
-			<div>
-			Due Date:  
-			<input type="date" name="due-date" value="2016-05-15"><br>
-			</div>
-			<div>
-			Assigned On:  
-			<input type="date" name="made-date" value="2016-05-10"><br><br>
-			</div>
-			<div>
-			Priority:  
-			<input type="number" name="priority" value="5"><br>
-			</div>
-			<div>
-			Time Left:<br>
-			<input type="text" name="time-left" value="4 days 20 hrs"><br><br><br>
-			</div>
-			
-			Details
-			<div>
-				This bill is for <b>everyone</b>.  <b>Housemate B</b> collects rent, and you can send him a payment on Venmo <a href="payvenyo">here.</a>	
-			</div>
-			<input type="submit" value="Confirm Bill Paid">
-		</form>
+            <div class="detailedTask">
+                <b>Task Description:</b>
+                <p>{{selectedTask.task_descr}}</p>
+                <b>Task Created On:</b>
+                <p>{{selectedTask.task_time}}</p>
+                <b>Task Status:</b>
+                <p>{{selectedTask.task_status}}</p>
+                <b>Task Due Date:</b>
+                <p>{{selectedTask.due_date}}</p>
+                <b>Task Type:</b>
+                <p>{{selectedTask.task_type}}</p>
+            </div>
+            <div class="taskComment">
+                <h3>Comments</h3>
+                <span class="existingComment" ng-repeat="comment in comments" >
+                    <p>{{comment.comment_owner_id}}</p>
+                    <p>{{comment.comment_time}}</p>
+                    <p>{{comment.comment_descr}}</p>
+                    <button class="btn btn-danger" ng-click="deleteComment(comment)">Delete comment</button>
+                </span>
+                <input type="text" id="commentTextBox" placeholder="Add a comment" ng-model="commentDescription">
+                <input class="btn btn-info" type="submit" ng-click="submitComment()"></input>
+            </div>
+            <!--<form>
+                <div>
+                Assigned To:  
+                <input type="text" name="assignee-name" value="You"><br>
+                </div>
+                <div>
+                Assigned By:  
+                <input type="text" name="assigner-name" value="Housemate McGee"><br><br>
+                </div>
+                <div>
+                Due Date:  
+                <input type="date" name="due-date" value="2016-05-15"><br>
+                </div>
+                <div>
+                Assigned On:  
+                <input type="date" name="made-date" value="2016-05-10"><br><br>
+                </div>
+                <div>
+                Priority:  
+                <input type="number" name="priority" value="5"><br>
+                </div>
+                <div>
+                Time Left:<br>
+                <input type="text" name="time-left" value="4 days 20 hrs"><br><br><br>
+                </div>
+                
+                Details
+                <div>
+                    This bill is for <b>everyone</b>.  <b>Housemate B</b> collects rent, and you can send him a payment on Venmo <a href="payvenyo">here.</a>	
+                </div>
+                <input type="submit" value="Confirm Bill Paid">
+            </form>-->
 		</div>
 	</div>
 		

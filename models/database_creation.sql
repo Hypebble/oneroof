@@ -51,7 +51,7 @@ CREATE TABLE tblUSER_GROUPS (
 );
 
 
-/****/
+
 CREATE TABLE tblTASK (
 	task_id VARCHAR(100) NOT NULL,
 	task_name VARCHAR(30) NOT NULL,
@@ -96,23 +96,13 @@ CREATE TABLE tblUSER_TASK (
 );
 
 
-/****/
+
 CREATE TABLE tblCOMMENT (
 	comment_id INT NOT NULL AUTO_INCREMENT,
 	comment_descr VARCHAR(3000) NOT NULL,
 	comment_time TIMESTAMP NOT NULL,
 	comment_owner_id INT NOT NULL,
+    task_id VARCHAR(100) NOT NULL, 
 	PRIMARY KEY (comment_id),
 	FOREIGN KEY (comment_owner_id) REFERENCES tblUSER(user_id)
-);
-
-
-/****/
-CREATE TABLE tblUSER_TASK_COMMENT (
-	user_task_comment_id INT NOT NULL AUTO_INCREMENT,
-	user_task_id INT NOT NULL,
-	comment_id INT NOT NULL,
-	PRIMARY KEY (user_task_comment_id),
-	FOREIGN KEY (comment_id) REFERENCES tblCOMMENT(comment_id),
-	FOREIGN KEY (user_task_id) references tblUSER_TASK(user_task_id)
 );

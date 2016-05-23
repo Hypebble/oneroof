@@ -150,8 +150,8 @@ var bankData = {
 	createTask(task) {
 		console.log(TAG + "creating a task");
 		console.log(task);
-		var sql = 'insert into tblTASK (task_id, task_name, task_time, task_type, task_status, task_due_date) values (?, ?, ?, ?, ?, ?)';
-		var params = [task.taskID, task.taskName, task.taskTime, task.taskType, task.taskStatus, task.taskDueDate];
+		var sql = 'insert into tblTASK (task_id, task_name, task_time, task_type, task_status, task_due_date, task_descr) values (?, ?, ?, ?, ?, ?, ?)';
+		var params = [task.taskID, task.taskName, task.taskTime, task.taskType, task.taskStatus, task.taskDueDate, task.taskDescription];
 		return connPool.queryAsync(sql, params)	
 	},
 
@@ -199,14 +199,25 @@ var bankData = {
 	
 	/*TO DO: edit task stuff needs to get added*/
 	
-	addTaskComment() {
+	addComment(data) {
 		console.log(TAG + "adding a comment to task");
+        var sql = 'insert into tblCOMMENT (comment_descr, comment_owner_id, task_id) values(?, ?, ?)';
+        var params = [data.commentDescr, data.creatorID, data.taskID];
+        return connPool.queryAsync(sql, params);
 	},
 	
-	removeTaskComment() {
-		console.log(TAG + "removing comment from task");
+	getComment(data) {
+		console.log(TAG + "getting comment for task ", data.task_id);
+        var sql = 'select * from tblCOMMENT where task_id=?';
+        return connPool.queryAsync(sql, data.task_id);
         
-	}, 
+	},
+    
+    deleteComment(id) {
+        console.log(TAG + " removing comment from task");
+        var sql = 'delete from tblCOMMENT where comment_id=?';
+        return connPool.queryAsync(sql, id);
+    }
 
     
     
