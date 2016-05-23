@@ -121,13 +121,14 @@
                 <form name="createTaskForm" ng-submit="addTask()" >
                     <div class="form-group">
                         <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
-                            <p> {{assignee.displayName}} </p>
+                            <p> {{ determineDisplayName(assignee) }} </p>
                             <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
                         </div>
                         <label for="taskOwner">Assign to:</label>
                         <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
                             <option value="">Select Roommate</option>
                             <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
+                            <option ng-repeat="responsibilibuddy in responsibilityGroups.data" value="{{responsibilibuddy}}">{{responsibilibuddy.group_name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -192,6 +193,21 @@
                 </span>
                 <input type="text" id="commentTextBox" placeholder="Add a comment" ng-model="commentDescription">
                 <input class="btn btn-info" type="submit" ng-click="submitComment()"></input>
+            </div>
+            
+            <div class="createResponsibiltyGroup">
+                <h2>Create a Responsibility Group?</h2>
+                
+                <form ng-submit="createGroup()">
+					<input class="form-control" ng-model="groupName" placeholder="Group Name" name="groupName" required>
+					<input class="form-control" ng-model="groupDescr" placeholder="Write a bit about what this group does or is!" name="groupDescr" required>
+					  
+                <select class="form-control" ng-model="currentHousemate" ng-change="addAssigneeToGroup(currentHousemate)" required>
+                    <option value="">Select Roommate or Responsibility Group</option>
+                    <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
+                </select>
+                    <button class="btn btn-primary">CREATE GROUP</button>
+                </form>
             </div>
             <!--<form>
                 <div>

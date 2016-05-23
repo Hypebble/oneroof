@@ -187,9 +187,20 @@ module.exports = function(passport, bankData) {
     });
 
     router.put('/api/createGroup', function(req, res) {
-        bankData.createGroup(req.body.groupN, req.body.groupD)
+        console.log("1732tyu4g92374ty4iu5whe58495y3486374895r");
+        console.log(TAG + " and req.body ", req.body);
+     
+        bankData.createGroup(req.body.group_name, req.body.group_descr)
         .then(function(rows){
-            bankData.addUserToGroup(rows.insertId, req.user.user_id);
+            console.log("ROWSSWWEWEOWEOWOEOEWOEWOWEOEW 21383172313");
+            console.log(rows);
+             for (var i = 0; i < req.body.group_members.length; i++) {
+                 console.log(rows.insertId + " " + req.body.group_members[i].user_id);
+                bankData.addUserToGroup(rows.insertId, req.body.group_members[i].user_id);
+            } 
+            
+            
+            
         })
     });
 

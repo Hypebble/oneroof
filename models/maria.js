@@ -132,8 +132,8 @@ var bankData = {
 	},
 	
 	addUserToGroup(group, user) {
-		var sql = 'insert into tblUSER_GROUPS (user_id, group_id) values (?, ?)';
-		var params = [user, group];
+		var sql = 'insert into tblUSER_GROUPS (group_id, user_id) values (?, ?)';
+		var params = [group, user];
 		return connPool.queryAsync(sql, params);
 	},
 

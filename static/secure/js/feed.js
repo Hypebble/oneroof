@@ -23,6 +23,8 @@ var app = angular.module('users', [])
         $scope.assignees = [];
         $scope.statusType = 'incomplete'
         $scope.selectedTask = "";
+        $scope.currResponsibilityGroup = [];
+        $scope.responsibilityGroups = [];
         
         
         // http get the house code with api/house
@@ -56,7 +58,15 @@ var app = angular.module('users', [])
                         }
                         console.log("full response", response);
                         console.log("assigned val", $scope.testAccounts);
-                    });      
+                    })
+                    .then(function() {
+                        $http.get("/api/getGroups")
+                            .then(function(response) {
+                                console.log("1241341213123 ", response);
+                                $scope.responsibilityGroups = response;
+                            })  
+                    })
+   
             });
             
            
@@ -298,5 +308,46 @@ var app = angular.module('users', [])
                     //splice shit
                 })
         }
-
+        
+        $scope.createGroup = function() {
+            console.log("in create group 12241322`3");
+            var data = {
+                group_members: $scope.currResponsibilityGroup,
+                group_name: $scope.groupName,
+                group_descr: $scope.groupDescr
+            }
+            console.log(data);
+            $http.put('/api/createGroup', data)
+                .then(function(response) {
+                   console.log(response); 
+                })
+        }
+        
+        $scope.addAssigneeToGroup = function(housemate) {
+            var temp = JSON.parse(housemate);
+            console.log("add assignee ", $scope.currentHousemate)
+            console.log("housemates: ", $scope.housemates);
+            console.log("assignees: " , $scope.assignees);
+            var index = -1;
+            for (var i = 0; i < $scope.housemates.length; i++){
+                if ($scope.housemates[i].email == temp.email) {
+                    index = i;
+                }
+            }
+            console.log("index: " + index);
+            console.log("INDEX", $scope.housemates.indexOf(temp))
+            if(index != -1) {
+               $scope.currResponsibilityGroup.push(temp);
+            }
+            console.log("assignees after: " , $scope.assignees);
+        }
+        
+        $scope.determineDisplayName = function(assignee) {
+            if(assignee.hasOwnProperty("group_name")) {
+                 return assignee.group_name;   
+            } else {
+                 return assignee.displayName;
+            } 
+        };
+        
 	});
