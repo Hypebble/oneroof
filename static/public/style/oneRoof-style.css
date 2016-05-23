@@ -127,7 +127,9 @@ body {
   z-index:  -1;
   padding:0px;
   padding-right: 60px;
-
+  top:0;
+  left:0;
+  position: fixed;
 }
 
 .sidebar img {
@@ -213,6 +215,7 @@ input:checked + label {
 }
 
 .tasks {
+  margin-left: 56px;
   overflow: hidden;
   height: 100vh;
   border-radius: 0px 0px 0px 2px;
@@ -351,4 +354,8 @@ a {
 
 .prof-link, .sign-out {
   float:right;
+}
+
+.navbar-fixed-top {
+  margin-left: 56px;
 }
