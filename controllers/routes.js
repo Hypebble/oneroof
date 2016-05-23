@@ -16,10 +16,6 @@ var url = require('url');
 var TAG = "ROUTES "
 
 module.exports = function(passport, bankData) {
-    var uploading = multer({
-        dest: __dirname + './public/uploads/',
-        limits: {fileSize: 1000000, files:1},
-    })
 
     //router.post('/api/upload', function (req, res) {
         router.post('/api/upload', upload.single('image'), function(req, res){
