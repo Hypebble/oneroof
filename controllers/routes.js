@@ -92,6 +92,18 @@ module.exports = function(passport, bankData) {
                res.json(req.user);
             })
     });
+    
+    router.get('/api/houseDetails', function(req, res) {
+        console.log("~!~!~!H13213OUSE API GRABBING ALL DETAILS OF HOUSE");
+        console.log(req.user);
+        bankData.getHouseWithID(req.user.houseID)
+            .then(function(response) {
+              console.log("response!!!!");
+              console.log(response);
+              res.json([response[0]])
+            })
+        
+    })
 
     router.get('/api/profile', function(req, res){
         bankData.getUser(req.user.requestedProfile)

@@ -73,6 +73,14 @@ var bankData = {
 		var params = [houseCode];
 		return connPool.queryAsync(sql, params);
 	}, 
+	
+	getHouseWithID(houseID) {
+		console.log(TAG + "getting all ~~~!~!!~!~~!~~!~!!~~! house info");
+		console.log("", houseID);
+		var sql = 'select * from tblHOUSE where house_id=?';
+		var params = [houseID];
+		return connPool.queryAsync(sql, params);
+	},
 
 	getUserHouse(id) {
 		console.log(TAG + "grabbing house for user");

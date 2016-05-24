@@ -60,8 +60,17 @@ angular.module('users', [])
         // store the house code, and kick off virginity
         $http.get("/api/house")
             .then(function(response) {
+                console.log("1281y47719u312 call to api/house");
                 console.log("API HOUSE ANGULAR " , response);
                 console.log(response.data.houseID);
+                $http.get("/api/houseDetails")
+                    .then(function(response) {
+                        console.log("FEEDJS printing house details")
+                        console.log(response.data[0]);
+                        $scope.houseName = response.data[0].house_name;
+                        $scope.rentTotal = response.data[0].rent_total;
+                        $scope.houseCode = response.data[0].house_code
+                    })
                var ifHouseID = (response.data.houseID !== undefined);
                if(!ifHouseID) {
                    //run first time stuff
