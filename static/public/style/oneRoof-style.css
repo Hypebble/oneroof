@@ -4,6 +4,8 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
+  margin-left:60px;
+  padding: 0;
 }
 
 .clear {
@@ -115,9 +117,17 @@ body {
   box-shadow: 0px 25px 0px grey;
 }
 
-.home-button, .sidebar-btn {
-    height: 56px;
-    width: 56x;
+.home-button {
+    height: 60px;
+    width: 60px;
+}
+
+.sidebar-btn {
+  text-align: center;
+}
+
+.sidebar-btn > img {
+  vertical-align: middle;
 }
 
 
@@ -130,9 +140,10 @@ body {
   top:0;
   left:0;
   position: fixed;
+  -webkit-transform: translateZ(0);
 }
 
-.sidebar img {
+.sidebar div img {
   position: relative;
   width:48px;
   height:48px;
@@ -165,7 +176,6 @@ input:checked + label {
 .smallSidebar {
     background-color: #694489;
     height:100%;
-    padding: 4px;
     width:56px;
     float: left;
     overflow: hidden;
@@ -215,7 +225,6 @@ input:checked + label {
 }
 
 .tasks {
-  margin-left: 56px;
   /*overflow: hidden;*/
   height: 100vh;
   border-radius: 0px 0px 0px 2px;
@@ -357,12 +366,16 @@ a {
 }
 
 .navbar-fixed-top {
-  margin-left: 56px;
+  margin-left: 60px;
 }
 
 #content-page {
-  margin-top: 60px;
-  margin-left: 60px;
+  margin-top: 65px;
+  padding: 0px;
+}
+.container {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 #task-menu {
@@ -378,6 +391,8 @@ a {
 
 #feed-list {
   list-style: none;
+  margin:0px;
+  padding: 0px;
 }
 
 .task-icon {
@@ -397,6 +412,21 @@ a {
 
 #sidebar-list div:hover {
   color: #fff;
-  background-color: #333;
+  background-color: #fff;
   cursor: pointer;
+}
+
+#sidebar-list div {
+
+  position:relative;
+
+}
+
+#sidebar-list div img {
+  margin-left:9.5%;
+  margin-top:9.5%;
+}
+
+.img-responsive {
+  margin: 0 auto;
 }

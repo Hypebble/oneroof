@@ -69,7 +69,7 @@ var app = angular.module('users', [])
    
             });
             
-           
+        
 
 		$http.get('/api/feed')
 			.then(function(response) {
@@ -146,6 +146,15 @@ var app = angular.module('users', [])
    
 		}
 
+        $scope.imageClick = function(){
+            console.log("clicked an image");
+        }
+
+
+        $scope.imageChange = function(img){
+            console.log("hovered an image", img);
+            //img.setAttribute('src', 'http://dummyimage.com/100x100/eb00eb/fff');
+        }
 		//currently only works for our binary set up
 		$scope.chooseTaskType = function() {
 			console.log($scope.selectedTaskType)

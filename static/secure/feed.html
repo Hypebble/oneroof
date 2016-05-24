@@ -22,20 +22,20 @@
 <body ng-app="users" ng-controller="UserController">
 
     <div id="sidebar-list" class="smallSidebar sidebar">
-		<div class ="home-button">
-            <a><img src="./img/newlogo2-04.png" width="48" height="48"></a>
+		<div class ="home-button sidebar-btn" >
+            <img ng-click="imageClick()" class="img-responsive" src="./img/newlogo2-04.png" width="48" height="48">
         </div>
-        <div id="feed-btn" class="sidebar-btn">
-            <a><img src="./img/icon/sidebar-icons/todo-white.png"/></a>
+        <div class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
+            <img ng-click="imageClick()" src="{{todo}}"/>
         </div>
-        <div id="roomies-btn" class="sidebar-btn">
-            <a><img src="./img/icon/sidebar-icons/roommates-white.png"/></a>
+        <div class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
+            <img ng-click="imageClick()" ng-mouseover src="{{roomease}}"/>
         </div>
-        <div id="house-btn" class="sidebar-btn">
-            <a><img src="./img/icon/sidebar-icons/house-white.png"/></a>
+        <div class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
+            <img ng-click="imageClick()" ng-mouseover src="{{houseS}}"/>
         </div>
-        <div id="account-btn" class="sidebar-btn">
-            <a><img src="./img/icon/sidebar-icons/account-white.png"/></a>
+        <div class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
+            <img ng-click="imageClick()" ng-mouseover="imageChage(this)" src="{{imgsrc}}"/>
         </div>
     <!-- 	<label for="radio1" class = "sidebar-link text-center">
     		<img src="./img/icon/user-silhouette.png">
@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div id="content-page">
+    <div id="content-page" class="container">
         <row>
             <!--Content Columns-->
             <div id="content-overview" class="col-md-3 col-sm-4 col-xs-3">
