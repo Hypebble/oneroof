@@ -132,6 +132,7 @@ angular.module('users', [])
 			.then(function(response) {
                 $scope.taskSelect(response.data[0]);
 				$scope.tasks = response.data;
+                console.log("Tasks!!!!");
 				console.log(response.data);
 			});
 
@@ -441,6 +442,47 @@ angular.module('users', [])
                $scope.currResponsibilityGroup.push(temp);
             }
             console.log("assignees after: " , $scope.assignees);
+        }
+        
+        $scope.prettifyDates = function(date) {
+            console.log("prettifying date!!!!!!");
+            console.log(date);
+            var prettyDate = moment(date);
+            var dayDiff = prettyDate.diff(moment(), 'days');
+            var hourDiff = prettyDate.diff(moment(), 'hours');
+            var minuteDiff = prettyDate.diff(moment(), 'minutes');
+            var secondDiff = prettyDate.diff(moment(), 'seconds');
+            console.log(dayDiff);
+            console.log(hourDiff);
+            console.log(minuteDiff);
+            console.log(secondDiff);
+            if (dayDiff <= 0) {
+                if (hourDiff <= 0) {
+                    if(minuteDiff <= 0) {
+                        return (secondDiff + " seconds ago");
+                    }
+                    return (minuteDiff + " minutes ago");
+                }
+                return (hourDiff + " hours ago");
+            }            
+            if (dayDiff = 1) {
+                return("yesterday");
+            } else {
+                return(dayDiff + " days ago");
+            }
+            
+            //var prettyDate = moment(date).format('ddd, MMM Do');
+        }
+        
+        $scope.prettifyDue = function(dueDate) {
+            console.log("pretititititi due ddaatetee");
+            var now = moment(new Date()); //todays date
+            var due = moment(dueDate);
+            var daysDiff = due.diff(now, 'days');
+            var hoursDiff = due.diff(now, 'hours');
+            hoursDiff = hoursDiff - (daysDiff * 24);
+            console.log(daysDiff + "d " + hoursDiff + "h")
+            return(daysDiff + "d " + hoursDiff + "h");
         }
         
         $scope.determineDisplayName = function(assignee) {
