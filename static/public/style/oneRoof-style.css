@@ -442,3 +442,47 @@ a {
   list-style: none;
   padding:0;
 }
+
+#mobile-header {
+  visibility: hidden;
+  display: none;
+}
+
+@media (max-width: 768px) { 
+  body, .navbar-fixed-top {
+    margin:0;
+  }
+
+  body {
+    height: 100vh;
+  }
+
+  #mobile-header {
+    visibility: visible;
+    display: inline;
+    background-color: #000;
+
+  }
+
+  #content-detail {
+    display: none;
+    visibility: hidden;
+  }
+
+  #header {
+    visibility: hidden;
+
+  }
+
+  .sidebar {
+    visibility: hidden;
+  }
+
+  #sign-out {
+    visibility: hidden;
+  }
+
+
+
+
+}
