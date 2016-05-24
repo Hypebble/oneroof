@@ -81,7 +81,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Weclome to OneRoof!</h4>
+                <h4 class="modal-title" id="myModalLabel">Welcome to OneRoof!</h4>
             </div>
             <div class="modal-body">
                 <div id="firstInstructions" ng-show="showFirstHouseQuestion">
@@ -101,12 +101,19 @@
                     <button type="button" class="btn btn-info" ng-click="joinHouse()">Join House</button>
                 </div>
                 <div id="showCode" ng-show="showCode">
-                    <h2>You have sucessfully create a new house!</h2>
+                    <h2>You have sucessfully created a new house!</h2>
                     <p>Share the code below with your friends so they can join you!</p>
+                    <p>You can find this later in the accounts section.</p>
                     <h2> {{ generatedHouseCode }}</h2>
+                    <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
                 </div>
-                <div>
-                    
+                <div id="joinSuccess" ng-show="showJoinSuccess">
+                    <h2>You have successfully joined a house!</h2>
+                    <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
+                </div>
+                <div id="" ng-show="">
+                    <h2>Well now that you are in a house, its time to introduce you to OneRoof</h2>
+                    <p>OneRoof works to help simplify coordinating your roommates and keep them accountable.</p>
                 </div>
             </div>
         </div>
