@@ -15,24 +15,39 @@
     <script src="/js/feed.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/feed.js"></script>
+    <script src="/js/tabs.js"></script>
 
 </head>
 
 <body ng-app="users" ng-controller="UserController">
 
-    <div class="smallSidebar sidebar">
-		<div class = "home-button">
-            <a href="/"><img src="./img/newlogo2-04.png" width="48" height="48"></a>
+    <div id="sidebar-list" class="smallSidebar sidebar">
+		<div class ="home-button">
+            <a><img src="./img/newlogo2-04.png" width="48" height="48"></a>
         </div>
-		<label for="radio1" class = "sidebar-link text-center">
-			<img src="./img/icon/user-silhouette.png">
-		</label>		
-		<input type="radio" value="personal" name="radio1" id="radio1" checked>
-		
-		<label for="radio2" class = "sidebar-link text-center">
-			<img src="./img/icon/users-group.png">
-		</label>
-		<input type="radio" value="house" name="radio2" id="radio2">
+        <div id="feed-btn" class="sidebar-btn">
+            <a><img src="./img/icon/sidebar-icons/todo-white.png"/></a>
+        </div>
+        <div id="roomies-btn" class="sidebar-btn">
+            <a><img src="./img/icon/sidebar-icons/roommates-white.png"/></a>
+        </div>
+        <div id="house-btn" class="sidebar-btn">
+            <a><img src="./img/icon/sidebar-icons/house-white.png"/></a>
+        </div>
+        <div id="account-btn" class="sidebar-btn">
+            <a><img src="./img/icon/sidebar-icons/account-white.png"/></a>
+        </div>
+    <!-- 	<label for="radio1" class = "sidebar-link text-center">
+    		<img src="./img/icon/user-silhouette.png">
+    	</label>		
+    	<input type="radio" value="personal" name="radio1" id="radio1" checked>
+    	
+    	<label for="radio2" class = "sidebar-link text-center">
+    		<img src="./img/icon/users-group.png">
+    	</label>
+    	<input type="radio" value="house" name="radio2" id="radio2"> -->
+
+
     </div>
 
     <div id="header" class="navbar-fixed-top headline box-down">
@@ -111,12 +126,14 @@
                     <row>
                         <div>
                             <div id="choreBoard">
+                                <ul>
                                 <li ng-repeat="task in tasks" class="center" ng-click="taskSelect(task)">
                                     <span class="task-icon">{{task.task_type === "Chore" ? "C" : "$"}}</span>
                                     <p>{{task.task_name}}</p>
                                     <p>{{task.task_due_date}}</p>
                                     <!--<button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>-->
                                 </li>
+                                </ul>
                             </div>
                         </div>
                     </row>
