@@ -81,7 +81,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Weclome to OneRoof!</h4>
             </div>
             <div class="modal-body">
                 <div id="firstInstructions" ng-show="showFirstHouseQuestion">
@@ -90,15 +90,23 @@
                     <button type="button" class="btn btn-danger" ng-click="noHouse()">No</button>
                 </div>
                 <div id="createHouse" ng-show="showCreateHouse">
+                    <h4>Please Enter a name for your new house.</h4>
                     <input class="form-control" placeholder="House Name" ng-model="modalHouseName" required>
+                    <button type="button" class="btn btn-danger">Back</button>
                     <button type="button" class="btn btn-info" ng-click="createHouse()">Create House</button>
                 </div>
                 <div id="enterCode" ng-show="showHouseCodeEntry">
                     <input class="form-control" placeholder="Enter House Code" ng-model="modalHouseCode" required>
+                    <button type="button" class="btn btn-danger">Back</button>
                     <button type="button" class="btn btn-info" ng-click="joinHouse()">Join House</button>
                 </div>
                 <div id="showCode" ng-show="showCode">
-                    <h2> {{ generatedHouseCode }}<h2>
+                    <h2>You have sucessfully create a new house!</h2>
+                    <p>Share the code below with your friends so they can join you!</p>
+                    <h2> {{ generatedHouseCode }}</h2>
+                </div>
+                <div>
+                    
                 </div>
             </div>
         </div>
