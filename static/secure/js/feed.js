@@ -24,8 +24,8 @@ $(function() {
     });
 });
 
-var app = angular.module('users', [])
-	.controller('UserController', function($scope, $http) {
+angular.module('users', [])
+	.controller('UserController', function($scope, $http, $location) {
 		$scope.newUser = {};
 		$scope.newAccount = {};
 		//$scope.editAccount = {};
@@ -175,9 +175,14 @@ var app = angular.module('users', [])
    
 		}
 
+        $scope.backBtn = function() {
+            window.history.back();
+        }
+
         $scope.imageClick = function(img){
             console.log("clicked an image", img);
-            if(img === 'f') {
+            $location.path(img);
+            if(img === '/f') {
                 $scope.activePage = "My Feed";
                 $scope.feedOver = true;
                 $scope.feedDeet = true;
@@ -188,7 +193,7 @@ var app = angular.module('users', [])
                 $scope.accountOver = false;
                 $scope.accountDeet = false;
             }
-            else if(img === 'r') {
+            else if(img === '/r') {
                 $scope.activePage = "Roommates";
                 $scope.feedOver = false;
                 $scope.feedDeet = false;
@@ -199,8 +204,8 @@ var app = angular.module('users', [])
                 $scope.accountOver = false;
                 $scope.accountDeet = false;
             }
-            else if(img === 'h') {
-                $scope.activePage = "House Settings";
+            else if(img === '/h') {
+                $scope.activePage = "House Info";
                 $scope.feedOver = false;
                 $scope.feedDeet = false;
                 $scope.roomiesOver = false;
@@ -210,7 +215,7 @@ var app = angular.module('users', [])
                 $scope.accountOver = false;
                 $scope.accountDeet = false;
             }
-            else if(img === 'a') {
+            else if(img === '/a') {
                 $scope.activePage = "Account";
                 $scope.feedOver = false;
                 $scope.feedDeet = false;

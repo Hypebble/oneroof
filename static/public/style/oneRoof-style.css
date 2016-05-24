@@ -448,6 +448,10 @@ a {
   display: none;
 }
 
+#content-detail {
+  display: inline;
+}
+
 @media (max-width: 768px) { 
   body, .navbar-fixed-top {
     margin:0;

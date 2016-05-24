@@ -26,16 +26,16 @@
             <img ng-click="imageClick()" src="./img/newlogo2-04.png" width="48" height="48">
         </div>
         <div id="f" class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
-            <img ng-click="imageClick('f')" src="{{todo}}"/>
+            <img ng-click="imageClick('/f')" src="{{todo}}"/>
         </div>
         <div id="r" class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
-            <img ng-click="imageClick('r')" src="{{roomease}}"/>
+            <img ng-click="imageClick('/r')" src="{{roomease}}"/>
         </div>
         <div id="h" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
-            <img ng-click="imageClick('h')" src="{{houseS}}"/>
+            <img ng-click="imageClick('/h')" src="{{houseS}}"/>
         </div>
         <div id="a" class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
-            <img ng-click="imageClick('a')" src="{{imgsrc}}"/>
+            <img ng-click="imageClick('/a')" src="{{imgsrc}}"/>
         </div>
     <!-- 	<label for="radio1" class = "sidebar-link text-center">
     		<img src="./img/icon/user-silhouette.png">
@@ -53,9 +53,9 @@
     <div id="header" class="navbar-fixed-top headline box-down">
 		<div class="links">
 			<div class="head-link col-md-3 col-xs-3">
-				<a href="feed.html"><span class="logo">OneRoof</span></a>
+				<!--<a href="feed.html">--><span ng-click="backBtn()" class="logo">OneRoof</span><!--</a>-->
 			</div>
-            <div id="page-header" class="col-md-4 col-xs-4 logo" style="margin:0">{{activePage}}</div>
+            <div id="page-header" class="col-md-4 col-xs-4 logo logo-s" style="margin:0">{{activePage}}</div>
 			<div class="col-md-5">
                     <div id="sign-out" class="head-link sign-out">
                         <!--<a href="/settings.html" class="btn btn-primary">Settings</a>-->
@@ -212,8 +212,125 @@
                         <li><img height="96" width="96" float="left" src="{{housemate.user_pic}}"/><span style="padding-left:25px;font-size:18px">{{housemate.displayName}}</span></li>
                     </ul>
                 </div>
-                <div id="house-overview" ng-show="houseOver">HOUSE SETTINGS GO HERE</div>
-                <div id="account-overview" ng-show="accountOver">ACCOUNT SETTINGS GO HERE</div>
+                <div id="house-overview" ng-show="houseOver"><h2>House Information</h2>
+
+        <div class="row" ng-show="!house">
+
+            <div class="col-md-6 col-sm-2" ng-hide="inHouse">
+                <form ng-submit="createHouse()">
+                    <div class="form-group">
+                        <label for="createNewHouse"></label>
+                        <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
+                    </div>
+                    <input class="btn btn-info" type="submit">
+                </form>
+            </div>
+
+            <div class="col-md-6 col-sm-2" ng-hide="inHouse">
+                <form ng-submit="joinHouse()">
+                    <div class="form-group">
+                        <label for="joinAHouse"></label>
+                        <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
+                    </div>
+                    <input class="btn btn-info" type="submit">
+                </form>
+        </div>
+        <div class="row" ng-show="!house">
+            <div class="col-md-6">
+            <p>Your House Name: {{ houseNAME }}</p>
+            <p>Your House Code: {{ houseCODE }}</p>
+            <a class="btn btn-danger" ng-click="leaveHouse()">LEAVE HOUSE</a></div>
+        </div>
+        <div ng-hide="">
+        <h3>Manage Responsibility Groups</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <form ng-submit="createGroup()">
+                    <input class="form-control" ng-model="groupName" placeholder="Group Name" name="groupName" required>
+                    <input class="form-control" ng-model="groupDescr" placeholder="Write a bit about what this group does or is!" name="groupDescr" required>
+                    <button class="btn btn-primary">CREATE GROUP</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form>
+                    <!--Need to create get house groups-->
+                    <select ng-model="joinIntoGroup" class="form-control" ng-options="item.group_name for item in groups" required>
+                            <option value="">Select A Responsibility Group</option>
+                    </select>
+                    <button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button>
+                </form>
+            </div>          
+        </div>
+            
+            <h2>Responsibility Groups</h2>
+            <!--Smoke and Mirrors time-->
+            <ul>
+                <div ng-show="houseJoined">
+                <li><button ng-click="selectDefaultG()" class="btn btn-secondary">Kitchen Crew</button></li></div>
+                <div ng-show="groupJoined">
+                    <li><button ng-click="selectOtherG()" class="btn btn-secondary">Downstairs Roommates</button></li>
+                </div>
+                <div ng-show="groupCreated">
+                <li><button ng-click="selectCreateG()" class="btn btn-secondary">New Group Name</button></li>
+                </div>
+            </ul>
+        </div>
+    </div></div>
+                <div id="account-overview" ng-show="accountOver">     
+        <div class="col-md-4">
+            <h1>Personal Information</h1>
+
+            <h3>email: {{ email }}</h3>
+            <h3>username: {{ displayName }} </h3>
+
+            <h2>Update Name</h2>
+            <form ng-submit="updateName()">
+                <div class="form-group">
+                    <label for="displayNameChange"></label>
+                    <input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName" required>
+                </div>
+                <input class="btn btn-info" type="submit">
+            </form>
+
+                <h2>Change Password</h2>
+                <form ng-submit="updatePassword()">
+                    <div class="form-group">
+                        <label for="currPass">Current Password</label>
+                        <input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass" required>
+                    </div>
+                        <div class="alert alert-danger" role="alert" ng-show="incorrectPass">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            Password is incorrect!
+                    </div>
+                    <div class="form-group">
+                        <label for="newPass">New Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="New password" name="newPassword" ng-model="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPass">Confirm New Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Confirm new password" name="password" ng-model="confirmNewPassword" required>
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="confirmPass">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            Passwords need to match!
+                    </div>
+                    <input class="btn btn-info" type="submit">
+                </form>
+
+                <h2>Upload Profile Pic</h2>
+                <div>
+                                
+
+                            </div>
+
+                        <form action="/api/upload" method="POST" enctype="multipart/form-data">
+                          Select an image to upload:
+                          <input type="file" name="image"> 
+                          <input type="submit" value="Upload Image">
+                        </form> 
+            </div></div>  </div>
             </div>
             <div id="content-detail" class="col-md-7 col-sm-7 col-xs-12">
                 <div id="feed-details" ng-show="feedDeet" class="tasks task-details">
@@ -307,7 +424,8 @@
                     </div>
                 </div>
                 <div id="house-detail" ng-show="houseDeet">HOUSE SETTINGS OTHER GO HERE</div>
-                <div id="sccount-detail" ng-show="accountDeet">MORE ACCOUNT SETTINGS GO HERE</div>
+                <div id="account-detail" ng-show="accountDeet">
+  
             </div>
     </div>
 
