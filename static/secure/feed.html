@@ -22,20 +22,20 @@
 <body ng-app="users" ng-controller="UserController">
 
     <div id="sidebar-list" class="smallSidebar sidebar">
-		<div class ="home-button sidebar-btn" >
-            <img ng-click="imageClick()" class="img-responsive" src="./img/newlogo2-04.png" width="48" height="48">
+		<div class ="home-button sidebar-btn">
+            <img ng-click="imageClick()" src="./img/newlogo2-04.png" width="48" height="48">
         </div>
-        <div class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
-            <img ng-click="imageClick()" src="{{todo}}"/>
+        <div id="f" class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
+            <img ng-click="imageClick('f')" src="{{todo}}"/>
         </div>
-        <div class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
-            <img ng-click="imageClick()" ng-mouseover src="{{roomease}}"/>
+        <div id="r" class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
+            <img ng-click="imageClick('r')" src="{{roomease}}"/>
         </div>
-        <div class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
-            <img ng-click="imageClick()" ng-mouseover src="{{houseS}}"/>
+        <div id="h" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
+            <img ng-click="imageClick('h')" src="{{houseS}}"/>
         </div>
-        <div class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
-            <img ng-click="imageClick()" ng-mouseover="imageChage(this)" src="{{imgsrc}}"/>
+        <div id="a" class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
+            <img ng-click="imageClick('a')" src="{{imgsrc}}"/>
         </div>
     <!-- 	<label for="radio1" class = "sidebar-link text-center">
     		<img src="./img/icon/user-silhouette.png">
@@ -53,10 +53,10 @@
     <div id="header" class="navbar-fixed-top headline box-down">
 		<div class="links">
 			<div class="head-link col-md-3">
-				<a href="feed.html"><span class="logo"> OneRoof</span></a>
+				<a href="feed.html"><span class="logo">OneRoof</span></a>
 			</div>
-
-			<div class="col-md-9">
+            <div id="page-header" class="col-md-4 logo" style="margin:0">{{activePage}}</div>
+			<div class="col-md-5">
                     <div class="head-link sign-out">
                         <!--<a href="/settings.html" class="btn btn-primary">Settings</a>-->
                         <a href="/api/signout" class="btn btn-danger">Sign out!</a>
@@ -107,7 +107,7 @@
         <row>
             <!--Content Columns-->
             <div id="content-overview" class="col-md-3 col-sm-4 col-xs-3">
-                <div class="tasks">
+                <div id="feed-overview" ng-show="feedOver" class="tasks">
                     <row>
                         <ul id="task-menu">
                             <li id="tasks-p">Personal</li>
@@ -191,9 +191,17 @@
                         </div>
                     </row>
                 </div>
+
+                <div id="roommates-overview" ng-show="roomiesOver">
+                    <ul id="roommate-list" ng-repeat="housemate in housemates" ng-click="roommateSelect(housemate)">
+                        <li><img height="96" width="96" float="left" src="{{housemate.user_pic}}"/><span style="padding-left:25px;font-size:18px">{{housemate.displayName}}</span></li>
+                    </ul>
+                </div>
+                <div id="house-overview" ng-show="houseOver">HOUSE SETTINGS GO HERE</div>
+                <div id="account-overview" ng-show="accountOver">ACCOUNT SETTINGS GO HERE</div>
             </div>
             <div id="content-detail" class="col-md-7 col-sm-7 col-xs-7">
-                <div id="tasks task-details">
+                <div id="feed-details" ng-show="feedDeet" class="tasks task-details">
                     <div class="headerWord text-center">
                         <h4>{{selectedTask.task_name}}</h4>
                     </div>
@@ -269,8 +277,23 @@
                     </div>
                     <input type="submit" value="Confirm Bill Paid">
                 </form>-->
+                </div>
+                </div>
+            <div id="roommates-detail" ng-show="roomiesDeet">
+                <div>
+                    <img height="384" width="384" float="left" src="{{selectedHousemate.user_pic}}"/>
+                </div>
+                <div>
+                    <b>Name</b>
+                    <p>{{selectedHousemate.displayName}}</p>
+                    <b>Email</b>
+                    <p>{{selectedHousemate.email}}</p>
+                    <b>Phone Number</b>
+                    <p>{{selectedHousemate.phone_num === null ? "N/A" : selectedHousemate.phone_num}}</p>
+                </div>
             </div>
-
+            <div id="house-detail" ng-show="houseDeet">HOUSE SETTINGS OTHER GO HERE</div>
+            <div id="sccount-detail" ng-show="accountDeet">MORE ACCOUNT SETTINGS GO HERE</div>
         </row>  
     </div>
 

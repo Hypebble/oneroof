@@ -6,6 +6,7 @@ body {
   height: 100vh;
   margin-left:60px;
   padding: 0;
+  /*overflow:hidden;*/
 }
 
 .clear {
@@ -429,4 +430,9 @@ a {
 
 .img-responsive {
   margin: 0 auto;
+}
+
+#roommate-list {
+  list-style: none;
+  padding:0;
 }

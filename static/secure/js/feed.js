@@ -26,7 +26,18 @@ var app = angular.module('users', [])
         $scope.currResponsibilityGroup = [];
         $scope.responsibilityGroups = [];
         
-        
+        /* page title stuff*/
+        $scope.activePage = "My Feed";
+        /* tab variables */
+        $scope.feedOver = true;
+        $scope.feedDeet = true;
+        $scope.roomiesOver = false;
+        $scope.roomiesDeet = false;
+        $scope.houseOver = false;
+        $scope.houseDeet = false;
+        $scope.accountOver = false;
+        $scope.accountDeet = false;
+
         // http get the house code with api/house
         // store the house code, and kick off virginity
         $http.get("/api/house")
@@ -146,8 +157,52 @@ var app = angular.module('users', [])
    
 		}
 
-        $scope.imageClick = function(){
-            console.log("clicked an image");
+        $scope.imageClick = function(img){
+            console.log("clicked an image", img);
+            if(img === 'f') {
+                $scope.activePage = "My Feed";
+                $scope.feedOver = true;
+                $scope.feedDeet = true;
+                $scope.roomiesOver = false;
+                $scope.roomiesDeet = false;
+                $scope.houseOver = false;
+                $scope.houseDeet = false;
+                $scope.accountOver = false;
+                $scope.accountDeet = false;
+            }
+            else if(img === 'r') {
+                $scope.activePage = "Roommates";
+                $scope.feedOver = false;
+                $scope.feedDeet = false;
+                $scope.roomiesOver = true;
+                $scope.roomiesDeet = true;
+                $scope.houseOver = false;
+                $scope.houseDeet = false;
+                $scope.accountOver = false;
+                $scope.accountDeet = false;
+            }
+            else if(img === 'h') {
+                $scope.activePage = "House Settings";
+                $scope.feedOver = false;
+                $scope.feedDeet = false;
+                $scope.roomiesOver = false;
+                $scope.roomiesDeet = false;
+                $scope.houseOver = true;
+                $scope.houseDeet = true;
+                $scope.accountOver = false;
+                $scope.accountDeet = false;
+            }
+            else if(img === 'a') {
+                $scope.activePage = "Account";
+                $scope.feedOver = false;
+                $scope.feedDeet = false;
+                $scope.roomiesOver = false;
+                $scope.roomiesDeet = false;
+                $scope.houseOver = false;
+                $scope.houseDeet = false;
+                $scope.accountOver = true;
+                $scope.accountDeet = true;
+            }
         }
 
 
@@ -293,6 +348,11 @@ var app = angular.module('users', [])
                     console.log(err);
                 });
            
+        }
+
+        $scope.roommateSelect = function(housemate) {
+            $scope.selectedHousemate = housemate;
+            console.log("from feed.js", $scope.selectedHousemate.phone_num);
         }
         
         $scope.submitComment = function() {
