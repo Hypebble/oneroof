@@ -168,6 +168,8 @@ module.exports = function(passport) {
                                 } else {
                                     console.log("user exists!!!")
                                     console.log(rows[0]);
+                                    return done(null, rows[0]);
+                                    
                                 }
                             });
                         });
