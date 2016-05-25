@@ -3,9 +3,9 @@
 		<div id="account-overview">     
 	        <div>
 	            <h1>Personal Information</h1>
-
-	            <h3>email: {{ email }}</h3>
-	            <h3>username: {{ displayName }} </h3>
+	            <!-- Created current User because displayName wasn't working correctly in other tabs -->
+	            <h3>email: {{ currentUser.email }}</h3>
+	            <h3>username: {{ currentUser.displayName }} </h3>
 
 	            <h2>Update Name</h2>
 	            <form ng-submit="updateName()">
