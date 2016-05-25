@@ -114,6 +114,8 @@ module.exports = function(passport) {
                     //console.log(profile);
                     // console.log(refreshToken);
                     // console.log(token);
+                    console.log("logging profile!!!@!@~~!~!!!@!@#@@!#@!#!#!@#");
+                    console.log(profile);
                     bankUser.getUserFB(profile.id)
                         .then(function(rows) {
                             console.log(rows);
@@ -126,7 +128,6 @@ module.exports = function(passport) {
 
                                 //var userIDNew = uuid.v1();
                                 var name;
-                                console.log(profile)
                                 if(profile.displayName == undefined) {
                                     name = profile.name.givenName + " " + profile.name.familyName;
                                 } else {
@@ -149,11 +150,19 @@ module.exports = function(passport) {
                                 };
 
                                 bankUser.createUser(newUser)
-                                    .then(function() {
-                                        console.log("facebook user created");
+                                    .then(function(response) {
+                                        console.log("^*$#*$!#^DW!GR facebook user created");
+                                        console.log("newUser");
+                                        console.log(newUser);
+                                        console.log("response");
+                                        console.log(response.insertId);
+                                        
+                                        newUser.user_id = response.insertId;
+                                        console.log("newUser ", newUser);
                                         return done(null, newUser);
                                     })
-                                    .catch(function() {
+                                    .catch(function(error) {
+                                        console.log(error);
                                         return done(null, false);
                                     });
                                 } else {

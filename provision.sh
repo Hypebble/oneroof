@@ -57,3 +57,6 @@ apt-get install -y mariadb-server
 npm config set loglevel error -g
 
 sudo -E npm install --no-bin-links
+
+sudo -E apt-get install -y redis-tools
+sudo -E apt-get install -y redis-server

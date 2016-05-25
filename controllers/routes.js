@@ -145,7 +145,7 @@ module.exports = function(passport, bankData) {
             res.json(req.newUser);
         });
         
-    router.get('/api/facebook', passport.authenticate('facebook-login', { scope: 'email'}));
+    router.get('/api/facebook', passport.authenticate('facebook-login', { scope:'email'}));
     
     router.get('/api/facebook/callback', passport.authenticate('facebook-login', {
             successRedirect: '/feed.html',
@@ -214,11 +214,13 @@ module.exports = function(passport, bankData) {
 
     router.put('/api/joinHouse', function(req, res) {
         console.log(req.body);
+        console.log("~$!#@!#~@~!@~!@ joining house");
         bankData.getHouseWithCode(req.body.enterHouseCode)
             .then(function(rows) {
                 console.log(rows[0]);
                 if(rows[0] !== undefined) {
                     console.log('success house exists');
+                    console.log(req.user);
                     bankData.addUserToHouse(rows[0].house_id, req.user.user_id);
                     req.user.houseID = rows[0].house_id;
                     console.log('user added to house!');

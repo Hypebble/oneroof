@@ -32,9 +32,9 @@ var bankData = {
 		console.log("Begin create user");
 		console.log(user);
 		if (user.hasOwnProperty("facebook_id") ) {
-			console.log("creating facebook user!!!");
-			var sql = 'insert into tblUSER (facebook_email, name, facebook_token, facebook_id) values (?, ?, ?, ?)';
-			var params = [user.facebook_email, user.displayName, user.facebook_token, user.facebook_id];
+			console.log("12`2313 creating facebook user!!!");
+			var sql = 'insert into tblUSER (facebook_email, displayName, facebook_name, facebook_token, facebook_id) values (?, ?, ?, ?, ?)';
+			var params = [user.facebook_email, user.displayName, user.displayName, user.facebook_token, user.facebook_id];
 		} else {
 			console.log("creating local user!!!");
 			var sql = 'insert into tblUSER (email, displayName, hash_pass) values (?, ?, ?)';
@@ -42,6 +42,7 @@ var bankData = {
 			
 		}
 		console.log("SQL " + sql);
+		console.log("params " + params);
 		return connPool.queryAsync(sql, params);
 
 	},
@@ -134,6 +135,7 @@ var bankData = {
 		console.log(TAG + "adding user to house");
 		console.log("", houseId);
 		console.log("", userId);
+
 		var sql = 'insert into tblHOUSE_USER (house_id, user_id) values (?, ?)';
 		var params = [houseId, userId];
 		return connPool.queryAsync(sql, params);
