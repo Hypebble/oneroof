@@ -226,7 +226,7 @@ module.exports = function(passport, bankData) {
                     console.log('user added to house!');
                 }else {
                     console.log('house doesnt exist');
-                    return res.status("403").send("Hey Man, that house doesn't exist. Maybe create a new house or double check your code!");
+                    res.status("403").send("Hey Man, that house doesn't exist. Maybe create a new house or double check your code!");
                 }
             })
             .catch(function(err) {

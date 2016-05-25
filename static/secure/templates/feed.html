@@ -47,7 +47,7 @@
 		                                    <label for="taskOwner">Assign to:</label>
 		                                    <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
 		                                        <option value="">Select Roommate</option>
-		                                        <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
+		                                        <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName === currentUser.displayName ? "Me" : housemate.displayName}}</option>
 		                                        <option ng-repeat="responsibilibuddy in responsibilityGroups.data" value="{{responsibilibuddy}}">{{responsibilibuddy.group_name}}</option>
 		                                    </select>
 		                                </div>

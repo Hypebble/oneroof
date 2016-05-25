@@ -97,7 +97,7 @@ var bankData = {
 
 	getUsersInHouse(houseID) {
 		console.log(TAG, "grabbing all users present in a house");
-		var sql = 'SELECT * FROM tblUSER u join tblHOUSE_USER hu on u.user_id = hu.user_id WHERE hu.house_id = ?';
+		var sql = 'SELECT DISTINCT u.user_id, u.displayName, u.facebook_id, u.facebook_name, u.facebook_email, u.facebook_token, u.hash_pass, u.phone_num, u.email, u.user_pic FROM tblUSER u join tblHOUSE_USER hu on u.user_id = hu.user_id WHERE hu.house_id = ?';
 		return connPool.queryAsync(sql, houseID);
 	},
 	

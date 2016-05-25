@@ -226,6 +226,14 @@ var AppController = angular.module('AppController',[])
             }
         }
         
+        /* Modal Functions */
+        $scope.backToModal1 = function() {
+            console.log('clicked the back btn')
+            $scope.showFirstHouseQuestion = true;
+            $scope.showCreateHouse = false;
+            $scope.showHouseCodeEntry = false;
+        }
+
         $scope.confirmExistingHouse = function() {
             console.log("Chose exisiting house");
             $scope.showFirstHouseQuestion = false;
@@ -242,40 +250,74 @@ var AppController = angular.module('AppController',[])
         }
         
         $scope.createHouse = function() {
-            var houseName ={
-                setHouseName : $scope.modalHouseName
+            console.log('huh?', $scope.modalHouseName);
+            if($scope.modalHouseName !== undefined) {
+                var houseName ={
+                    setHouseName : $scope.modalHouseName
+                }
+                console.log('', houseName);
+
+                $http.put('/api/createHouse', houseName)
+                    .then(function(response) {
+                        console.log("should respond with house code here!");
+                        console.log('', response.data);
+                        $scope.generatedHouseCode = response.data;
+                        $scope.showCreateHouse= false;
+                        $scope.modalHouseNameWarning = false;
+                        $scope.showCode= true;
+                    })
+                    .catch(function(err) {
+                        console.log("something's wrong: ", err);
+                    })                
+            } else {
+                $scope.modalHouseNameWarning = true;
             }
-
-            console.log('', houseName);
-
-            $http.put('/api/createHouse', houseName)
-                .then(function(response) {
-                    console.log("should respond with house code here!");
-                    console.log('', response.data);
-                    $scope.generatedHouseCode = response.data;
-                    $scope.showCreateHouse= false;
-                    $scope.showCode= true;
-                })
-                .catch(function(err) {
-                    console.log("something's wrong: ", err);
-                })
         };
         
         $scope.joinHouse = function() {
-            var enteredCode = {
-                enterHouseCode : $scope.modalHouseCode
+            console.log(typeof($scope.modalHouseCode));
+            if($scope.modalHouseCode !== undefined) {
+                var enteredCode = {
+                    enterHouseCode : $scope.modalHouseCode
+                }
+
+                console.log(enteredCode);
+
+                $http.put('/api/joinHouse', enteredCode)
+                    .then(function(response){
+                        console.log("success", response);
+                    })
+                    .catch(function(err) {
+                        console.log('not good this is a problem: ', err);
+                    })
+                $scope.showHouseCodeEntry = false;
+                $scope.showHouseCodeWarning = false;
+                $scope.showJoinSuccess = true;
+            } else {
+                $scope.modalHouseCodeWarning = true;
             }
-
-            console.log(enteredCode);
-
-            $http.put('/api/joinHouse', enteredCode)
-                .then(function(response){
-                    console.log("success", response);
-                })
-                .catch(function(err) {
-                    console.log('not good this is a problem: ', err);
-                })
         };
+
+        $scope.oneOverview = function() {
+            $scope.showJoinSuccess = false;
+            $scope.showCode = false;
+            $scope.oneRoofOverview = true;
+        }
+
+        $scope.exitModal = function() {
+            $("#instructionModal").modal('hide');
+        }
+
+        $scope.oneRoofMore = function() {
+            $scope.oneRoofMore1 = true;
+            $scope.oneRoofOverview = false;
+        }
+
+        $scope.oneRoofIcons = function() {
+            $("#instructionModal").modal('show');
+            $scope.oneRoofMore1 = true;
+        }
+        /* End modal methods */
         
         $scope.removeAssignee = function(value) {
             console.log("remove assignee", value)

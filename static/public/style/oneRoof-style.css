@@ -12,6 +12,15 @@ body {
   margin-left:60px;
 }
 
+#modal-list {
+  list-style: none;
+  text-align: left;
+}
+
+#modal-list li {
+  padding:0;
+}
+
 .clear {
   clear: both;
   overflow: hidden;
