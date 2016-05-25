@@ -24,10 +24,10 @@ $(function() {
     });
 });
 
-var oneApp = angular.module('users', ['ngRoute', "AppController"]);
+var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify']);
 
 var AppController = angular.module('AppController',[])
-    .controller('UserController', function($scope, $http, $location) {
+    .controller('UserController', function($scope, $http, $location, ngNotify) {
         $scope.newUser = {};
         $scope.newAccount = {};
         //$scope.editAccount = {};
@@ -45,6 +45,7 @@ var AppController = angular.module('AppController',[])
         $scope.selectedTask = "";
         $scope.currResponsibilityGroup = [];
         $scope.responsibilityGroups = [];
+        
         
         /* page title stuff*/
         $scope.activePage = "My Feed";
@@ -78,6 +79,8 @@ var AppController = angular.module('AppController',[])
                         for(var i of response.data[1]){
                             console.log(i.name);
                             $scope.housemates.push(i);
+                            console.log("updating input date!!!");
+                            document.getElementById('dueDate').valueAsDate = new Date(); 
                         }
                         console.log("new housemates: ", $scope.housemates)
                         $scope.userObj = response.data[0];
@@ -165,6 +168,7 @@ var AppController = angular.module('AppController',[])
                 priority : $scope.chorePriority
             }
             console.log("tasky task: " , task);
+            ngNotify.set('Task created: ' + task.taskName + "!" );
 
             $http.post('/api/addTask', task)
                 .then(function(response) {
@@ -459,8 +463,15 @@ var AppController = angular.module('AppController',[])
 
         $scope.prettifyDates = function(date) {
             console.log("prettifying date!!!!!!");
+            console.log("original date");
             console.log(date);
+            console.log("moment date");
             var prettyDate = moment(date);
+            console.log(prettyDate);
+            prettyDate = prettyDate.subtract(2, 'hours');
+            console.log(prettyDate);
+            console.log("current moment");
+            console.log(moment());
             var dayDiff = prettyDate.diff(moment(), 'days');
             var hourDiff = prettyDate.diff(moment(), 'hours');
             var minuteDiff = prettyDate.diff(moment(), 'minutes');
@@ -469,19 +480,19 @@ var AppController = angular.module('AppController',[])
             console.log(hourDiff);
             console.log(minuteDiff);
             console.log(secondDiff);
-            if (dayDiff <= 0) {
-                if (hourDiff <= 0) {
-                    if(minuteDiff <= 0) {
-                        return (secondDiff + " seconds ago");
+            if (dayDiff >= -1) {
+                if (hourDiff >= 0) {
+                    if(minuteDiff >= -1) {
+                        return (-1 *secondDiff + " seconds ago");
                     }
-                    return (minuteDiff + " minutes ago");
+                    return (-1 *minuteDiff + " minutes ago");
                 }
-                return (hourDiff + " hours ago");
+                return ((hourDiff * -1) + " hours ago");
             }            
-            if (dayDiff = 1) {
+            if (dayDiff -= 1) {
                 return("yesterday");
             } else {
-                return(dayDiff + " days ago");
+                return(dayDiff * -1 + " days ago");
             }
             
             //var prettyDate = moment(date).format('ddd, MMM Do');
