@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/oneRoof-style.css">
+    <script src="/js/moment.js"></script>
+    <script src="/js/feed.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/feed.js"></script>
+    <script src="/js/tabs.js"></script>
+    <base href="/app.html">
+</head>
+
+<body ng-app="users" ng-controller="UserController">
+
+    <div id="sidebar-list" class="smallSidebar sidebar">
+		<div class ="home-button sidebar-btn">
+            <img ng-click="imageClick()" src="./img/newlogo2-04.png" width="48" height="48">
+        </div>
+        <div id="f" class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
+            <img ng-click="imageClick('/feed')" src="{{todo}}"/>
+        </div>
+        <div id="r" class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
+            <img ng-click="imageClick('/roommates')" src="{{roomease}}"/>
+        </div>
+        <div id="h" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
+            <img ng-click="imageClick('/house')" src="{{houseS}}"/>
+        </div>
+        <div id="a" class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
+            <img ng-click="imageClick('/settings')" src="{{imgsrc}}"/>
+        </div>
+    <!-- 	<label for="radio1" class = "sidebar-link text-center">
+    		<img src="./img/icon/user-silhouette.png">
+    	</label>		
+    	<input type="radio" value="personal" name="radio1" id="radio1" checked>
+    	
+    	<label for="radio2" class = "sidebar-link text-center">
+    		<img src="./img/icon/users-group.png">
+    	</label>
+    	<input type="radio" value="house" name="radio2" id="radio2"> -->
+
+
+    </div>
+    <div id="mobile-header" class="navbar-fixed-top">ONEROOF ONEROOF</div>
+    <div id="header" class="navbar-fixed-top headline box-down">
+		<div class="links">
+			<div class="head-link col-md-3 col-xs-3">
+				<!--<a href="feed.html">--><span ng-click="backBtn()" class="logo">OneRoof</span><!--</a>-->
+			</div>
+            <div id="page-header" class="col-md-4 col-xs-4 logo logo-s" style="margin:0">{{activePage}}</div>
+			<div class="col-md-5">
+                    <div id="sign-out" class="head-link sign-out">
+                        <!--<a href="/settings.html" class="btn btn-primary">Settings</a>-->
+                        <a href="/api/signout" class="btn btn-danger">Sign out!</a>
+                    </div>
+                    <!--<div class="head-link prof-link">
+    					<a href="profile.html" ng-click="loadProf()">
+    					<div ng-show="defaultPic">
+    						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48">
+    					</div>
+    					<div ng-hide="defaultPic">
+    						<img ng-Src="./{{ userPic }}" />
+    					</div></a>
+    				</div>-->
+                </div>
+			</div>	
+		</div>
+    </div>
+    
+    <div id="instructionModal" class="modal fade" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Welcome to OneRoof!</h4>
+            </div>
+            <div class="modal-body">
+                <div id="firstInstructions" ng-show="showFirstHouseQuestion">
+                    <h4>Are you part of an existing house?</h4>
+                    <button type="button" class="btn btn-success" ng-click="confirmExistingHouse()">Yes</button>
+                    <button type="button" class="btn btn-danger" ng-click="noHouse()">No</button>
+                </div>
+                <div id="createHouse" ng-show="showCreateHouse">
+                    <h4>Please Enter a name for your new house.</h4>
+                    <input class="form-control" placeholder="House Name" ng-model="modalHouseName" required>
+                    <button type="button" class="btn btn-danger">Back</button>
+                    <button type="button" class="btn btn-info" ng-click="createHouse()">Create House</button>
+                </div>
+                <div id="enterCode" ng-show="showHouseCodeEntry">
+                    <input class="form-control" placeholder="Enter House Code" ng-model="modalHouseCode" required>
+                    <button type="button" class="btn btn-danger">Back</button>
+                    <button type="button" class="btn btn-info" ng-click="joinHouse()">Join House</button>
+                </div>
+                <div id="showCode" ng-show="showCode">
+                    <h2>You have sucessfully created a new house!</h2>
+                    <p>Share the code below with your friends so they can join you!</p>
+                    <p>You can find this later in the accounts section.</p>
+                    <h2> {{ generatedHouseCode }}</h2>
+                    <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
+                </div>
+                <div id="joinSuccess" ng-show="showJoinSuccess">
+                    <h2>You have successfully joined a house!</h2>
+                    <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
+                </div>
+                <div id="" ng-show="">
+                    <h2>Well now that you are in a house, its time to introduce you to OneRoof</h2>
+                    <p>OneRoof works to help simplify coordinating your roommates and keep them accountable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-view>
+        <!-- Partials get rendered here!-->
+    </div>
+</body>
+
+</html>

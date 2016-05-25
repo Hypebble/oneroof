@@ -28,7 +28,7 @@ angular.module('signup', [])
 					.then(function(response){
 						console.log("Made it through sign up, redirecting the page")
 						$scope.loading = false;
-						$window.location.href = '/feed.html';
+						$window.location.href = '/app.html#/feed';
 					})
 					.catch(function(err) {
 						$scope.loading = false;

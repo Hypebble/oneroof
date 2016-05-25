@@ -208,7 +208,7 @@ input:checked + label {
 
 
 .task-details, .task-headline {
-  color: #eeeeee;
+  color: #000;
   font-size:22px;
   margin-top: 14px;
   position: relative;

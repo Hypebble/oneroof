@@ -24,19 +24,21 @@ $(function() {
     });
 });
 
-angular.module('users', [])
-	.controller('UserController', function($scope, $http, $location) {
-		$scope.newUser = {};
-		$scope.newAccount = {};
-		//$scope.editAccount = {};
-		$scope.defaultPic = true;
+var oneApp = angular.module('users', ['ngRoute', "AppController"]);
+
+var AppController = angular.module('AppController',[])
+    .controller('UserController', function($scope, $http, $location) {
+        $scope.newUser = {};
+        $scope.newAccount = {};
+        //$scope.editAccount = {};
+        $scope.defaultPic = true;
         $scope.housemates = [];
-		$scope.showPass = false;
-		$scope.showProf = false;
-		$scope.userObj = 0;
-		$scope.userPic = "";
-		$scope.showChoreForm = false;
-		$scope.showBillForm = false;
+        $scope.showPass = false;
+        $scope.showProf = false;
+        $scope.userObj = 0;
+        $scope.userPic = "";
+        $scope.showChoreForm = false;
+        $scope.showBillForm = false;
         $scope.showModal = false;
         $scope.assignees = [];
         $scope.statusType = 'incomplete'
@@ -46,31 +48,13 @@ angular.module('users', [])
         
         /* page title stuff*/
         $scope.activePage = "My Feed";
-        /* tab variables */
-        $scope.feedOver = true;
-        $scope.feedDeet = true;
-        $scope.roomiesOver = false;
-        $scope.roomiesDeet = false;
-        $scope.houseOver = false;
-        $scope.houseDeet = false;
-        $scope.accountOver = false;
-        $scope.accountDeet = false;
 
         // http get the house code with api/house
         // store the house code, and kick off virginity
         $http.get("/api/house")
             .then(function(response) {
-                console.log("1281y47719u312 call to api/house");
                 console.log("API HOUSE ANGULAR " , response);
                 console.log(response.data.houseID);
-                $http.get("/api/houseDetails")
-                    .then(function(response) {
-                        console.log("FEEDJS printing house details")
-                        console.log(response.data[0]);
-                        $scope.houseName = response.data[0].house_name;
-                        $scope.rentTotal = response.data[0].rent_total;
-                        $scope.houseCode = response.data[0].house_code
-                    })
                var ifHouseID = (response.data.houseID !== undefined);
                if(!ifHouseID) {
                    //run first time stuff
@@ -109,132 +93,104 @@ angular.module('users', [])
             
         
 
-		$http.get('/api/feed')
-			.then(function(response) {
-				console.log(response)
-				$scope.email = response.data.email;
-				$scope.displayName = response.data.name;
-				$scope.gravatarUrl = response.data.gravatarUrl;
-				if(!response.data.oAuth) {
-					$scope.showPass = true;
-				} 
-			})
-			.catch(function(err) {
-				console.log("ruh roh");
-			});
+        $http.get('/api/feed')
+            .then(function(response) {
+                console.log(response)
+                $scope.email = response.data.email;
+                $scope.displayName = response.data.name;
+                $scope.gravatarUrl = response.data.gravatarUrl;
+                if(!response.data.oAuth) {
+                    $scope.showPass = true;
+                } 
+            })
+            .catch(function(err) {
+                console.log("ruh roh");
+            });
             
         //update this so that it gets the value of current or 
         // past button when thats added to UI
         
-		$http.post("/api/tasks", {
+        $http.post("/api/tasks", {
             status: $scope.statusType
         })
-			.then(function(response) {
+            .then(function(response) {
                 $scope.taskSelect(response.data[0]);
-				$scope.tasks = response.data;
-                console.log("Tasks!!!!");
-				console.log(response.data);
-			});
+                $scope.tasks = response.data;
+                console.log(response.data);
+            });
 
-		$scope.selectedTestAccount = null;
-    	$scope.testAccounts = [];
+        $scope.selectedTestAccount = null;
+        $scope.testAccounts = [];
 
-    	
-		$scope.feed = function() {
-			console.log("made it to the feed view");
-			$scope.showProf = true;
-		}
+        
+        $scope.feed = function() {
+            console.log("made it to the feed view");
+            $scope.showProf = true;
+        }
 
-		$scope.hideFeed = function() {
-			console.log("hide feed");
-			$scope.showProf = false;
-		}
+        $scope.hideFeed = function() {
+            console.log("hide feed");
+            $scope.showProf = false;
+        }
 
-		$scope.loadProf = function() {
-			var email = {
-				loadEmail : $scope.userObj.email
-			}
+        $scope.loadProf = function() {
+            var email = {
+                loadEmail : $scope.userObj.email
+            }
 
-			$http.post("/api/loadProfile", email);
-		}
+            $http.post("/api/loadProfile", email);
+        }
 
-		$scope.addTask = function() {
-			console.log("Start adding task");
+        $scope.addTask = function() {
+            console.log("Start adding task");
                 console.log("assignees in feed ", $scope.assignees);
-			var task = {
-	            taskOwner : $scope.assignees,
-	            taskName : $scope.taskName,
-	            taskType : $scope.taskType,
-	            taskDueDate : $scope.taskDueDate,
-	            taskDescription : $scope.taskDescription,
-	            amount : $scope.billAmount,
-	            priority : $scope.chorePriority
-        	}
+            var task = {
+                taskOwner : $scope.assignees,
+                taskName : $scope.taskName,
+                taskType : $scope.taskType,
+                taskDueDate : $scope.taskDueDate,
+                taskDescription : $scope.taskDescription,
+                amount : $scope.billAmount,
+                priority : $scope.chorePriority
+            }
             console.log("tasky task: " , task);
 
-        	$http.post('/api/addTask', task)
-        		.then(function(response) {
-        			$scope.tasks.push(response.data);
-        		})
-        		.then(function() {
-        			$http.get("/api/tasks")
-						.then(function(response) {
-							$scope.tasks = response.data;
-						});
-        		});
+            $http.post('/api/addTask', task)
+                .then(function(response) {
+                    $scope.tasks.push(response.data);
+                })
+                .then(function() {
+                    $http.get("/api/tasks")
+                        .then(function(response) {
+                            $scope.tasks = response.data;
+                        });
+                });
    
-		}
+        }
 
         $scope.backBtn = function() {
             window.history.back();
         }
 
+
         $scope.imageClick = function(img){
             console.log("clicked an image", img);
-            $location.path(img);
-            if(img === '/f') {
+            //$location.path(img);
+            if(img === '/feed') {
+                $location.path(img)
                 $scope.activePage = "My Feed";
-                $scope.feedOver = true;
-                $scope.feedDeet = true;
-                $scope.roomiesOver = false;
-                $scope.roomiesDeet = false;
-                $scope.houseOver = false;
-                $scope.houseDeet = false;
-                $scope.accountOver = false;
-                $scope.accountDeet = false;
             }
-            else if(img === '/r') {
+            else if(img === '/roommates') {
+                $location.path(img);
                 $scope.activePage = "Roommates";
-                $scope.feedOver = false;
-                $scope.feedDeet = false;
-                $scope.roomiesOver = true;
-                $scope.roomiesDeet = true;
-                $scope.houseOver = false;
-                $scope.houseDeet = false;
-                $scope.accountOver = false;
-                $scope.accountDeet = false;
             }
-            else if(img === '/h') {
+            else if(img === '/house') {
+                $location.path(img);
                 $scope.activePage = "House Info";
-                $scope.feedOver = false;
-                $scope.feedDeet = false;
-                $scope.roomiesOver = false;
-                $scope.roomiesDeet = false;
-                $scope.houseOver = true;
-                $scope.houseDeet = true;
-                $scope.accountOver = false;
-                $scope.accountDeet = false;
             }
-            else if(img === '/a') {
+            else if(img === '/settings') {
+                $location.path(img);
                 $scope.activePage = "Account";
-                $scope.feedOver = false;
-                $scope.feedDeet = false;
-                $scope.roomiesOver = false;
-                $scope.roomiesDeet = false;
-                $scope.houseOver = false;
-                $scope.houseDeet = false;
-                $scope.accountOver = true;
-                $scope.accountDeet = true;
             }
         }
 
@@ -243,21 +199,21 @@ angular.module('users', [])
             console.log("hovered an image", img);
             //img.setAttribute('src', 'http://dummyimage.com/100x100/eb00eb/fff');
         }
-		//currently only works for our binary set up
-		$scope.chooseTaskType = function() {
-			console.log($scope.selectedTaskType)
-			console.log("entered change task type")
-			$scope.taskType = $scope.selectedTaskType;
-			if($scope.selectedTaskType == "Chore") {
-				$scope.showChoreForm = true;
-				$scope.showBillForm = false;
-				console.log("Switched to chore view")
-			} else {
-				$scope.showBillForm = true;
-				$scope.showChoreForm = false;
-				console.log("Switched to bill view")
-			}
-		}
+        //currently only works for our binary set up
+        $scope.chooseTaskType = function() {
+            console.log($scope.selectedTaskType)
+            console.log("entered change task type")
+            $scope.taskType = $scope.selectedTaskType;
+            if($scope.selectedTaskType == "Chore") {
+                $scope.showChoreForm = true;
+                $scope.showBillForm = false;
+                console.log("Switched to chore view")
+            } else {
+                $scope.showBillForm = true;
+                $scope.showChoreForm = false;
+                console.log("Switched to bill view")
+            }
+        }
         
         $scope.confirmExistingHouse = function() {
             console.log("Chose exisiting house");
@@ -275,40 +231,40 @@ angular.module('users', [])
         }
         
         $scope.createHouse = function() {
-			var houseName ={
-				setHouseName : $scope.modalHouseName
-			}
+            var houseName ={
+                setHouseName : $scope.modalHouseName
+            }
 
-			console.log('', houseName);
+            console.log('', houseName);
 
-			$http.put('/api/createHouse', houseName)
-				.then(function(response) {
+            $http.put('/api/createHouse', houseName)
+                .then(function(response) {
                     console.log("should respond with house code here!");
-					console.log('', response.data);
+                    console.log('', response.data);
                     $scope.generatedHouseCode = response.data;
                     $scope.showCreateHouse= false;
                     $scope.showCode= true;
-				})
-				.catch(function(err) {
-					console.log("something's wrong: ", err);
-				})
-		};
+                })
+                .catch(function(err) {
+                    console.log("something's wrong: ", err);
+                })
+        };
         
         $scope.joinHouse = function() {
-			var enteredCode = {
-				enterHouseCode : $scope.modalHouseCode
-			}
+            var enteredCode = {
+                enterHouseCode : $scope.modalHouseCode
+            }
 
-			console.log(enteredCode);
+            console.log(enteredCode);
 
-			$http.put('/api/joinHouse', enteredCode)
-				.then(function(response){
-					console.log("success", response);
-				})
-				.catch(function(err) {
-					console.log('not good this is a problem: ', err);
-				})
-		};
+            $http.put('/api/joinHouse', enteredCode)
+                .then(function(response){
+                    console.log("success", response);
+                })
+                .catch(function(err) {
+                    console.log('not good this is a problem: ', err);
+                })
+        };
         
         $scope.removeAssignee = function(value) {
             console.log("remove assignee", value)
@@ -362,10 +318,10 @@ angular.module('users', [])
             $http.post("/api/tasks", {
                 status: $scope.statusType
             })
-			.then(function(response) {
-				$scope.tasks = response.data;
-				console.log(response.data);
-			});
+            .then(function(response) {
+                $scope.tasks = response.data;
+                console.log(response.data);
+            });
 
         }
         
@@ -443,7 +399,7 @@ angular.module('users', [])
             }
             console.log("assignees after: " , $scope.assignees);
         }
-        
+
         $scope.prettifyDates = function(date) {
             console.log("prettifying date!!!!!!");
             console.log(date);
@@ -493,4 +449,25 @@ angular.module('users', [])
             } 
         };
         
-	});
+    });
+
+oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
+    $routeProvider
+    .when('/feed', {
+            templateUrl: './templates/feed.html',
+            controller: 'UserController'
+    })
+    .when('/roommates', {
+        templateUrl: './templates/roommates.html',
+        controller: 'UserController'
+    })
+    .when('/house', {
+        templateUrl: './templates/house.html',
+        controller: 'UserController'
+
+    })
+    .when('/settings', {
+        templateUrl: './templates/settings.html',
+        controller: 'UserController'
+    });
+}]);
