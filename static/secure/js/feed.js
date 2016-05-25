@@ -308,6 +308,10 @@ var AppController = angular.module('AppController',[])
             $("#instructionModal").modal('hide');
         }
 
+        $scope.exitModal = function() {
+            $("#createTaskModal").modal('hide');
+        }
+
         $scope.oneRoofMore = function() {
             $scope.oneRoofMore1 = true;
             $scope.oneRoofOverview = false;
