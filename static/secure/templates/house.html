@@ -65,6 +65,21 @@
 		</div>
 	</div>
 	<div id="content-details" class="col-md-7 col-md-7 col-xs-12">
-		<div id="house-detail">HOUSE SETTINGS OTHER GO HERE</div>
+		<div id="house-detail">
+			<div class="createResponsibiltyGroup">
+		            <h2>Create a Responsibility Group?</h2>
+		            
+		            <form ng-submit="createGroup()">
+		                <input class="form-control" ng-model="groupName" placeholder="Group Name" name="groupName" required>
+		                <input class="form-control" ng-model="groupDescr" placeholder="Write a bit about what this group does or is!" name="groupDescr" required>
+		                  
+		            <select class="form-control" ng-model="currentHousemate" ng-change="addAssigneeToGroup(currentHousemate)" required>
+		                <option value="">Select Roommate or Responsibility Group</option>
+		                <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
+		            </select>
+		                <button class="btn btn-primary">CREATE GROUP</button>
+		            </form>
+		        </div>
+		</div>
 	</div>
 </div>
