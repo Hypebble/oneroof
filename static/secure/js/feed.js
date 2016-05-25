@@ -53,6 +53,7 @@ var AppController = angular.module('AppController',[])
         // store the house code, and kick off virginity
         $http.get("/api/house")
             .then(function(response) {
+                $scope.currentUser = response.data;
                 console.log("API HOUSE ANGULAR " , response);
                 console.log(response.data.houseID);
                 $http.get("/api/houseDetails")
@@ -85,6 +86,8 @@ var AppController = angular.module('AppController',[])
                             console.log('not null picture');
                             $scope.userPic = $scope.userObj.user_pic;
                             $scope.defaultPic = false;
+                        } else {
+                            $scope.userPic = './img/icon/dj.png';
                         }
                         console.log("full response", response);
                         console.log("assigned val", $scope.testAccounts);

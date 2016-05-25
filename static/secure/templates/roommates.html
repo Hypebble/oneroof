@@ -2,7 +2,7 @@
 	<div id="content-overview" class="col-md-3 col-sm-4 col-xs-12">
 		<div id="roommates-overview">
             <ul id="roommate-list" ng-repeat="housemate in housemates" ng-click="roommateSelect(housemate)">
-                <li><img height="96" width="96" float="left" src="{{housemate.user_pic}}"/><span style="padding-left:25px;font-size:18px">{{housemate.displayName}}</span></li>
+                <li><img height="96" width="96" float="left" src="{{housemate.user_pic}}"/><span style="padding-left:25px;font-size:18px">{{housemate.email  === currentUser.email ? "Me" : housemate.displayName}}</span></li>
             </ul>
         </div>
         
