@@ -459,6 +459,7 @@ var AppController = angular.module('AppController',[])
         
     });
 
+/* Routes for the app, yeah the ability to view history */
 oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/feed', {

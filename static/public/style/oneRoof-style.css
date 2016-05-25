@@ -4,9 +4,12 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  margin-left:60px;
   padding: 0;
   /*overflow:hidden;*/
+}
+
+#app-body {
+  margin-left:60px;
 }
 
 .clear {

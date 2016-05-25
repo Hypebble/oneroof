@@ -21,11 +21,11 @@
     <base href="/app.html">
 </head>
 
-<body ng-app="users" ng-controller="UserController">
+<body id="app-body" ng-app="users" ng-controller="UserController">
 
     <div id="sidebar-list" class="smallSidebar sidebar">
 		<div class ="home-button sidebar-btn">
-            <img ng-click="imageClick()" src="./img/newlogo2-04.png" width="48" height="48">
+            <img ng-click="imageClick('/feed')" src="./img/newlogo2-04.png" width="48" height="48">
         </div>
         <div id="f" class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
             <img ng-click="imageClick('/feed')" src="{{todo}}"/>
@@ -55,7 +55,7 @@
     <div id="header" class="navbar-fixed-top headline box-down">
 		<div class="links">
 			<div class="head-link col-md-3 col-xs-3">
-				<!--<a href="feed.html">--><span class="logo">OneRoof</span><!--</a>-->
+				<a ng-click="imageClick('/feed')"><span class="logo">OneRoof</span></a>
 			</div>
             <div id="page-header" class="col-md-4 col-xs-4 logo logo-s" style="margin:0">{{activePage}}</div>
 			<div class="col-md-5">
