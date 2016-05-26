@@ -1,0 +1,15 @@
+<div id="content-details" class="col-md-7 col-sm-7 col-xs-12">
+        <div id="roommates-detail">
+            <div>
+                <img height="384" width="384" float="left" src="{{selectedHousemate.user_pic === null ? 'img/icon/dj.png' : selectedHousemate.user_pic}}"/>
+            </div>
+            <div>
+                <b>Name</b>
+                <p>{{selectedHousemate.displayName}}</p>
+                <b>Email</b>
+                <p>{{selectedHousemate.email}}</p>
+                <b>Phone Number</b>
+                <p>{{selectedHousemate.phone_num === null ? "N/A" : selectedHousemate.phone_num}}</p>
+            </div>
+        </div>
+    </div> 

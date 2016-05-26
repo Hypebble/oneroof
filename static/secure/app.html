@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
     <script src="/js/ng-notify.min.js"></script>
@@ -23,26 +24,26 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/feed.js"></script>
     <script src="/js/tabs.js"></script>
-    <base href="/app.html">
+    <!--<base href="/app.html">-->
 </head>
 
 <body id="app-body" ng-app="users" ng-controller="UserController">
 
     <div id="sidebar-list" class="smallSidebar sidebar">
 		<div class ="home-button sidebar-btn">
-            <img ng-click="imageClick('/feed')" src="./img/newlogo2-04.png" width="48" height="48"/>
+            <a ui-sref=".feed"><img src="./img/newlogo2-04.png" width="48" height="48"/></a>
         </div>
         <div id="f" class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
-            <img ng-click="imageClick('/feed')" src="{{todo}}"/>
+            <a ui-sref=".feed"><img src="{{todo}}"/></a>
         </div>
         <div id="r" class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
-            <img ng-click="imageClick('/roommates')" src="{{roomease}}"/>
+            <a ui-sref=".roommates"><img src="{{roomease}}"/></a>
         </div>
         <div id="h" ng-class="" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
-            <img ng-click="imageClick('/house')" src="{{houseS}}"/>
+            <a ui-sref=".house"><img src="{{houseS}}"/></a>
         </div>
         <div id="a" class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
-            <img ng-click="imageClick('/settings')" src="{{imgsrc}}"/>
+            <a ui-sref=".settings"><img src="{{imgsrc}}"/></a>
         </div>
     <!-- 	<label for="radio1" class = "sidebar-link text-center">
     		<img src="./img/icon/user-silhouette.png">
@@ -152,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div ng-view>
+    <div ui-view>
         <!-- Partials get rendered here!-->
     </div>
 </body>
