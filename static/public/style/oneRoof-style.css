@@ -590,8 +590,7 @@ input[type="file"] {
   #signoutButtonM {
     visibility: visible;
     display: inline;
-    margin-top: 2%;
-    margin-right: 1%;
+    top:10px;
     float: right;
   }
 
@@ -599,18 +598,26 @@ input[type="file"] {
     height: 100vh;
   }
 
-  #nav-mobile {
+  #mobile-nav {
     visibility: visible;
     display: inline;
     background-color: #9f7cb8;
-    height: 58px;
+    height: 60px;
+    text-align: center;
 
   }
+
 
   .navbar-header {
     background-color: #9f7cb8;
   }
 
+  #mobile-drop {
+    background-color: #694489;
+    display: block;
+    margin-top: 0;
+    overflow: hidden;
+  }
   #mobile-button {
     padding: 0px 5px 0px 5px;
     margin: 0px;
@@ -627,10 +634,6 @@ input[type="file"] {
   .navbar-brand {
     margin-top: 1%;
     color: #FFF;
-  }
-
-  .navbar-default {
-    color:#FFF;
   }
 
   #profile-detail {
@@ -651,4 +654,60 @@ input[type="file"] {
     visibility: hidden;
   }
 
+  #mobile-wrapper {
+    height: 60px;
+    background: #222;
+    position: relative;
+  }
+
+  #mobile-button { 
+    position: absolute; 
+    height: 60px; 
+    width: 60px; 
+    background: #694489; 
+    color: #fff; 
+    line-height: 60px; 
+    text-align: center;
+  }
+
+  #mobileMenu { 
+    display: none; 
+  }
+
+  #mobileMenu ul { 
+    width: 100%; 
+    padding: 0; 
+    margin: 0; 
+    position: absolute; 
+    top: 60px; 
+  }
+
+  #mobile-header {
+    text-align:center;
+  }
+
+  #mobileMenu li { 
+    text-align: center; 
+    height: 40px; 
+    line-height: 40px; 
+    background: #694489; 
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+    z-index: 1;
+
+    list-style: none;
+    position: relative; 
+  }
+
+  nav ul a {
+     font-size: 20px;
+  }
+
+  #mobile-title {
+    font-size: 24px;
+    text-align: center;
+    font-family: "Encode Sans Bold";
+    top: 10px;
+  }
 }

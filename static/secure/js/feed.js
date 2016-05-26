@@ -25,6 +25,24 @@ $(function() {
     });
 });
 
+//responsive menu because bootstrap hated me
+$(function() {
+  var menuVisible = false;
+  $('#mobile-button').click(function() {
+    if (menuVisible) {
+      $('#mobileMenu').css({'display':'none'});
+      menuVisible = false;
+      return;
+    }
+    $('#mobileMenu').css({'display':'block'});
+    menuVisible = true;
+  });
+  $('#mobileMenu').click(function() {
+    $(this).css({'display':'none'});
+    menuVisible = false;
+  });
+});
+
 // responsive menu closing on click
 $(function(){ 
 var navMain = $("#nav-mobile");

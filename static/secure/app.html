@@ -47,29 +47,32 @@
             <a ui-sref=".settings"><img src="{{imgsrc}}"/></a>
         </div>
     </div>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-       
-        <div id="mobile-nav" class="navbar-header">
-            <button id="mobile-button" style="float:left" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#oneRoof-collapse">
-                <img  src="./img/newlogo2-04.png" height="36px" width="36px"/>
-            </button>
-            
-            <a id="titleAnch" class="head-link" ui-sref=".feed.details">OneRoof</a>
-            <a id="signoutButtonM" href="/api/signout" class="waves-effect btn red lighten-1 z-depth-0">Sign out!</a>
+
+ 
+    <div id="mobile-wrapper"> 
+        <div id="mobile-nav" class="navbar-fixed-top">
+            <div class="col-1-xs">
+                <div id="mobile-button"> 
+                    <img  src="./img/newlogo2-04.png" height="36px" width="36px"/>
+                </div>
+            </div>
+            <div id="mobile-header" style="text-align:center" class="col-11-xs">
+                <span id="mobile-title">OneRoof</span>
+                <span id="signoutButtonM" href="/api/signout" class="waves-effect btn red lighten-1 z-depth-0">Sign out!</span>
+            </div>
         </div>
-       
-       <div class="collapse navbar-collapse" id="oneRoof-collapse">
-          <ul id="mobile-drop" class="nav navbar-nav">
+        <nav id="mobileMenu">
+            <ul>
                 <li><a ng-click="imageClick('/feed')">Feed</a></li>
                 <li><a ng-click="imageClick('/roommates')">Roommates</a></li>
                 <li><a ng-click="imageClick('/house')">House</a></li>
                 <li><a ng-click="imageClick('/settings')">Settings</a></li>
-          </ul>
-       </div>
-       
-    </nav>
-    <div id="nav-mobile" class="collapse nav-collapse">
+            </ul>
+        </nav>
     </div>
+
+       
+ 
     <div id="header" class="navbar-fixed-top headline box-down">
 		<div class="links">
 			<div class="head-link col-md-12 col-xs-12 col-sm-12">
