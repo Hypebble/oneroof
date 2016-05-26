@@ -25,7 +25,6 @@ $(function() {
     });
 });
 
-<<<<<<< HEAD
 // responsive menu closing on click
 $(function(){ 
 var navMain = $("#nav-mobile");
@@ -35,10 +34,8 @@ var navMain = $("#nav-mobile");
 });
 
 // Angular Application
-var oneApp = angular.module('users', ['ngRoute', "AppController"]);
-=======
 var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify']);
->>>>>>> 305ccb3e531e75237f4698686b374b41b42ea5af
+
 
 var AppController = angular.module('AppController',[])
     .controller('UserController', function($scope, $http, $location, ngNotify) {
