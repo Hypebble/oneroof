@@ -57,7 +57,7 @@ var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify', 'u
 
 
 var AppController = angular.module('AppController',[])
-    .controller('UserController', function($scope, $http, $location, ngNotify) {
+    .controller('UserController', function($scope, $http, $location, ngNotify, $window) {
         $scope.newUser = {};
         $scope.newAccount = {};
         //$scope.editAccount = {};
@@ -129,21 +129,23 @@ var AppController = angular.module('AppController',[])
                    $scope.showFirstHouseQuestion = true;
                }
                console.log("HOUSE ", $scope.ifHouseID)
+               
                $http.get("/api/getUsers")
                     .then(function (response) {
-                    console.log("housemates: ", $scope.housemates)
-                    console.log(response.data[1]);
+                    console.log("updating user objects");
+                    console.log(response);
+                    var curUserName = response.data[0].displayName;
+                    console.log(curUserName)
                         for(var i of response.data[1]){
+                            console.log(i);
+                            if (curUserName == i.displayName) {
+                                console.log("is current user");
+                                $scope.userObj = i;
+                            }
                             console.log(i.name);
                             $scope.pureHousemates.push(i);
                             $scope.housemates.push(i);
-                            console.log("updating input date!!!");
-                            //document.getElementById('dueDate').valueAsDate = new Date(); 
                         }
-                        console.log("new housemates: ", $scope.housemates)
-                        $scope.userObj = response.data[1][0];
-                        console.log("updated userObj!!!!!!");
-                        console.log(response.data[1][0]);
                         console.log($scope.userObj);
 
                         if($scope.userObj.user_pic != null) {
@@ -696,7 +698,21 @@ var AppController = angular.module('AppController',[])
                     console.log(response);
                 })
             }
+            $window.location.reload();
 		}
+        
+        $scope.contestTask = function(taskContested) {
+            console.log(taskContested);
+            console.log($scope.selectedTask.task_id);
+            var taskToContest = {
+                taskId: $scope.selectedTask.task_id,
+                taskStatus: taskContested
+            }
+            $http.put('/api/updateTask', taskToContest)
+                .then(function(response) {
+                    console.log(response);
+                }) 
+        }
         
         $scope.updatePaymentMethod = function(meth) {
             $scope.newPaymentMethod = meth;
@@ -734,6 +750,7 @@ var AppController = angular.module('AppController',[])
         }
                     
      });
+     
 
 
 

@@ -605,6 +605,15 @@ module.exports = function(passport, bankData) {
         });
 
     })
+    
+    router.put('/api/updateTask', function(req, res) {
+        console.log("about to send to maria!!!");
+        console.log(req.body);
+        bankData.updateTask(req.body)
+        .then(function(response) {
+            console.log(response);
+        })
+    })
 
     // upload a reference to profile image
     router.post('/api/uploadProfile', function(req, res) {

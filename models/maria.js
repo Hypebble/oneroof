@@ -233,6 +233,15 @@ var bankData = {
         
 	},
 	
+	updateTask(data) {
+		var params = [data.taskStatus, data.taskId];
+		var sql = 'update tblTASK set task_status=? where task_id=?'
+		console.log("updating in maria yooo yooo yooo");
+		console.log(params);
+		return connPool.queryAsync(sql, params);
+		
+	},
+	
 	/*TO DO: edit task stuff needs to get added*/
 	
 	addComment(data) {
