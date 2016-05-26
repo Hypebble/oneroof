@@ -536,7 +536,7 @@ module.exports = function(passport, bankData) {
                 bankData.updateUserTaskTable(info);
             } 
         })
-        .then(function() {
+        .then(function(response) {
             var info = {
                 taskID : generatedTaskID,
                 amount : req.body.amount,
@@ -544,10 +544,18 @@ module.exports = function(passport, bankData) {
             }
 
             if(req.body.taskType == "Chore") {
-                return bankData.updateChoreTable(info);
+                bankData.updateChoreTable(info)
+                    .then(function() {
+                        console.log(TAG + "MADE IT THRU CHORE")
+                        res.json(response);
+                    })
+                    .catch(function() {
+                        console.log(TAG + 'UHOHOHOHOHOHHOHOHOOHOOHHOHHOHOOH')
+                    });
             } else {
-                return bankData.updateBillTable(info);
+                bankData.updateBillTable(info);
             }
+            res.json(response)
         })
         .catch(function() {
             res.status("404").send("Something's fucky");
@@ -585,7 +593,11 @@ module.exports = function(passport, bankData) {
         var completedTime = new Date();
         req.body.completedDate = completedTime;
         console.log(TAG , req.body)
-        bankData.removeTask(req.body);
+        bankData.removeTask(req.body)
+        .then(function(response) {
+            res.json(response)
+        });
+
     })
 
     // upload a reference to profile image

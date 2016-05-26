@@ -18,6 +18,10 @@ body {
   /*overflow:hidden;*/
 }
 
+#createTaskModal {
+  position:fixed;
+}
+
 #app-body {
   margin-left:60px;
 }
