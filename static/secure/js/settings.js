@@ -132,7 +132,17 @@ var app = angular.module('settings', [])
 					console.log("something's wrong: ", response);
 				})
 		};
+		
+		// reveal the submit button for profile picture
 
+
+		// send form data
+		$scope.updateData = function() {
+			console.log("updatingData!");
+			console.log($scope.newPassword);
+			console.log($scope.changeDisplayName);
+			console.log($scope.profilePictureChange);
+		}
 
 		// update user display name
 		$scope.updateName = function() {

@@ -402,6 +402,24 @@ a.btn-primary:hover {
   height: 200%;
 }
 
+
+
+
+/*************PROFILE PICTURE*************/
+
+#profilePicture img {
+  height: 256px;
+  width: 256px;
+  margin-left: auto;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+/*****************************************/
+
 /* Hiram's work keep out for now */
 
 .prof-link, .sign-out {
