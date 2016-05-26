@@ -34,7 +34,7 @@ var navMain = $("#nav-mobile");
 });
 
 // Angular Application
-var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify']);
+var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify', 'ui.router']);
 
 
 var AppController = angular.module('AppController',[])
@@ -56,8 +56,21 @@ var AppController = angular.module('AppController',[])
         $scope.selectedTask = "";
         $scope.currResponsibilityGroup = [];
         $scope.responsibilityGroups = [];
+        // get from local storage
+        var pullRoommate= localStorage.getItem('currentRoomie');
+        var pullTask = localStorage.getItem('currentTask');
+
+        if(pullRoommate !== 'undefined') {
+            $scope.selectedHousemate = JSON.parse(pullRoommate);
+        }
+        if(pullTask !== 'undefined') {
+            $scope.selectedTask = JSON.parse(pullTask);
+        }
+        console.log('task after pull', $scope.selectedTask);
+
         $scope.profPicSubmit = false;
         
+
         
         /* page title stuff*/
         
@@ -142,7 +155,10 @@ var AppController = angular.module('AppController',[])
             status: $scope.statusType
         })
             .then(function(response) {
-                $scope.taskSelect(response.data[0]);
+                console.log('task value', typeof(selectedTask) );
+                if($scope.selectedTask === 'undefined') {
+                    $scope.taskSelect(response.data[0]);
+                }
                 $scope.tasks = response.data;
                 console.log(response.data);
             });
@@ -387,27 +403,27 @@ var AppController = angular.module('AppController',[])
         }
         
         $scope.showHistory = function() {
-            var statusType = "complete";
-            changeFilter(statusType);
-        }
+            if($scope.statusType === 'incomplete') {
+                $scope.statusType = 'complete'
+                $scope.historyIconColor = {"color" : "#9f7cb8"}
+            } else {
+                $scope.statusType = 'incomplete'
+                $scope.historyIconColor = {"color" : "#bfbfbf"}
+            }
 
-        $scope.showPersonal = function() {
-            var statusType = "incomplete";
-            changeFilter(statusType);
-        }
-
-        var changeFilter = function(statusType) {
             $http.post("/api/tasks", {
-                status: statusType
+                status: $scope.statusType
             })
             .then(function(response) {
                 $scope.tasks = response.data;
                 console.log(response.data);
             });
+           
         }
-        
+
         $scope.taskSelect = function(task) {
             $scope.selectedTask = task;
+            localStorage.setItem('currentTask', JSON.stringify($scope.selectedTask));
             console.log("Entered task select, task = ", task)
             $http.post('/api/getComment', $scope.selectedTask)
                 .then(function(response) {
@@ -422,6 +438,8 @@ var AppController = angular.module('AppController',[])
 
         $scope.roommateSelect = function(housemate) {
             $scope.selectedHousemate = housemate;
+            console.log('data that goes into local storage', JSON.stringify(housemate));
+            localStorage.setItem("currentRoomie", JSON.stringify($scope.selectedHousemate));
             console.log("from feed.js", $scope.selectedHousemate.phone_num);
         }
         
@@ -619,8 +637,8 @@ var AppController = angular.module('AppController',[])
                     
      });
 
-/* Routes for the app, yeah the ability to view history */
-oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
+/* Routes for the app, yeah the ability to view history: ngRoute*/
+/*oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/feed', {
             templateUrl: './templates/feed.html',
@@ -642,4 +660,54 @@ oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
         templateUrl: './templates/settings.html',
         controller: 'UserController'
     });
-}]);
+}]);*/
+
+// configuring our routes  ui-router
+// =============================================================================
+oneApp.config(function($stateProvider, $urlRouterProvider) {
+    
+    $stateProvider
+    
+        // route to show our basic form (/form)
+        .state('feed', {
+            url: '/feed',
+            templateUrl: './templates/feed.html',
+            controller: 'UserController'
+        })
+
+        //I need a feed detail view route
+        .state('feed.detail', {
+            url: '/feed/detail',
+            templateUrl: './templates/feed-detail.html'
+        })
+        
+        // nested states 
+        // each of these sections will have their own view
+        // url will be nested (/form/profile)
+        .state('roommates', {
+            url: '/roommates',
+            templateUrl: './templates/roommates.html',
+            controller: 'UserController'
+        })
+
+        //I need a roommates detail view route
+        .state('roommates.detail', {
+            url: '/roommates/profile',
+            templateUrl: './templates/roommates-detail.html'
+        })
+        // url will be /form/interests
+        .state('house', {
+            url: '/house',
+            templateUrl: './templates/house.html'
+        })
+        
+        // url will be /form/payment
+        .state('settings', {
+            url: '/settings',
+            templateUrl: './templates/settings.html'
+        });
+        
+    // catch all route
+    // send users to the form page 
+    //$urlRouterProvider.otherwise('/form/profile');
+})
