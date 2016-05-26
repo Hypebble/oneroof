@@ -51,7 +51,8 @@
 	                </div>
 	            </form>
 				
-				<h3>Preferred Payment- Current Method: {{userObj.payment_method}}, username: {{userObj.payment_username}}  </h3>
+				<h3>Preferred Payment</h3>
+				<h5> <b>Current Method: {{userObj.payment_method}}<b>, <br><b>Current Username:<b> {{userObj.payment_username}}  </h5>
 	            <form ng-submit="updateName()">
 	                <div class="form-group">  
 								<select class="payLabels" style="float:left;display:inline;margin-bottom:5px;" ng-change="updatePaymentMethod(paymentMethod)" ng-model="paymentMethod">

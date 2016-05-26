@@ -11,7 +11,13 @@
 	            <b>Task Created On:</b>
 	            <p>{{selectedTask.task_time}}</p>
 	            <b>Task Status:</b>
-	            <p>{{selectedTask.task_status}}</p>
+				<form>
+					<select id="getContestTask" class="form-control" ng-model="contest" ng-change="contestTask(contest)">
+						<option value="complete">Complete</option>
+						<option value="incomplete">Incomplete</option>
+					</select>
+				</form>
+				<b></b>
 	            <b>Task Due Date:</b>
 	            <p>{{selectedTask.due_date}}</p>
 	            <b>Task Type:</b>

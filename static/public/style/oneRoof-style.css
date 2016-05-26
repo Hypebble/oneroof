@@ -734,3 +734,9 @@ input[type="file"] {
     display: inline
   }
 }
+
+/*******PLOTS ******/
+
+.plots {
+  display: inline-block;
+}
