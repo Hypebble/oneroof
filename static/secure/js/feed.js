@@ -77,14 +77,14 @@ var AppController = angular.module('AppController',[])
                         $scope.houseCode = response.data[0].house_code
                         $scope.activePage = "Tasks for " + $scope.houseName;
                     })
-               var ifHouseID = (response.data.houseID !== undefined);
-               if(!ifHouseID) {
+               $scope.ifHouseID = (response.data.houseID !== undefined);
+               if(!$scope.ifHouseID) {
                    //run first time stuff
                    console.log("AMI I IN HERE?")
                    $("#instructionModal").modal('show');
                    $scope.showFirstHouseQuestion = true;
                }
-               console.log("HOUSE ", ifHouseID)
+               console.log("HOUSE ", $scope.ifHouseID)
                $http.get("/api/getUsers")
                     .then(function (response) {
                     console.log("housemates: ", $scope.housemates)
