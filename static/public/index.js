@@ -23,7 +23,7 @@ angular.module('signin', [])
 				.then(function(response){
 					$scope.loading = false;
 					console.log("in profile!!!! ");
-					$window.location.href = '/app.html#/feed';
+					$window.location.href = '/app.html#/feed/feed/detail';
 				})
 				.catch(function(err) {
 					console.log(err);

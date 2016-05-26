@@ -1,11 +1,11 @@
-<div id="content-page" class="container-fluid">
-	<div id="content-overview" class="col-md-3 col-sm-4 col-xs-12">
+<div id="content-page" class="container">
+	<div id="content-overview" class="col-md-5 col-sm-12 col-xs-12">
 		<div id="account-overview">     
 	        <div>
 				<div class="sidebar-btn">
 	            	<h1>Personal Information</h1>
 					<div id = "profilePicture">
-						<img src = "{{userObj.user_pic === null ? 'img/icon/dj.png' : userObj.user_pic}}"><br>	
+						<img class="img-responsive" src = "{{userObj.user_pic === null ? 'img/icon/dj.png' : userObj.user_pic}}"><br>	
 						<form action="/api/upload" method="POST" enctype="multipart/form-data">
 							<h4>Edit Profile Picture:</h4>
 							<div id = "profilePicture">
@@ -30,8 +30,6 @@
 	</div>
 	<div id="content-detail" class="col-md-7 col-md-7 col-xs-12">
 		<div id="account-detail">
-			
-			<button type="button" class="btn btn-info" ng-click="oneRoofIcons()">What do the icons mean again?</button>
 		    <div class="text-center">
 					<h3><b>Profile for: </b>{{ currentUser.email }}</h3>
 					<h3></h3>
@@ -63,7 +61,6 @@
                                     <option value="paypal">PayPal</option>
                                     <option value="googlewallet">Google Wallet</option>
                                 </select>
-                                
 	                    <input class="form-control" id="changePayUsername" placeholder="{{ currentUser.mobile }}" name="changePayUsername" ng-model="changePayUsername">
 	                </div>
 	            </form>
