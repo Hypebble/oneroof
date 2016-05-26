@@ -387,25 +387,24 @@ var AppController = angular.module('AppController',[])
         }
         
         $scope.showHistory = function() {
-            var statusType = "complete";
-            changeFilter(statusType);
-        }
+            if($scope.statusType === 'incomplete') {
+                $scope.statusType = 'complete'
+                $scope.historyIconColor = {"color" : "#9f7cb8"}
+            } else {
+                $scope.statusType = 'incomplete'
+                $scope.historyIconColor = {"color" : "#bfbfbf"}
+            }
 
-        $scope.showPersonal = function() {
-            var statusType = "incomplete";
-            changeFilter(statusType);
-        }
-
-        var changeFilter = function(statusType) {
             $http.post("/api/tasks", {
-                status: statusType
+                status: $scope.statusType
             })
             .then(function(response) {
                 $scope.tasks = response.data;
                 console.log(response.data);
             });
+           
         }
-        
+
         $scope.taskSelect = function(task) {
             $scope.selectedTask = task;
             console.log("Entered task select, task = ", task)

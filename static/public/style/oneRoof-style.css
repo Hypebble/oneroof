@@ -47,7 +47,6 @@ body {
   top: 50%;
   left: 50%;
   /* bring your own prefixes */
-  transform: translate(0%, -50%);
 }
 
 .form-label {
@@ -100,8 +99,8 @@ body {
 /*  font-weight: bold;*/
 }
 
-.headerWord {
-  font-size: 18px;
+.headerWord{
+  font-size: 25px;
   margin-top: 25px;
 }
 
@@ -198,10 +197,19 @@ input:checked + label {
 
 /**************TASKS *******/
 
+#historyIcon {
+  margin-top: 12px;
+  color: #bfbfbf;
+  /*color: #9f7cb8;*/
+}
 
 #profile-main {
   width: 50%;
   display: inline-block;
+}
+
+#taskTitle {
+  font-size: 25px;
 }
 
 .task-details {
@@ -457,13 +465,13 @@ input[type="file"] {
 }
 
 .task-icon {
-  background-color: purple;
   border-radius: 50%;
   -moz-border-radius: 50%;
   font-size: 20px;
   font-style: bold;
-  height:30px;
-  width:30px;
+  margin-top:5px;
+  height:40px;
+  width:40px;
   line-height: 30px;
   color:#FFF;
   display: block;
