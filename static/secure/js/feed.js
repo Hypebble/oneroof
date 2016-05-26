@@ -360,10 +360,11 @@ var AppController = angular.module('AppController',[])
 
         $scope.exitModal = function() {
             $("#instructionModal").modal('hide');
+            $("#createTaskModal").modal('hide');
         }
 
-        $scope.exitModal = function() {
-            $("#createTaskModal").modal('hide');
+        $scope.createTask = function() {
+            $("createTaskModal").modal('show');
         }
 
         $scope.oneRoofMore = function() {
