@@ -64,13 +64,16 @@
 
 	<div id="content-overview" class="col-md-3 col-sm-4 col-xs-12">
 		<img id="floatingButton" src="../img/icon/plus-button.png" data-toggle="modal" data-target="#createTaskModal"></img>
-		<div id="feed-overview" class="tasks">
-            <row>
-                <ul id="task-menu">
-                    <li id="tasks-p" ng-click="showPersonal()">Personal</li>
-                    <li id="tasks-g">Group</li>
-                    <li id="tasks-h" ng-click="showHistory()">History</li>
+		<div id="feed-overview" class="tasks row">
+            <row class="col s12">
+                <ul class="tabs" id="task-menu">
+                    <li class="tab col s6" id="tasks-p" ng-click="showPersonal()"><a href="">Personal</a></li>
+                    <li class="tab col s6" id="tasks-g"><a class="active" href="">Everyone</a></li>
+                    <!-- <li id="tasks-h" class="tab col s4" ng-click="showHistory()">History</li> -->
                 </ul>
+
+                 <div id="test" class="col s12"></div>
+
             </row>
             <!--<row>
                 <input type="checkbox" name="history" value="history" ng-model="history" ng-click="changeStatus()">See Completed Tasks<br></row>
@@ -80,13 +83,18 @@
 
             <row>
                 <div>
-                    <div id="choreBoard">
+                    <div id="choreBoard" class="container-fluid">
                         <ul id="feed-list">
-                        <li ng-repeat="task in tasks" class="center" ng-click="taskSelect(task)">
-                            <span class="task-icon">{{task.task_type === "Chore" ? "C" : "$"}}</span>
-                            <p>{{task.task_name}}</p>
-                            <p><b>Created: </b>{{prettifyDates(task.task_time)}}</p>
-                            <p><b>Due: {{prettifyDue(task.task_due_date)}}</b></p>
+                        <li ng-repeat="task in tasks" class="row" ng-click="taskSelect(task)">
+                            <div class="col-sm-2">
+                            	<span class="task-icon">{{task.task_type === "Chore" ? "C" : "$"}}</span>
+                            </div>
+                            <div class="col-sm-9">
+                            	<p id="individualTaskName">{{task.task_name}}</p>
+                            	<p id="individualDueDate"><b>Due: {{prettifyDue(task.task_due_date)}}</b></p>
+                            </div>
+
+                            
                             <!--<button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>-->
                         </li>
                         </ul>
