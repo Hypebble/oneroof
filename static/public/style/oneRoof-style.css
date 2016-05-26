@@ -420,7 +420,7 @@ a.btn-primary:hover {
     left: 50%;
     margin-left: -1440px;
     margin-top: -250px;
-    background:url('./../img/chores/vaccuuming.jpg');
+    background:url('/img/chores/vaccuuming.jpg');
     background-size: 100%;
     width:2880px;
     height:1620px;  
@@ -607,11 +607,8 @@ input[type="file"] {
     visibility: hidden;
   }
 
-  #sign-out {
+  #sign-out-app {
     visibility: hidden;
   }
-
-
-
 
 }
