@@ -121,6 +121,10 @@ body {
     height: 65px;
 }
 
+#signoutButton {
+  float: right;
+}
+
 /**/
 
 
