@@ -50,8 +50,11 @@ var bankData = {
 	updateUserDisplayName(displayName, id) {
 		console.log("9123287482373 displayName", displayName);
 		console.log("", id);
-		var sql = 'update tblUSER set name=? where user_id=?'
-		return connPool.queryAsync(sql, [displayName, id]);
+		var sql = 'update tblUSER set displayName=? where user_id=?'
+		
+		var params = [displayName, id];
+		console.log(params);
+		return connPool.queryAsync(sql, params);
 	}, 
 
 	updateUserPass(pass, id) {
@@ -62,25 +65,26 @@ var bankData = {
 	}, 
 	
 	updateUserPaymentMethod(meth, id) {
-		console.log("Making it in, but not past hash")
-		var newPassword = createHash(pass);
+		console.log("updating payment mehtod!!!!@!@!@");
+		console.log(meth);
+		console.log(id);
 		var sql = 'update tblUSER set payment_method=? where user_id=?';
 		return connPool.queryAsync(sql, [meth, id]);
 	}, 
 	
-	updateUserPaymentUser(username, id) {
+	updateUserPaymentUsername(username, id) {
 		console.log("Making it in, but not past hash")
 		var sql = 'update tblUSER set payment_username=? where user_id=?';
 		return connPool.queryAsync(sql, [username, id]);
 	}, 
 	
-	updateMobile(mobile, id) {
-		console.log("mobile to insert");
-		console.log(mobile);
-		console.log("Making it in, but not past hash")
-		
+	updateMobile(mobile, id) {	
 		var sql = 'update tblUSER set phone_num=? where user_id=?';
-		return connPool.queryAsync(sql, [mobile, id]);
+		console.log(mobile);
+		var params = [mobile, id];
+		console.log(sql);
+		console.log(params)
+		return connPool.queryAsync(sql, params);
 	}, 
 	
 	getHouse(userId) {
@@ -119,7 +123,7 @@ var bankData = {
 
 	getUsersInHouse(houseID) {
 		console.log(TAG, "grabbing all users present in a house");
-		var sql = 'SELECT DISTINCT u.user_id, u.displayName, u.facebook_id, u.facebook_name, u.facebook_email, u.facebook_token, u.hash_pass, u.phone_num, u.email, u.user_pic FROM tblUSER u join tblHOUSE_USER hu on u.user_id = hu.user_id WHERE hu.house_id = ?';
+		var sql = 'SELECT DISTINCT u.user_id, u.displayName, u.facebook_id, u.facebook_name, u.facebook_email, u.facebook_token, u.hash_pass, u.phone_num, u.email, u.user_pic, u.payment_method, u.payment_username FROM tblUSER u join tblHOUSE_USER hu on u.user_id = hu.user_id WHERE hu.house_id = ?';
 		return connPool.queryAsync(sql, houseID);
 	},
 	

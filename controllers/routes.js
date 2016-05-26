@@ -297,9 +297,12 @@ module.exports = function(passport, bankData) {
     });
     
      router.put('/api/updatePaymentMethod', function(req, res) {
+        console.log("user" , req.user);
+        console.log("body", req.body);
         bankData.getUser(req.user.email)
             .then(function(rows) {
                 if(rows.length != 0) {
+                    console.log("updating payment");
                     bankData.updateUserPaymentMethod(req.body.newMethod, req.user.user_id)
                 } else {
                     res.status("403").send("You're not authorized to do that");
@@ -311,9 +314,12 @@ module.exports = function(passport, bankData) {
     });
     
     router.put('/api/updatePaymentUser', function(req, res) {
+        console.log("update payment username req.body", req.body);
+        console.log("req.user", req.user);
         bankData.getUser(req.user.email)
             .then(function(rows) {
                 if(rows.length != 0) {
+                    console.log(req.body.newUsername);
                     bankData.updateUserPaymentUsername(req.body.newUsername, req.user.user_id)
                 } else {
                     res.status("403").send("You're not authorized to do that");

@@ -99,6 +99,16 @@ var AppController = angular.module('AppController',[])
         $http.get("/api/house")
             .then(function(response) {
                 $scope.currentUser = response.data;
+                if (!response.data.mobile) {
+                    $scope.currentUser.mobile = "None set"
+                }
+                if (!response.data.paymentMethod) {
+                    $scope.currentUser.paymentMethod = "None set"
+                }
+                if (!response.data.paymentUsername) {
+                    $scope.currentUser.paymentUsername = "None set"
+                }
+                console.log("setting current user");
                 console.log("API HOUSE ANGULAR " , response);
                 console.log(response.data.houseID);
                 $http.get("/api/houseDetails")
@@ -129,7 +139,10 @@ var AppController = angular.module('AppController',[])
                             //document.getElementById('dueDate').valueAsDate = new Date(); 
                         }
                         console.log("new housemates: ", $scope.housemates)
-                        $scope.userObj = response.data[0];
+                        $scope.userObj = response.data[1][0];
+                        console.log("updated userObj!!!!!!");
+                        console.log(response.data[1][0]);
+                        console.log($scope.userObj);
 
                         if($scope.userObj.user_pic != null) {
                             console.log('not null picture');
@@ -598,10 +611,13 @@ var AppController = angular.module('AppController',[])
             } 
         };
         
+        $scope.update = function() {
+            console.log($scope.newText);
+        }
+        
+        
         // send form data
 		$scope.updateData = function() {
-			console.log("updatingData!");
-            console.log($scope.userObj);
 			var newPass = {
                 "newPass":$scope.newPassword,
                 "oldPass": $scope.oldPass
@@ -618,8 +634,11 @@ var AppController = angular.module('AppController',[])
             var newMobile = {
                 "newMobile":$scope.changeMobile
             }
-            console.log(newDisplayName.displayName);
+            console.log(newMobile);
+            console.log(newPaymentMethod);
             if (newDisplayName.displayName) {
+                console.log("updating display name!!");
+                $scope.userObj.displayName = $scope.changeDisplayName;
                 $http.put('/api/updateDispl', newDisplayName)
                 .then(function(response) {
                     console.log(response);
@@ -632,24 +651,34 @@ var AppController = angular.module('AppController',[])
                 })
             }
             if (newPaymentMethod.newMethod) {
+                console.log("updating payment method");
+                console.log($scope.newPaymentMethod);
+            $scope.userObj.payment_method = $scope.newPaymentMethod;
             $http.put('/api/updatePaymentMethod', newPaymentMethod)
                .then(function(response) {
                     console.log(response);
                 })
             }
             if (newPaymentUsername.newUsername) {
+            $scope.userObj.payment_username = $scope.changePayUsername;
             $http.put('/api/updatePaymentUser', newPaymentUsername)
                 .then(function(response) {
                     console.log(response);
                 })
             }
             if (newMobile.newMobile) {
+            $scope.userObj.phone_num = $scope.changeMobile;
             $http.put('/api/updateMobile', newMobile)
                 .then(function(response) {
+                    console.log("should have response!!!!!");
                     console.log(response);
                 })
             }
 		}
+        
+        $scope.updatePaymentMethod = function(meth) {
+            $scope.newPaymentMethod = meth;
+        }
         
         $scope.revealUpload = function() {
             console.log("Hello!");
@@ -662,7 +691,7 @@ var AppController = angular.module('AppController',[])
         
         $scope.updateProfilePicString = function() {
             console.log("getting users!");
-            $route.reload();
+            //$route.reload();
         }
                     
      });
@@ -734,7 +763,8 @@ oneApp.config(function($stateProvider, $urlRouterProvider) {
         // url will be /form/payment
         .state('settings', {
             url: '/settings',
-            templateUrl: './templates/settings.html'
+            templateUrl: './templates/settings.html',
+            controller: 'UserController'
         });
         
     // catch all route
