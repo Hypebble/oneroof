@@ -25,6 +25,7 @@ $(function() {
     });
 });
 
+<<<<<<< HEAD
 // responsive menu closing on click
 $(function(){ 
 var navMain = $("#nav-mobile");
@@ -35,9 +36,12 @@ var navMain = $("#nav-mobile");
 
 // Angular Application
 var oneApp = angular.module('users', ['ngRoute', "AppController"]);
+=======
+var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify']);
+>>>>>>> 305ccb3e531e75237f4698686b374b41b42ea5af
 
 var AppController = angular.module('AppController',[])
-    .controller('UserController', function($scope, $http, $location) {
+    .controller('UserController', function($scope, $http, $location, ngNotify) {
         $scope.newUser = {};
         $scope.newAccount = {};
         //$scope.editAccount = {};
@@ -55,6 +59,7 @@ var AppController = angular.module('AppController',[])
         $scope.selectedTask = "";
         $scope.currResponsibilityGroup = [];
         $scope.responsibilityGroups = [];
+        
         
         /* page title stuff*/
         
@@ -89,6 +94,8 @@ var AppController = angular.module('AppController',[])
                         for(var i of response.data[1]){
                             console.log(i.name);
                             $scope.housemates.push(i);
+                            console.log("updating input date!!!");
+                            document.getElementById('dueDate').valueAsDate = new Date(); 
                         }
                         console.log("new housemates: ", $scope.housemates)
                         $scope.userObj = response.data[0];
@@ -176,6 +183,7 @@ var AppController = angular.module('AppController',[])
                 priority : $scope.chorePriority
             }
             console.log("tasky task: " , task);
+            ngNotify.set('Task created: ' + task.taskName + "!" );
 
             $http.post('/api/addTask', task)
                 .then(function(response) {
@@ -321,6 +329,10 @@ var AppController = angular.module('AppController',[])
             $("#instructionModal").modal('hide');
         }
 
+        $scope.exitModal = function() {
+            $("#createTaskModal").modal('hide');
+        }
+
         $scope.oneRoofMore = function() {
             $scope.oneRoofMore1 = true;
             $scope.oneRoofOverview = false;
@@ -375,20 +387,24 @@ var AppController = angular.module('AppController',[])
             
         }
         
-        $scope.changeStatus = function() {
-            if ($scope.statusType == 'incomplete') {
-                $scope.statusType = 'complete';
-            } else {
-                $scope.statusType = 'incomplete';
-            }
+        $scope.showHistory = function() {
+            var statusType = "complete";
+            changeFilter(statusType);
+        }
+
+        $scope.showPersonal = function() {
+            var statusType = "incomplete";
+            changeFilter(statusType);
+        }
+
+        var changeFilter = function(statusType) {
             $http.post("/api/tasks", {
-                status: $scope.statusType
+                status: statusType
             })
             .then(function(response) {
                 $scope.tasks = response.data;
                 console.log(response.data);
             });
-
         }
         
         $scope.taskSelect = function(task) {
@@ -468,8 +484,15 @@ var AppController = angular.module('AppController',[])
 
         $scope.prettifyDates = function(date) {
             console.log("prettifying date!!!!!!");
+            console.log("original date");
             console.log(date);
+            console.log("moment date");
             var prettyDate = moment(date);
+            console.log(prettyDate);
+            prettyDate = prettyDate.subtract(2, 'hours');
+            console.log(prettyDate);
+            console.log("current moment");
+            console.log(moment());
             var dayDiff = prettyDate.diff(moment(), 'days');
             var hourDiff = prettyDate.diff(moment(), 'hours');
             var minuteDiff = prettyDate.diff(moment(), 'minutes');
@@ -478,19 +501,19 @@ var AppController = angular.module('AppController',[])
             console.log(hourDiff);
             console.log(minuteDiff);
             console.log(secondDiff);
-            if (dayDiff <= 0) {
-                if (hourDiff <= 0) {
-                    if(minuteDiff <= 0) {
-                        return (secondDiff + " seconds ago");
+            if (dayDiff >= -1) {
+                if (hourDiff >= 0) {
+                    if(minuteDiff >= -1) {
+                        return (-1 *secondDiff + " seconds ago");
                     }
-                    return (minuteDiff + " minutes ago");
+                    return (-1 *minuteDiff + " minutes ago");
                 }
-                return (hourDiff + " hours ago");
+                return ((hourDiff * -1) + " hours ago");
             }            
-            if (dayDiff = 1) {
+            if (dayDiff -= 1) {
                 return("yesterday");
             } else {
-                return(dayDiff + " days ago");
+                return(dayDiff * -1 + " days ago");
             }
             
             //var prettyDate = moment(date).format('ddd, MMM Do');

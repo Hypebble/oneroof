@@ -463,6 +463,14 @@ a {
   display: inline;
 }
 
+#floatingButton {
+  position: fixed;
+  float:right;
+  height:10%;
+  width:10%;
+  margin: 20px 20px;
+}
+
 @media (max-width: 768px) { 
   #app-body, .navbar-fixed-top {
     margin:0;
