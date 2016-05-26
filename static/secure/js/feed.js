@@ -67,6 +67,10 @@ var AppController = angular.module('AppController',[])
             $scope.selectedTask = JSON.parse(pullTask);
         }
         console.log('task after pull', $scope.selectedTask);
+
+        $scope.profPicSubmit = false;
+        
+
         
         /* page title stuff*/
         
@@ -565,7 +569,30 @@ var AppController = angular.module('AppController',[])
             } 
         };
         
-    });
+        // send form data
+		$scope.updateData = function() {
+			console.log("updatingData!");
+			var newPass = $scope.newPassword;
+            var dName = $scope.changeDisplayName;
+            console.log($scope.newPassword);
+			console.log($scope.changeDisplayName);
+		}
+        
+        $scope.revealUpload = function() {
+            console.log("Hello!");
+            $scope.profPicSubmit = true;
+        }
+        
+        $scope.submitImage = function() {
+            console.log($scope.image);
+        }
+        
+        $scope.updateProfilePicString = function() {
+            console.log("getting users!");
+            $route.reload();
+        }
+                    
+     });
 
 /* Routes for the app, yeah the ability to view history: ngRoute*/
 /*oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
