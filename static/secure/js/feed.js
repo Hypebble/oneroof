@@ -184,8 +184,8 @@ var AppController = angular.module('AppController',[])
             
         //update this so that it gets the value of current or 
         // past button when thats added to UI
-        
-        $http.post("/api/tasks", {
+        $scope.showPersonal = function() {
+            $http.post("/api/tasks", {
             users: [$scope.userObj],
             status: $scope.statusType
         })
@@ -195,7 +195,26 @@ var AppController = angular.module('AppController',[])
                     $scope.taskSelect(response.data[0]);
                     $scope.selectedTask = response.data[0];
                 }
-                $scope.tasks = response.data;
+                if(response.data[0].length > 0) {
+                  $scope.tasks = response.data;  
+                }
+                console.log("MADE IT PAST GETTING GHETTTTTTTTOOOOOOOO TASKS", response.data);
+            });
+        }
+
+        $http.post("/api/tasks", {
+            users: [$scope.userObj],
+            status: $scope.statusType
+        })
+            .then(function(response) {
+                console.log('task value', typeof(selectedTask) );
+                if(response.data[0].length > 0) {
+                  $scope.tasks = response.data; 
+                  if($scope.selectedTask === 'undefined') {
+                    $scope.taskSelect(response.data[0]);
+                    $scope.selectedTask = response.data[0];
+                } 
+                }
                 console.log("MADE IT PAST GETTING GHETTTTTTTTOOOOOOOO TASKS", response.data);
             });
 
@@ -239,18 +258,21 @@ var AppController = angular.module('AppController',[])
             $http.post('/api/addTask', task)
                 .then(function(response) {
                     console.log("MADE IT THROUGHGJEHKRJGGDJSHGJGH");
-                    $scope.tasks.push(response.data);
-                    $http.post("/api/tasks", {
-                        users: [$scope.userObj],
-                        status: $scope.statusType
-                    })
+                    if(response.data[0].length != 0) {
+                      $scope.tasks.push(response.data);
+                        $http.post("/api/tasks", {
+                            users: [$scope.userObj],
+                            status: $scope.statusType
+                        })
                         .then(function(response) {
                             $scope.tasks = response.data;
                             console.log("MADE IT TO SECOND GET")
                         })
                         .catch(function(err) {
                             console.log(err);
-                        });
+                        });  
+                    }
+                    
                 });
    
         }
@@ -469,10 +491,12 @@ var AppController = angular.module('AppController',[])
                 status: $scope.statusType
             })
             .then(function(response) {
-                $scope.tasks = response.data;
-                $scope.taskSelect(response.data[0]);
-                $scope.selectedTask = response.data[0];
-                console.log(response.data);
+                if(response.data[0].length > 0) {
+                    $scope.tasks = response.data;
+                    $scope.taskSelect(response.data[0]);
+                    $scope.selectedTask = response.data[0];
+                    console.log(response.data);
+                }
             });
            
         }
@@ -724,12 +748,24 @@ var AppController = angular.module('AppController',[])
                 status: $scope.statusType
             })
             .then(function(response) {
-                tasksEveryone.push(response.data);
+                if (response.data[0].length > 0) {
+                    console.log("Response DATATTSFDSFDSAFDSFDSFDSAFDSAFDSAFDSA")
+                    console.log(response.data)
+                    response.data.map(function(data) {
+                        
+                        data.map(function(nestedData) {
+                        
+                            $scope.tasks.push(nestedData)
+                        })
+                    })
+                    
+                }
+
             });
-               
-            $scope.tasks.push(tasksEveryone)
             $scope.taskSelect(tasksEveryone[0]);
             $scope.selectedTask = tasksEveryone[0];
+               
+            
         }
                     
      });

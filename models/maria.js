@@ -246,7 +246,6 @@ var bankData = {
 		console.log(TAG + "getting comment for task ", data.task_id);
         var sql = 'select * from tblCOMMENT where task_id=?';
         return connPool.queryAsync(sql, data.task_id);
-        
 	},
     
     deleteComment(id) {

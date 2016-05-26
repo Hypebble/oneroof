@@ -368,16 +368,32 @@ module.exports = function(passport, bankData) {
         console.log("USER " + req.body.users);
         console.log("SELECTED TASK TYPE: " , req.body.status);
         var response = [];
-        for(var i = 0; i < req.body.users.length; i++) {
-            bankData.getTasksForUser(req.body.users[i].email, req.body.status)
-                .then(function(rows) {
-                    response.push(rows);
-                })
-                .catch(function() {
-                    res.status("404").send("Tasks query failed");
-                });
-        }
-        res.json(response);
+        
+        var promiseArray = req.body.users.map(function(user) {
+                console.log(`User: ${user}`)
+                return bankData.getTasksForUser(user.email, req.body.status)
+        })
+        
+        bluebird.map(promiseArray, function(responseFromBankData) {
+            // One by one
+            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>')
+            console.log(responseFromBankData)
+            response.push(responseFromBankData)
+        }).then(function() {
+            console.log('Plz work')
+            res.json(response);
+        })
+
+        // for(var i = 0; i < req.body.users.length; i++) {
+        //     bankData.getTasksForUser(req.body.users[i].email, req.body.status)
+        //         .then(function(rows) {
+        //             response.push(rows);
+        //         })
+        //         .catch(function() {
+        //             res.status("404").send("Tasks query failed");
+        //         });
+        // }
+        // res.json(response);
     });
 
     //get all tasks for user, when its a different user
@@ -574,10 +590,12 @@ module.exports = function(passport, bankData) {
     router.post('/api/getComment', function(req, res) {
        console.log(TAG + "Entered getComments");
        console.log(TAG + " req.body is ", req.body);
-       bankData.getComment(req.body)
+       if(req.body.task_id) {
+           bankData.getComment(req.body)
           .then(function(response) {
               res.json(response);
           });
+       }
     });
     
     router.post('/api/addComment', function(req, res) {
