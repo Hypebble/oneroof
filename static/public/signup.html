@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="displayName" class="form-label text-left">Choose display name</label>
-                                <input class="form-control" id="displayName" placeholder="{{userObj.displayName}}" name="displayName" ng-model="displayName" required>
+                                <input class="form-control" id="displayName" placeholder="Username" name="displayName" ng-model="displayName" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label text-left">Password</label>
@@ -48,7 +48,7 @@
                                                             
                             <div class = "paymentInput">
                                 <label for="paymentUsername" class="form-label text-center"><b>Optional<b></label>
-                                <select class="payLabels" style="float:left;display:inline;margin-bottom:5px;" ng-model="paymentMethod">
+                                <select class="payLabels" style="float:left;display:inline;margin-bottom:6px;" ng-model="paymentMethods">
                                     <option value="">Select Preferred Payment Method</option>
                                     <option value="venmo">Venmo</option>
                                     <option value="squarecash">Square Cash</option>
@@ -58,7 +58,7 @@
                                 <input class="form-control payInputs" id="paymentUsername" placeholder="Username" name="paymentUsername" ng-model="paymentUsername">   
                                 
                                  <label for="confirm" class="form-label text-left">Mobile Number</label>
-                                <input type="text" class="form-control" id="mobile" placeholder="Mobile Number" name="mobile" ng-model="mobile">
+                                <input type="number" class="form-control" id="mobile" placeholder="Mobile Number" name="mobile" ng-model="mobile">
                                  
                             </div>
                                 <div class="alert alert-danger" role="alert" ng-show="showPassError">
