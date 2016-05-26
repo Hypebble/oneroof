@@ -112,7 +112,7 @@ var AppController = angular.module('AppController',[])
                         $http.get("/api/getGroups")
                             .then(function(response) {
                                 console.log("1241341213123 ", response);
-                                $scope.responsibilityGroups = response;
+                                $scope.responsibilityGroups = response.data;
                             })  
                     })
    
@@ -340,7 +340,7 @@ var AppController = angular.module('AppController',[])
             $("#instructionModal").modal('show');
             $scope.oneRoofMore1 = true;
         }
-        /* End modal methods */
+        /* End first experience modal methods */
         
         $scope.removeAssignee = function(value) {
             console.log("remove assignee", value)
@@ -454,11 +454,24 @@ var AppController = angular.module('AppController',[])
                 group_name: $scope.groupName,
                 group_descr: $scope.groupDescr
             }
+            $scope.formCreateGroup.$setPristine(true);
+            $scope.groupName = null;
+            $scope.groupDescr = null;
+            $scope.currentHousemate = null;
             console.log(data);
             $http.put('/api/createGroup', data)
                 .then(function(response) {
                    console.log(response); 
                 })
+        }
+
+        $scope.joinGroup = function() {
+            var data = { 
+                groupId: $scope.joinIntoGroup
+            }
+            $scope.joinIntoGroup = null;
+            console.log('join group', data);
+            $http.post('/api/joinGroup', data)
         }
         
         $scope.addAssigneeToGroup = function(housemate) {
