@@ -2,25 +2,78 @@
 	<div id="content-overview" class="col-md-3 col-sm-4 col-xs-12">
 		<div id="account-overview">     
 	        <div>
-	            <h1>Personal Information</h1>
+				<div class="sidebar-btn">
+	            	<h1>Personal Information</h1>
+					<div id = "profilePicture">
+						<img src = "{{userObj.user_pic === null ? 'img/icon/dj.png' : userObj.user_pic}}"><br>	
+						<form action="/api/upload" method="POST" enctype="multipart/form-data">
+							<h4>Edit Profile Picture:</h4>
+							<div id = "profilePicture">
+								<label for="file-upload" class="btn">
+									Custom Upload
+								</label>
+							</div>
+							<div id = "profilePicture">
+								<input id="file-upload" type="file" name="image" ng-show="proPicUpload" ng-click="revealUpload()"/>
+								<input type="submit" class="btn" ng-show="profPicSubmit" value="Upload Image" ng-click=updateProfilePicString()>
+							</div>
+												
+						<!--<input type="file" class="btn" name="image" ng-model="profilePictureChange" ng-click="showProfSubmit"> 
+						<input type="submit" class="btn" value="Upload Image"> -->
+					</form> 
+					
+					</div>
+				</div>
 	            <!-- Created current User because displayName wasn't working correctly in other tabs -->
-	            <h3>email: {{ currentUser.email }}</h3>
-	            <h3>username: {{ currentUser.displayName }} </h3>
-
-	            <h2>Update Name</h2>
+	        </div>
+		</div>
+	</div>
+	<div id="content-detail" class="col-md-7 col-md-7 col-xs-12">
+		<div id="account-detail">
+			
+			<button type="button" class="btn btn-info" ng-click="oneRoofIcons()">What do the icons mean again?</button>
+		    <div class="text-center">
+					<h3><b>Profile for: </b>{{ currentUser.email }}</h3>
+					<h3></h3>
+			</div>
+			<hr>
+			<h3>Display Name: {{ currentUser.displayName }}  </h3>
 	            <form ng-submit="updateName()">
 	                <div class="form-group">
 	                    <label for="displayNameChange"></label>
-	                    <input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName" required>
+	                    <input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeDisplayName">
 	                </div>
-	                <input class="btn btn-info" type="submit">
+	            </form>
+				
+				<h3>Mobile Number: {{currentUser.mobile}}  </h3>
+	            <form ng-submit="updateName()">
+	                <div class="form-group">
+	                    <label for="displayNameChange"></label>
+	                    <input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeMobile">
+	                </div>
+	            </form>
+				
+				<h3>Preferred Payment: {{currentUser.mobile}}  </h3>
+	            <form ng-submit="updateName()">
+	                <div class="form-group">
+	                    <label for="displayNameChange"></label>
+					<select class="payLabels" ng-model="paymentMethods">
+						<option value="">Select Preferred Method</option>
+						<option value="venmo">Venmo</option>
+						<option value="squarecash">Square Cash</option>
+						<option value="paypal">PayPal</option>
+						<option value="googlewallet">Google Wallet</option>
+					</select>
+                                
+	                    <input class="form-control" id="displayNameChange" placeholder="New display name" name="displayName" ng-model="changeMobile">
+	                </div>
 	            </form>
 
-	            <h2>Change Password</h2>
+	            <h3>Change Password</h3>
 	            <form ng-submit="updatePassword()">
 	                <div class="form-group">
 	                    <label for="currPass">Current Password</label>
-	                    <input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass" required>
+	                    <input class="form-control" id="currPass" placeholder="Current password" name="curPass" ng-model="curPass">
 	                </div>
 	                    <div class="alert alert-danger" role="alert" ng-show="incorrectPass">
 	                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -29,31 +82,21 @@
 	                </div>
 	                <div class="form-group">
 	                    <label for="newPass">New Password</label>
-	                    <input type="password" class="form-control" id="password" placeholder="New password" name="newPassword" ng-model="newPassword" required>
+	                    <input type="password" class="form-control" id="password" placeholder="New password" name="newPassword" ng-model="newPassword">
 	                </div>
 	                <div class="form-group">
 	                    <label for="confirmNewPass">Confirm New Password</label>
-	                    <input type="password" class="form-control" id="password" placeholder="Confirm new password" name="password" ng-model="confirmNewPassword" required>
+	                    <input type="password" class="form-control" id="password" placeholder="Confirm new password" name="password" ng-model="confirmNewPassword">
 	                </div>
 	                <div class="alert alert-danger" role="alert" ng-show="confirmPass">
 	                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 	                        <span class="sr-only">Error:</span>
 	                        Passwords need to match!
 	                </div>
-	                <input class="btn btn-info" type="submit">
 	            </form>
-
-	            <h2>Upload Profile Pic</h2>
-
-	            <form action="/api/upload" method="POST" enctype="multipart/form-data">
-	              Select an image to upload:
-	              <input type="file" name="image"> 
-	              <input type="submit" value="Upload Image">
-	            </form> 
-	        </div>
+				<div class="sidebar-btn">
+					<button class="btn btn-info" ng-click="updateData()">Update Profile</button>
+				</div>
 		</div>
-	</div>
-	<div id="content-detail" class="col-md-7 col-md-7 col-xs-12">
-		<div id="account-detail"><button type="button" class="btn btn-info" ng-click="oneRoofIcons()">What do the icons mean again?</button></div>
 	</div>
 </div>
