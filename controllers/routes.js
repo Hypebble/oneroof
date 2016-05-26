@@ -365,7 +365,7 @@ module.exports = function(passport, bankData) {
     //get all tasks for user, when you are the current user
     router.post('/api/tasks', function(req, res, next) {
         console.log("Entered get tasks");
-        console.log("EMAIL " + req.user.email);
+        console.log("EMAIL " + req.body.email);
         console.log("SELECTED TASK TYPE: " , req.body.status);
         bankData.getTasksForUser(req.user.email, req.body.status)
             .then(function(rows) {

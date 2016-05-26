@@ -175,7 +175,7 @@ var bankData = {
 
 	getTasksForUser(email, status) {
 		console.log(TAG + "getting tasks for user");
-		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id join tblTASK t on t.task_id = ut.task_id where u.email = ? AND t.task_status=?';
+		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id or u.user_id = ut.task_creator_id join tblTASK t on t.task_id = ut.task_id where u.email = ? AND t.task_status=?';
 		return connPool.queryAsync(sql, [email, status]);
 	},
 	
