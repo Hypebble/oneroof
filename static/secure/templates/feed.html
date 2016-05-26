@@ -72,8 +72,6 @@
                     <!-- <li id="tasks-h" class="tab col s4" ng-click="showHistory()">History</li> -->
                 </ul>
 
-                 <div id="test" class="col s12"></div>
-
             </row>
             <!--<row>
                 <input type="checkbox" name="history" value="history" ng-model="history" ng-click="changeStatus()">See Completed Tasks<br></row>
@@ -100,17 +98,18 @@
                         </ul>
                     </div>
                 </div>
+                <a class="btn-floating btn-large waves-effect waves-light light-green" id="addTaskButton"><i class="material-icons">add</i></a>
             </row>
 		</div>	
 	</div>
-	<div id="content-details" class="col-md-7 col-sm-7 col-xs-12">
+	<div id="content-details" class="col-md-9 col-sm-9 col-xs-12">
 		<div id="feed-details" class="tasks task-details">
 		    <div class="headerWord text-center">
 		        <h4>{{selectedTask.task_name}}</h4>
 		    </div>
 
-		    <div class ="details">
-		        <div class="detailedTask">
+		    <div class ="details row">
+		        <div class="detailedTask col-md-6">
 		            <b>Task Description:</b>
 		            <p>{{selectedTask.task_descr}}</p>
 		            <b>Task Created On:</b>
@@ -122,7 +121,7 @@
 		            <b>Task Type:</b>
 		            <p>{{selectedTask.task_type}}</p>
 		        </div>
-		        <div class="taskComment">
+		        <div class="taskComment col-md-6" id="taskCommentList">
 		            <h3>Comments</h3>
 		            <span class="existingComment" ng-repeat="comment in comments" >
 		                <p>{{comment.comment_owner_id}}</p>
@@ -131,9 +130,10 @@
 		                <button class="btn btn-danger" ng-click="deleteComment(comment)">Delete comment</button>
 		            </span>
 		            <input type="text" id="commentTextBox" placeholder="Add a comment" ng-model="commentDescription">
-		            <input class="btn btn-info" type="submit" ng-click="submitComment()"></input>
+		            <input class="btn light-green" type="submit" ng-click="submitComment()"></input>
 		        </div>
 		    </div>
 		</div>
+		<button class="btn-large" id="completeTask"><h4>Complete Task<h4></button>
 	</div>
 </div>
