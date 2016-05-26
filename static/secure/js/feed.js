@@ -6,6 +6,7 @@
 
 //var uuid = require('node-uuid');
 
+// Modal repoisitioning and sizing
 $(function() {
     function reposition() {
         var modal = $(this),
@@ -24,6 +25,15 @@ $(function() {
     });
 });
 
+// responsive menu closing on click
+$(function(){ 
+var navMain = $("#nav-mobile");
+    navMain.on("click", "a", null, function () {
+        navMain.collapse('hide');
+    });
+});
+
+// Angular Application
 var oneApp = angular.module('users', ['ngRoute', "AppController"]);
 
 var AppController = angular.module('AppController',[])
@@ -47,7 +57,7 @@ var AppController = angular.module('AppController',[])
         $scope.responsibilityGroups = [];
         
         /* page title stuff*/
-        $scope.activePage = "My Feed";
+        
 
         // http get the house code with api/house
         // store the house code, and kick off virginity
@@ -63,6 +73,7 @@ var AppController = angular.module('AppController',[])
                         $scope.houseName = response.data[0].house_name;
                         $scope.rentTotal = response.data[0].rent_total;
                         $scope.houseCode = response.data[0].house_code
+                        $scope.activePage = "Tasks for " + $scope.houseName;
                     })
                var ifHouseID = (response.data.houseID !== undefined);
                if(!ifHouseID) {
@@ -187,9 +198,11 @@ var AppController = angular.module('AppController',[])
         $scope.imageClick = function(img){
             console.log("clicked an image", img);
             //$location.path(img);
+            console.log($scope.click);
             if(img === '/feed') {
                 $location.path(img)
-                $scope.activePage = "My Feed";
+                $scope.activePage = "Tasks for " + $scope.houseName;
+                $.houseS = './img/icon/sidebar-icons/house-purple.png';
             }
             else if(img === '/roommates') {
                 $location.path(img);
@@ -510,6 +523,9 @@ oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
     .when('/feed', {
             templateUrl: './templates/feed.html',
             controller: 'UserController'
+    })
+    .when('/feed/:task.task_id', {
+        action: "event.detail"
     })
     .when('/roommates', {
         templateUrl: './templates/roommates.html',
