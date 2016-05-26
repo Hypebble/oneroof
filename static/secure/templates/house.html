@@ -1,13 +1,13 @@
 <div id="content-page" class="container-fluid">
 	<div id="content-overview" class="col-md-12 col-md-12 col-xs-12">
 		<div id="house-overview""><h2>House Information</h2>
-			<row ng-show="{{houseName !== null ? true : false }}">
+			<row ng-show="{{ifHouseID}}">
 			    <div class="col-md-12 col-sm-12 col-xs-12">
 				    <p>Your House Name: {{ houseName }}</p>
 				    <p>Your House Code: {{ houseCode }}</p>
 				</div>
 			</row>
-		    <row ng-show="{{houseName === null ? true : false }}">
+		    <row ng-show="{{!ifHouseID}}">
 		    	<!--Join or Create House if not already in one-->
 		        <div class="col-md-12 col-sm-12 col-xs-12">
 		            <form name="formHouseCreate" ng-submit="createHouse()">
@@ -15,7 +15,7 @@
 		                    <label for="createNewHouse"></label>
 		                    <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
 		                </div>
-		                <input class="btn btn-info" type="submit">
+		                <input class="btn btn-info" type="submit" ng-click="formHouseCreate.$setPristine()">
 		            </form>
 		        </div>
 
@@ -25,7 +25,7 @@
 		                    <label for="joinAHouse"></label>
 		                    <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
 		                </div>
-		                <input class="btn btn-info" type="submit">
+		                <input class="btn btn-info" type="submit" ng-click="formHouseJoin.$setPristine()">
 		            </form>
 		    	</div>
 		    </row>
