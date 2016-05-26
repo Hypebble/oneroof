@@ -5,6 +5,11 @@
   src: url('/fonts/EncodeSans-Thin.ttf') ;
 }
 
+@font-face {
+  font-family: 'Encode Sans Bold';
+  src: url('/fonts/EncodeSans-Regular.ttf');
+}
+
 body {
   font-family: "Encode Sans", sans-serif;
   height: 100vh;
@@ -315,6 +320,7 @@ a.btn-primary:hover {
   background-color: #9f7cb8;
 }
 
+
 /*a {
   background-color: #9f7cb8;
 }*/
@@ -327,7 +333,7 @@ a.btn-primary:hover {
     margin-right: auto;
     width: 33%;
     min-width: 225px;
-    height: 450px;
+    height: 425px;
     position: fixed;
     display:block;
     right: 0;
@@ -338,6 +344,27 @@ a.btn-primary:hover {
     border-top-right-radius:0px;
     border-bottom-right-radius:25px;
     border-bottom-left-radius:25px;
+    font-family: "Encode Sans Bold";
+}
+
+.form-notquiteassmall {
+    color: #1a1a1a;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33%;
+    min-width: 225px;
+    height:550px;
+    position: fixed;
+    display:block;
+    right: 0;
+    left: 0;
+    margin-top:auto;
+    background: #ededed;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-right-radius:25px;
+    border-bottom-left-radius:25px;
+    font-family: "Encode Sans Bold";
 }
 
 #createFacebook {

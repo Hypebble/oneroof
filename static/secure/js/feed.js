@@ -553,10 +553,54 @@ var AppController = angular.module('AppController',[])
         // send form data
 		$scope.updateData = function() {
 			console.log("updatingData!");
-			var newPass = $scope.newPassword;
-            var dName = $scope.changeDisplayName;
-            console.log($scope.newPassword);
-			console.log($scope.changeDisplayName);
+            console.log($scope.userObj);
+			var newPass = {
+                "newPass":$scope.newPassword,
+                "oldPass": $scope.oldPass
+            }
+            var newDisplayName = {
+                "displayName": $scope.changeDisplayName
+            }
+            var newPaymentMethod = {
+                "newMethod":$scope.newPaymentMethod
+            }
+            var newPaymentUsername = {
+                "newUsername":$scope.changePayUsername
+            }
+            var newMobile = {
+                "newMobile":$scope.changeMobile
+            }
+            console.log(newDisplayName.displayName);
+            if (newDisplayName.displayName) {
+                $http.put('/api/updateDispl', newDisplayName)
+                .then(function(response) {
+                    console.log(response);
+                })
+            }
+            if (newPass.newPass) {
+            $http.put('/api/updatePass', newPass)
+                .then(function(response) {
+                    console.log(response);
+                })
+            }
+            if (newPaymentMethod.newMethod) {
+            $http.put('/api/updatePaymentMethod', newPaymentMethod)
+               .then(function(response) {
+                    console.log(response);
+                })
+            }
+            if (newPaymentUsername.newUsername) {
+            $http.put('/api/updatePaymentUser', newPaymentUsername)
+                .then(function(response) {
+                    console.log(response);
+                })
+            }
+            if (newMobile.newMobile) {
+            $http.put('/api/updateMobile', newMobile)
+                .then(function(response) {
+                    console.log(response);
+                })
+            }
 		}
         
         $scope.revealUpload = function() {

@@ -37,8 +37,8 @@ var bankData = {
 			var params = [user.facebook_email, user.displayName, user.displayName, user.facebook_token, user.facebook_id];
 		} else {
 			console.log("creating local user!!!");
-			var sql = 'insert into tblUSER (email, displayName, hash_pass) values (?, ?, ?)';
-			var params = [user.email, user.displayName, user.hashPass];
+			var sql = 'insert into tblUSER (email, displayName, hash_pass, payment_method, payment_username, phone_num) values (?, ?, ?, ?, ?, ?)';
+			var params = [user.email, user.displayName, user.hashPass, user.paymentMethod, user.paymentUsername, user.mobile];
 			
 		}
 		console.log("SQL " + sql);
@@ -48,7 +48,7 @@ var bankData = {
 	},
 
 	updateUserDisplayName(displayName, id) {
-		console.log("", displayName);
+		console.log("9123287482373 displayName", displayName);
 		console.log("", id);
 		var sql = 'update tblUSER set name=? where user_id=?'
 		return connPool.queryAsync(sql, [displayName, id]);
@@ -59,6 +59,28 @@ var bankData = {
 		var newPassword = createHash(pass);
 		var sql = 'update tblUSER set hash_pass=? where user_id=?';
 		return connPool.queryAsync(sql, [newPassword, id]);
+	}, 
+	
+	updateUserPaymentMethod(meth, id) {
+		console.log("Making it in, but not past hash")
+		var newPassword = createHash(pass);
+		var sql = 'update tblUSER set payment_method=? where user_id=?';
+		return connPool.queryAsync(sql, [meth, id]);
+	}, 
+	
+	updateUserPaymentUser(username, id) {
+		console.log("Making it in, but not past hash")
+		var sql = 'update tblUSER set payment_username=? where user_id=?';
+		return connPool.queryAsync(sql, [username, id]);
+	}, 
+	
+	updateMobile(mobile, id) {
+		console.log("mobile to insert");
+		console.log(mobile);
+		console.log("Making it in, but not past hash")
+		
+		var sql = 'update tblUSER set phone_num=? where user_id=?';
+		return connPool.queryAsync(sql, [mobile, id]);
 	}, 
 	
 	getHouse(userId) {

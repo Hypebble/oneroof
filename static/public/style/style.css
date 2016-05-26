@@ -82,18 +82,21 @@
 
 }
 
-.form-small button, .form-large button {
+.form-small button, .form-notquiteassmall button {
   max-height: 100%;
   padding-top: 50px;
 }
-.form-small.loading button .spinner, .form-large.loading button .spinner {
+
+.form-small.loading button .spinner, .form-notquiteassmall.loading button .spinner {
   opacity: 1;
   top: 40%;
 }
-.form-small.ok button, .form-large.ok button {
+
+.form-small.ok button, .form-notquiteassmall.ok button {
   background-color: #8bc34a;
 }
-.form-small.ok button .spinner, .form-large.ok button .spinner {
+
+.form-small.ok button .spinner, .form-notquiteassmall.ok button .spinner {
   border-radius: 0;
   border-top-color: transparent;
   border-right-color: transparent;
@@ -101,7 +104,8 @@
   animation: none;
   transform: rotateZ(-45deg);
 }
-.form-small input, .form-large input  {
+
+.form-small input, .form-notquiteassmall input  {
   display: block;
   padding: 15px 10px;
   margin-bottom: 10px;
@@ -111,7 +115,8 @@
   border-radius: 2px;
   color: #ccc;
 }
-.form-small input + i.fa, .form-large input + i.fa {
+
+.form-small input + i.fa, .form-notquiteassmall input + i.fa {
   color: #fff;
   font-size: 1em;
   position: absolute;
@@ -120,23 +125,27 @@
   left: 0;
   transition: all 0.1s ease-in;
 }
-.form-small input:focus, .form-large input:focus {
+
+.form-small input:focus, .form-notquiteassmall input:focus {
   outline: none;
   color: #444;
   border-color: #9f7cb8;
   border-left-width: 35px;
 }
-.form-small input:focus + i.fa, .form-large input:focus + i.fa  {
+
+.form-small input:focus + i.fa, .form-notquiteassmall input:focus + i.fa  {
   opacity: 1;
   left: 30px;
   transition: all 0.25s ease-out;
 }
-.form-small a, .form-large a  {
+
+.form-small a, .form-notquiteassmall a  {
   font-size: 0.8em;
   color: #eeeeee;
   text-decoration: none;
 }
-.form-small .title, .form-large .title {
+
+.form-small .title, .form-notquiteassmall .title {
   color: #444;
   font-size: 1.2em;
   font-weight: bold;
@@ -144,7 +153,7 @@
   border-bottom: 1px solid #eee;
   padding-bottom: 20px;
 }
-.form-small button, .form-large button  {
+.form-small button, .form-notquiteassmall button  {
   width: 100%;
   height: 100%;
   padding: 10px 10px;
@@ -163,7 +172,8 @@
   transition: all 0.1s ease-out;
   border-bottom-width: 7px;
 }
-.form-small button .spinner, .form-large button .spinner {
+
+.form-small button .spinner, .form-notquiteassmall button .spinner {
   display: block;
   width: 40px;
   height: 40px;
@@ -180,10 +190,12 @@
   transition: top 0.3s 0.3s ease, opacity 0.3s 0.3s ease, border-radius 0.3s ease;
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
 }
-.form-small:not(.loading) button:hover, .form-large:not(.loading) button:hover  {
+
+.form-small:not(.loading) button:hover, .form-notquiteassmall:not(.loading) button:hover  {
   box-shadow: 0px 1px 3px #9f7cb8;
 }
-.form-small:not(.loading) button:focus, .form-large:not(.loading) button:focus {
+
+.form-small:not(.loading) button:focus, .form-notquiteassmall:not(.loading) button:focus {
   border-bottom-width: 4px;
 }
 

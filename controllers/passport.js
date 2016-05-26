@@ -51,6 +51,15 @@ module.exports = function(passport) {
                            // gravatarUrl : gravatarUrlNew, 
                             hashPass : hashPassNew
                         };
+                        
+                        if (req.body.hasOwnProperty('paymentMethod')) {
+                            newUser.paymentMethod = req.body.paymentMethod;
+                            newUser.paymentUsername = req.body.paymentUsername;
+                        } 
+                        if (req.body.hasOwnProperty('mobile')) {
+                            newUser.mobile = req.body.mobile;
+                            
+                        }
                         console.log("HERERERERERE");
                         var newAccount = {
                           //  userID : userIDNew,

@@ -27,7 +27,7 @@
                 <div class="container">
                     <div id="backgroundOverlay">
 
-                        <form class="form-small centered" id ="formLogin" ng-submit="submit()" ng-controller="SignUpController">
+                        <form class="form-notquiteassmall form-small centered" id ="formLogin" ng-submit="submit()" ng-controller="SignUpController">
                             We're happy to have you!  Let's get your room all set up.<br>
                             <div class="form-group">
                                 <label for="email" class="form-label text-left">Email address</label>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="displayName" class="form-label text-left">Choose display name</label>
-                                <input class="form-control" id="displayName" placeholder="Username" name="displayName" ng-model="displayName" required>
+                                <input class="form-control" id="displayName" placeholder="{{userObj.displayName}}" name="displayName" ng-model="displayName" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label text-left">Password</label>
@@ -45,7 +45,22 @@
                                 <label for="confirm" class="form-label text-left">Confirm password</label>
                                 <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password" name="confirm" ng-model="confirmPass" required>
                             </div>
-                            <div>
+                                                            
+                            <div class = "paymentInput">
+                                <label for="paymentUsername" class="form-label text-center"><b>Optional<b></label>
+                                <select class="payLabels" style="float:left;display:inline;margin-bottom:5px;" ng-model="paymentMethod">
+                                    <option value="">Select Preferred Payment Method</option>
+                                    <option value="venmo">Venmo</option>
+                                    <option value="squarecash">Square Cash</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="googlewallet">Google Wallet</option>
+                                </select>
+                                <input class="form-control payInputs" id="paymentUsername" placeholder="Username" name="paymentUsername" ng-model="paymentUsername">   
+                                
+                                 <label for="confirm" class="form-label text-left">Mobile Number</label>
+                                <input type="text" class="form-control" id="mobile" placeholder="Mobile Number" name="mobile" ng-model="mobile">
+                                 
+                            </div>
                                 <div class="alert alert-danger" role="alert" ng-show="showPassError">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     <span class="sr-only">Error:</span>

@@ -19,11 +19,21 @@ angular.module('signup', [])
 				confirmPass : $scope.confirmPass,
 				displayName : $scope.displayName
 			};
+			
+			if ($scope.paymentUsername != "undefined") {
+				newUser.paymentMethod =  $scope.paymentMethod;
+				newUser.paymentUsername = $scope.paymentUsername;
+			}
+			
+			if ($scope.mobile != "undefined") {
+				newUser.mobile = $scope.mobile;
+			}
 
 			//double check passwords match
 			if($scope.password == $scope.confirmPass) {
 				$scope.showPassError = false;
 				$scope.loading = true;
+				console.log("posting new user ", newUser)
 				$http.post('/api/signup', newUser)
 					.then(function(response){
 						console.log("Made it through sign up, redirecting the page")

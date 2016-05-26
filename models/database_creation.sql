@@ -14,9 +14,12 @@ CREATE TABLE tblUSER (
 	facebook_name VARCHAR(64),
 	facebook_email VARCHAR(64),
 	facebook_token VARCHAR(64),
+	payment_method VARCHAR(64),
+	payment_username VARCHAR(64),
 	hash_pass VARCHAR(64),
 	phone_num VARCHAR(10),
-	email VARCHAR(60), user_pic VARCHAR(150)
+	email VARCHAR(60),
+	user_pic VARCHAR(150)
 );
 
 

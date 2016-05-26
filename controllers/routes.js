@@ -295,6 +295,50 @@ module.exports = function(passport, bankData) {
             });
 
     });
+    
+     router.put('/api/updatePaymentMethod', function(req, res) {
+        bankData.getUser(req.user.email)
+            .then(function(rows) {
+                if(rows.length != 0) {
+                    bankData.updateUserPaymentMethod(req.body.newMethod, req.user.user_id)
+                } else {
+                    res.status("403").send("You're not authorized to do that");
+                }
+            })
+            .catch(function() {
+                res.status("400").send("Error grabbing user information");
+            });
+    });
+    
+    router.put('/api/updatePaymentUser', function(req, res) {
+        bankData.getUser(req.user.email)
+            .then(function(rows) {
+                if(rows.length != 0) {
+                    bankData.updateUserPaymentUsername(req.body.newUsername, req.user.user_id)
+                } else {
+                    res.status("403").send("You're not authorized to do that");
+                }
+            })
+            .catch(function() {
+                res.status("400").send("Error grabbing user information");
+            });
+    });
+    
+    router.put('/api/updateMobile', function(req, res) {
+        bankData.getUser(req.user.email)
+            .then(function(rows) {
+                if(rows.length != 0) {
+                    console.log("updating mobile!!!!!!");
+                    console.log(req.body.newMethod);
+                    bankData.updateMobile(req.body.newMobile, req.user.user_id)
+                } else {
+                    res.status("403").send("You're not authorized to do that");
+                }
+            })
+            .catch(function() {
+                res.status("400").send("Error grabbing user information");
+            });
+    });
 
     //signs a new user up
     router.post('/api/signup', passport.authenticate('local-signup'),

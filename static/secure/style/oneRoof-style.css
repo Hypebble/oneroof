@@ -242,6 +242,20 @@ a {
   background-color: #9f7cb8;
 }
 
+#paymentInput {
+    display: inline-block;
+    line-height: 200%;
+}
+
+.payLabels {
+  float:left;
+    vertical-align: bottom;
+}
+
+.payInputs {
+    vertical-align: bottom;
+}
+
 
 /*********LOGIN*******/
 .form-small {
