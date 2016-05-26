@@ -50,7 +50,8 @@ var navMain = $("#nav-mobile");
         navMain.collapse('hide');
     });
 });
-
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+console.log('screen size', width);
 // Angular Application
 var oneApp = angular.module('users', ['ngRoute', "AppController", 'ngNotify', 'ui.router']);
 
@@ -441,13 +442,23 @@ var AppController = angular.module('AppController',[])
         }
 
         $scope.taskSelect = function(task) {
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            console.log('screen size', width);
             $scope.selectedTask = task;
             localStorage.setItem('currentTask', JSON.stringify($scope.selectedTask));
+
+            
             console.log("Entered task select, task = ", task)
             $http.post('/api/getComment', $scope.selectedTask)
                 .then(function(response) {
                     console.log("SETTING COMMENTS, RESPONSE =", response);
                     $scope.comments = response.data;
+
+                    if(width < 768) {
+                        console.log('screen size', task);
+                        console.log('screen size', $scope.selectedTask);
+                        $("#viewTaskModal").modal('show');
+                    }
                 })
                 .catch(function(err) {
                     console.log(err);

@@ -87,119 +87,158 @@
     
     <!-- Modal logic and pathing -->
 
-        <div id="instructionModal" class="modal modal-content" data-backdrop="static" data-keyboard="false" role="dialog">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Hi {{currentUser.displayName}}, Welcome to OneRoof!</h4>
+    <div id="instructionModal" class="modal modal-content" data-backdrop="static" data-keyboard="false" role="dialog">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Hi {{currentUser.displayName}}, Welcome to OneRoof!</h4>
+        </div>
+        <div class="modal-body">
+            <div id="firstInstructions" ng-show="showFirstHouseQuestion">
+                <h3>First off we need to know</h3>
+                <h4>Are you part of an existing house?</h4>
+                <button type="button" class="btn btn-success" ng-click="confirmExistingHouse()">Yes</button>
+                <button type="button" class="btn btn-danger" ng-click="noHouse()">No</button>
             </div>
-            <div class="modal-body">
-                <div id="firstInstructions" ng-show="showFirstHouseQuestion">
-                    <h3>First off we need to know</h3>
-                    <h4>Are you part of an existing house?</h4>
-                    <button type="button" class="btn btn-success" ng-click="confirmExistingHouse()">Yes</button>
-                    <button type="button" class="btn btn-danger" ng-click="noHouse()">No</button>
-                </div>
-                <div id="createHouse" ng-show="showCreateHouse">
-                    <h4>Please Enter a name for your new house.</h4>
-                    <input class="form-control" placeholder="House Name" ng-model="modalHouseName" required>
-                    <div ng-show="modalHouseNameWarning" style="color:red">Don't forget to enter a house name</div>
-                    <button type="button" class="btn btn-danger" ng-click="backToModal1()">Back</button>
-                    <button type="button" class="btn btn-info" ng-click="createHouse()">Create House</button>
-                </div>
-                <div id="enterCode" ng-show="showHouseCodeEntry">
-                    <input class="form-control" placeholder="Enter House Code" ng-model="modalHouseCode" required>
-                    <div ng-show="modalHouseCodeWarning" style="color:red">Don't forget to enter a house code</div>
-                    <button type="button" class="btn btn-danger" ng-click="backToModal1()">Back</button>
-                    <button type="button" class="btn btn-info" ng-click="joinHouse()">Join House</button>
-                </div>
-                <div id="showCode" ng-show="showCode">
-                    <h2>You have sucessfully created a new house!</h2>
-                    <p>Share the code below with your friends so they can join you!</p>
-                    <p>You can find this later in the house icon tab.</p>
-                    <h2> {{ generatedHouseCode }}</h2>
-                    <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
-                </div>
-                <div id="joinSuccess" ng-show="showJoinSuccess">
-                    <h2>You have successfully joined a house!</h2>
-                    <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
-                </div>
-                <div id="oneRoofOverview" ng-show="oneRoofOverview">
-                    <h2>Well now that you are in a house, its time to introduce you to OneRoof</h2>
-                    <p>OneRoof works to help simplify coordinating your roommates and keep them accountable.</p>
-                    <button type="button" class="btn btn-success" ng-click="oneRoofMore()">Tell Me More</button>
-                    <button type="button" class="btn btn-danger" ng-click="exitModal()">Let me get to it!</button>
-                </div>
-                <div id="oneRoofMore1" ng-show="oneRoofMore1">
-                    <p>The tabs on the left of the screen allow you to switch between different functionality.</p>
-                    <p>From top to bottom we have</p>
-                    <ul id="modal-list">
-                        <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/todo-purple.png"/>: your home page where you can assign, complete and comment on tasks</li>
-                        <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/roommates-purple.png"/>: see information about your roommates</li>
-                        <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/house-purple.png"/>: manage house related settings like, responsibility groups</li>
-                        <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/account-purple.png"/>: manage personal settings like your name, password, and profile picture.</li>
-                    </ul>
-                    <button type="button" class="btn btn-success" ng-click="exitModal()">Okay!</button>
-                </div>
+            <div id="createHouse" ng-show="showCreateHouse">
+                <h4>Please Enter a name for your new house.</h4>
+                <input class="form-control" placeholder="House Name" ng-model="modalHouseName" required>
+                <div ng-show="modalHouseNameWarning" style="color:red">Don't forget to enter a house name</div>
+                <button type="button" class="btn btn-danger" ng-click="backToModal1()">Back</button>
+                <button type="button" class="btn btn-info" ng-click="createHouse()">Create House</button>
+            </div>
+            <div id="enterCode" ng-show="showHouseCodeEntry">
+                <input class="form-control" placeholder="Enter House Code" ng-model="modalHouseCode" required>
+                <div ng-show="modalHouseCodeWarning" style="color:red">Don't forget to enter a house code</div>
+                <button type="button" class="btn btn-danger" ng-click="backToModal1()">Back</button>
+                <button type="button" class="btn btn-info" ng-click="joinHouse()">Join House</button>
+            </div>
+            <div id="showCode" ng-show="showCode">
+                <h2>You have sucessfully created a new house!</h2>
+                <p>Share the code below with your friends so they can join you!</p>
+                <p>You can find this later in the house icon tab.</p>
+                <h2> {{ generatedHouseCode }}</h2>
+                <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
+            </div>
+            <div id="joinSuccess" ng-show="showJoinSuccess">
+                <h2>You have successfully joined a house!</h2>
+                <button type="button" class="btn btn-success" ng-click="oneOverview()">Continue</button>
+            </div>
+            <div id="oneRoofOverview" ng-show="oneRoofOverview">
+                <h2>Well now that you are in a house, its time to introduce you to OneRoof</h2>
+                <p>OneRoof works to help simplify coordinating your roommates and keep them accountable.</p>
+                <button type="button" class="btn btn-success" ng-click="oneRoofMore()">Tell Me More</button>
+                <button type="button" class="btn btn-danger" ng-click="exitModal()">Let me get to it!</button>
+            </div>
+            <div id="oneRoofMore1" ng-show="oneRoofMore1">
+                <p>The tabs on the left of the screen allow you to switch between different functionality.</p>
+                <p>From top to bottom we have</p>
+                <ul id="modal-list">
+                    <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/todo-purple.png"/>: your home page where you can assign, complete and comment on tasks</li>
+                    <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/roommates-purple.png"/>: see information about your roommates</li>
+                    <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/house-purple.png"/>: manage house related settings like, responsibility groups</li>
+                    <li><img height="10%" width="10%" src="./img/icon/sidebar-icons/account-purple.png"/>: manage personal settings like your name, password, and profile picture.</li>
+                </ul>
+                <button type="button" class="btn btn-success" ng-click="exitModal()">Okay!</button>
             </div>
         </div>
-        <div id="createTaskModal" class="modal modal-content" data-backdrop="static" data-keyboard="false" role="dialog">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Create a task!</h4>
+    </div>
+    <div id="createTaskModal" class="modal modal-content" data-backdrop="static" data-keyboard="false" role="dialog">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Create a task!</h4>
+        </div>
+        <div class="modal-body">
+            <div id="create-task" class ="feed-column">
+                <form name="createTaskForm" ng-submit="addTask()" >
+                    <div class="form-group">
+                        <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
+                            <p> {{ determineDisplayName(assignee) }} </p>
+                            <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
+                        </div>
+                        <label for="taskOwner">Assign to:</label>
+                        <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
+                            <option value="">Select Roommate</option>
+                            <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName === currentUser.displayName ? "Me" : housemate.displayName}}</option>
+                            <option ng-repeat="responsibilibuddy in responsibilityGroups.data" value="{{responsibilibuddy}}">{{responsibilibuddy.group_name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskName">Task name</label>
+                        <input class="form-control" placeholder="Task name" ng-model="taskName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskType">Task Type (required)</label>
+                        <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
+                            <option>Bill</option>
+                            <option>Chore</option>
+                        </select>
+                    </div>
+                    <div class="input-group" ng-show="showBillForm">
+                        <label for="billAmount">Bill Amount</label>
+                        <div class="input-group-addon">$</div>
+                        <input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
+                        <div class="input-group-addon">.00</div>
+                    </div>
+                    <div class="form-group" ng-show="showChoreForm">
+                        <label for="chorePriority">Chore Priority</label>
+                        <input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDueDate">Task Due Date</label>
+                         <input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Task Description (optional) </label>
+                        <input class="form-control" placeholder="Task description" ng-model="taskDescription">
+                    </div>
+                    <input class="btn btn-info" type="submit"></input>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Never Mind!</button>
+                </form>
             </div>
-            <div class="modal-body">
-                <div id="create-task" class ="feed-column">
-                    <form name="createTaskForm" ng-submit="addTask()" >
-                        <div class="form-group">
-                            <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
-                                <p> {{ determineDisplayName(assignee) }} </p>
-                                <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
-                            </div>
-                            <label for="taskOwner">Assign to:</label>
-                            <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
-                                <option value="">Select Roommate</option>
-                                <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName === currentUser.displayName ? "Me" : housemate.displayName}}</option>
-                                <option ng-repeat="responsibilibuddy in responsibilityGroups.data" value="{{responsibilibuddy}}">{{responsibilibuddy.group_name}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="taskName">Task name</label>
-                            <input class="form-control" placeholder="Task name" ng-model="taskName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="taskType">Task Type (required)</label>
-                            <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
-                                <option>Bill</option>
-                                <option>Chore</option>
-                            </select>
-                        </div>
-                        <div class="input-group" ng-show="showBillForm">
-                            <label for="billAmount">Bill Amount</label>
-                            <div class="input-group-addon">$</div>
-                            <input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
-                            <div class="input-group-addon">.00</div>
-                        </div>
-                        <div class="form-group" ng-show="showChoreForm">
-                            <label for="chorePriority">Chore Priority</label>
-                            <input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
-                        </div>
-                        <div class="form-group">
-                            <label for="taskDueDate">Task Due Date</label>
-                             <input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="taskDescription">Task Description (optional) </label>
-                            <input class="form-control" placeholder="Task description" ng-model="taskDescription">
-                        </div>
-                        <input class="btn btn-info" type="submit"></input>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Never Mind!</button>
-                    </form>
+        </div>
+    </div>
+    <div id="viewTaskModal" class="modal modal-content" data-backdrop="static" data-keyboard="false" role="dialog">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Currently Viewing {{selectedTask.task_name}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="headerWord">
+                <h4 id="taskTitle">{{selectedTask.task_name}}</h4>
+            </div>
+            <div class ="details row">
+                <div class="detailedTask col-md-6">
+                    <b>Task Description:</b>
+                    <p>{{selectedTask.task_descr}}</p>
+                    <b>Task Created On:</b>
+                    <p>{{selectedTask.task_time}}</p>
+                    <b>Task Status:</b>
+                    <p>{{selectedTask.task_status}}</p>
+                    <b>Task Due Date:</b>
+                    <p>{{selectedTask.due_date}}</p>
+                    <b>Task Type:</b>
+                    <p>{{selectedTask.task_type}}</p>
                 </div>
+                <div class="taskComment col-md-6" id="taskCommentList">
+                    <h3>Comments</h3>
+                    <span class="existingComment" ng-repeat="comment in comments" >
+                        <p>{{comment.comment_owner_id}}</p>
+                        <p>{{comment.comment_time}}</p>
+                        <p>{{comment.comment_descr}}</p>
+                        <button class="btn btn-danger" ng-click="deleteComment(comment)">Delete comment</button>
+                    </span>
+                    <input type="text" id="commentTextBox" placeholder="Add a comment" ng-model="commentDescription">
+                    <input class="btn light-green lighten-1" type="submit" ng-click="submitComment()"></input>
+                </div>
+                <button>Complete Task</button>
             </div>
+        </div>
         </div>
     </div>
     <div ui-view>
