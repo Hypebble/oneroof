@@ -2,7 +2,7 @@
 /*@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);*/
 @font-face {
   font-family: 'Encode Sans';
-  src: url('/fonts/EncodeSans.ttf') ;
+  src: url('/fonts/EncodeSans-Thin.ttf') ;
 }
 
 body {
@@ -67,6 +67,7 @@ body {
   margin: 0;
   overflow: hidden;
   color: #eeeeee;
+  padding: 12px;
 }
 
 .head-link {
@@ -84,10 +85,6 @@ body {
   font-size:18px;
 }
 
-.head-link .btn {
-  padding: 16px 16px;
-}
-
 .prof-link {
   width:64px;
   float: left;
@@ -100,17 +97,16 @@ body {
 
 .headline {
   background-color: #9f7cb8;
-  font-family: "Open Sans Bold", sans-serif;
-  font-weight: bold;
+/*  font-weight: bold;*/
 }
 
 .headerWord {
-  font-size: 24px;
+  font-size: 18px;
   margin-top: 25px;
 }
 
 .logo {
-  font-size:32px;
+  font-size:25px;
   margin-top: 25px;
 }
 
@@ -122,7 +118,11 @@ body {
 }
 
 .header {
-    height: 64px;
+    height: 65px;
+}
+
+#signoutButton {
+  float: right;
 }
 
 /**/
@@ -131,14 +131,6 @@ body {
 
 
 /*****SIDEBAR *******/
-
-.box-down {
-  box-shadow: 3px 3px 8px grey;
-}
-
-.box-right {
-  box-shadow: 0px 25px 0px grey;
-}
 
 .home-button {
     height: 60px;
@@ -219,8 +211,25 @@ input:checked + label {
 .task-headline {
   float: left;
   margin-left: 16px;
-} 
+}
 
+#content-overview {
+  border-right: solid #e6e6e6;
+}
+
+.tabs .tab a{
+  color: #694489;
+}
+
+.tabs .tab a:hover {
+  color: #9f7cb8;
+}
+
+.tabs {
+  color: #694489;
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
 
 .task-details, .task-headline {
   color: #000;
@@ -235,6 +244,18 @@ input:checked + label {
 
 .lower {
    padding: 10px;
+}
+
+#individualTaskName {
+
+}
+
+#individualCreationDate {
+
+}
+
+.highlighted {
+
 }
 
 .task {
@@ -294,9 +315,9 @@ a.btn-primary:hover {
   background-color: #9f7cb8;
 }
 
-a {
+/*a {
   background-color: #9f7cb8;
-}
+}*/
 
 
 /*********LOGIN*******/
@@ -418,11 +439,11 @@ input[type="file"] {
   margin-right: 0px;
 }
 
-#task-menu {
+/*#task-menu {
   list-style: none;
   padding: 0;
   text-align: center;
-}
+}*/
 
 #task-menu li {
   display: inline;

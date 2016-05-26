@@ -1,31 +1,31 @@
 <div id="content-page" class="container-fluid">
 	<div id="content-overview" class="col-md-12 col-md-12 col-xs-12">
 		<div id="house-overview""><h2>House Information</h2>
-			<row ng-show="{{houseName !== null ? true : false }}">
+			<row ng-show="{{ifHouseID}}">
 			    <div class="col-md-12 col-sm-12 col-xs-12">
 				    <p>Your House Name: {{ houseName }}</p>
 				    <p>Your House Code: {{ houseCode }}</p>
 				</div>
 			</row>
-		    <row ng-show="{{houseName === null ? true : false }}">
+		    <row ng-show="{{!ifHouseID}}">
 		    	<!--Join or Create House if not already in one-->
 		        <div class="col-md-12 col-sm-12 col-xs-12">
-		            <form ng-submit="createHouse()">
+		            <form name="formHouseCreate" ng-submit="createHouse()">
 		                <div class="form-group">
 		                    <label for="createNewHouse"></label>
 		                    <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
 		                </div>
-		                <input class="btn btn-info" type="submit">
+		                <input class="btn btn-info" type="submit" ng-click="formHouseCreate.$setPristine()">
 		            </form>
 		        </div>
 
 		        <div class="col-md-12 col-sm-12 col-xs-12">
-		            <form ng-submit="joinHouse()">
+		            <form name="formHouseJoin" ng-submit="joinHouse()">
 		                <div class="form-group">
 		                    <label for="joinAHouse"></label>
 		                    <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
 		                </div>
-		                <input class="btn btn-info" type="submit">
+		                <input class="btn btn-info" type="submit" ng-click="formHouseJoin.$setPristine()">
 		            </form>
 		    	</div>
 		    </row>
@@ -34,7 +34,7 @@
 				<div class="createResponsibiltyGroup">
 		            <h3>Create a Responsibility Group?</h3>
 		            
-		            <form ng-submit="createGroup()">
+		            <form name="formCreateGroup" ng-submit="createGroup()">
 		                <input class="form-control" ng-model="groupName" placeholder="Group Name" name="groupName" required>
 		                <input class="form-control" ng-model="groupDescr" placeholder="Write a bit about what this group does or is!" name="groupDescr" required>
 		                  
@@ -42,17 +42,17 @@
 		                <option value="">Select Roommate or Responsibility Group</option>
 		                <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
 		            </select>
-		                <button class="btn btn-primary">CREATE GROUP</button>
+		                <button class="btn btn-primary" ng-click="formCreateGroup.$setPristine()">CREATE GROUP</button>
 		            </form>
 		        </div>
-		        <div class="createResponsibilityGroup">
+		        <div class="createResponsibilityGroup" ">
 		        	<h3>How About Joining an Existing Group?</h3>
-		            <form>
+		            <form name="formJoinGroup" ng-submit="joinGroup()">
 		                <!--Need to create get house groups-->
-		                <select ng-model="joinIntoGroup" class="form-control" ng-options="item.group_name for item in groups" required>
+		                <select ng-model="joinIntoGroup" class="form-control" ng-options="item.group_id as item.group_name for item in responsibilityGroups" required>
 		                        <option value="">Select A Responsibility Group</option>
 		                </select>
-		                <button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button>
+		                <button class="btn btn-success" ng-click="formJoinGroup.$setPristine()">JOIN GROUP</button>
 		            </form>
 		        </div>          
 		    </row>

@@ -139,6 +139,10 @@ module.exports = function(passport, bankData) {
         }
     });
 
+    router.post('/api/joinGroup', function(req, res) {
+        bankData.addUserToGroup(req.body.groupId, req.user.user_id)
+    });
+
     //logs a user in
     router.post('/api/login', passport.authenticate('local-login'),
         function(req, res) {

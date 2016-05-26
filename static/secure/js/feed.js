@@ -78,14 +78,14 @@ var AppController = angular.module('AppController',[])
                         $scope.houseCode = response.data[0].house_code
                         $scope.activePage = "Tasks for " + $scope.houseName;
                     })
-               var ifHouseID = (response.data.houseID !== undefined);
-               if(!ifHouseID) {
+               $scope.ifHouseID = (response.data.houseID !== undefined);
+               if(!$scope.ifHouseID) {
                    //run first time stuff
                    console.log("AMI I IN HERE?")
                    $("#instructionModal").modal('show');
                    $scope.showFirstHouseQuestion = true;
                }
-               console.log("HOUSE ", ifHouseID)
+               console.log("HOUSE ", $scope.ifHouseID)
                $http.get("/api/getUsers")
                     .then(function (response) {
                     console.log("housemates: ", $scope.housemates)
@@ -113,7 +113,7 @@ var AppController = angular.module('AppController',[])
                         $http.get("/api/getGroups")
                             .then(function(response) {
                                 console.log("1241341213123 ", response);
-                                $scope.responsibilityGroups = response;
+                                $scope.responsibilityGroups = response.data;
                             })  
                     })
    
@@ -341,7 +341,7 @@ var AppController = angular.module('AppController',[])
             $("#instructionModal").modal('show');
             $scope.oneRoofMore1 = true;
         }
-        /* End modal methods */
+        /* End first experience modal methods */
         
         $scope.removeAssignee = function(value) {
             console.log("remove assignee", value)
@@ -455,11 +455,24 @@ var AppController = angular.module('AppController',[])
                 group_name: $scope.groupName,
                 group_descr: $scope.groupDescr
             }
+            $scope.formCreateGroup.$setPristine(true);
+            $scope.groupName = null;
+            $scope.groupDescr = null;
+            $scope.currentHousemate = null;
             console.log(data);
             $http.put('/api/createGroup', data)
                 .then(function(response) {
                    console.log(response); 
                 })
+        }
+
+        $scope.joinGroup = function() {
+            var data = { 
+                groupId: $scope.joinIntoGroup
+            }
+            $scope.joinIntoGroup = null;
+            console.log('join group', data);
+            $http.post('/api/joinGroup', data)
         }
         
         $scope.addAssigneeToGroup = function(housemate) {
