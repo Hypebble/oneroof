@@ -144,60 +144,62 @@
             </div>
         </div>
     </div>
-    <div id="createTaskModal" class="modal modal-content" data-backdrop="static" data-keyboard="false" role="dialog">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Create a task!</h4>
-        </div>
-        <div class="modal-body">
-            <div id="create-task" class ="feed-column">
-                <form name="createTaskForm" ng-submit="addTask()" >
-                    <div class="form-group">
-                        <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
-                            <p> {{ determineDisplayName(assignee) }} </p>
-                            <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
+    <div id="createTaskModal" class="modal modal-content" data-keyboard="false" role="dialog">
+        <!-- <div class="modal-content"> -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Create a task!</h4>
+            </div>
+            <div class="modal-body">
+                <div id="create-task" class ="feed-column">
+                    <form name="createTaskForm" ng-submit="addTask()" >
+                        <div class="form-group">
+                            <div ng-repeat="assignee in assignees" class="selectedHousemate" id="{{assignee.email}}">
+                                <p> {{ determineDisplayName(assignee) }} </p>
+                                <button type="button" class="btn btn-warning" ng-click="removeAssignee(assignee)">REMOVE</button>
+                            </div>
+                            <label for="taskOwner">Assign to:</label>
+                            <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
+                                <option value="">Select Roommate</option>
+                                <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName === currentUser.displayName ? "Me" : housemate.displayName}}</option>
+                                <option ng-repeat="responsibilibuddy in responsibilityGroups.data" value="{{responsibilibuddy}}">{{responsibilibuddy.group_name}}</option>
+                            </select>
                         </div>
-                        <label for="taskOwner">Assign to:</label>
-                        <select class="form-control" ng-model="currentHousemate" ng-change="addAssignee(currentHousemate)" required>
-                            <option value="">Select Roommate</option>
-                            <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName === currentUser.displayName ? "Me" : housemate.displayName}}</option>
-                            <option ng-repeat="responsibilibuddy in responsibilityGroups.data" value="{{responsibilibuddy}}">{{responsibilibuddy.group_name}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskName">Task name</label>
-                        <input class="form-control" placeholder="Task name" ng-model="taskName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskType">Task Type (required)</label>
-                        <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
-                            <option>Bill</option>
-                            <option>Chore</option>
-                        </select>
-                    </div>
-                    <div class="input-group" ng-show="showBillForm">
-                        <label for="billAmount">Bill Amount</label>
-                        <div class="input-group-addon">$</div>
-                        <input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
-                        <div class="input-group-addon">.00</div>
-                    </div>
-                    <div class="form-group" ng-show="showChoreForm">
-                        <label for="chorePriority">Chore Priority</label>
-                        <input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
-                    </div>
-                    <div class="form-group">
-                        <label for="taskDueDate">Task Due Date</label>
-                         <input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskDescription">Task Description (optional) </label>
-                        <input class="form-control" placeholder="Task description" ng-model="taskDescription">
-                    </div>
-                    <input class="btn btn-info" type="submit"></input>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Never Mind!</button>
-                </form>
+                        <div class="form-group">
+                            <label for="taskName">Task name</label>
+                            <input class="form-control" placeholder="Task name" ng-model="taskName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskType">Task Type (required)</label>
+                            <select class="form-control" placeholder="Choose a type of task" ng-model="selectedTaskType" ng-change="chooseTaskType()" required>
+                                <option>Bill</option>
+                                <option>Chore</option>
+                            </select>
+                        </div>
+                        <div class="input-group" ng-show="showBillForm">
+                            <label for="billAmount">Bill Amount</label>
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="billAmount" placeholder="Amount" ng-model="billAmount">
+                            <div class="input-group-addon">.00</div>
+                        </div>
+                        <div class="form-group" ng-show="showChoreForm">
+                            <label for="chorePriority">Chore Priority</label>
+                            <input type="text" class="form-control" placeholder="Chore Priority" ng-model="chorePriority">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDueDate">Task Due Date</label>
+                             <input type="date" class="form-control" placeholder="Task Due Date" ng-model="taskDueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDescription">Task Description (optional) </label>
+                            <input class="form-control" placeholder="Task description" ng-model="taskDescription">
+                        </div>
+                        <input class="btn btn-info" type="submit"></input>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Never Mind!</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

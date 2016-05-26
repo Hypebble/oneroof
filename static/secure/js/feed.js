@@ -234,12 +234,17 @@ var AppController = angular.module('AppController',[])
 
             $http.post('/api/addTask', task)
                 .then(function(response) {
+                    console.log("MADE IT THROUGHGJEHKRJGGDJSHGJGH");
                     $scope.tasks.push(response.data);
-                })
-                .then(function() {
-                    $http.get("/api/tasks")
+                    $http.post("/api/tasks", {
+                        status: $scope.statusType
+                    })
                         .then(function(response) {
                             $scope.tasks = response.data;
+                            console.log("MADE IT TO SECOND GET")
+                        })
+                        .catch(function(err) {
+                            console.log(err);
                         });
                 });
    
@@ -378,7 +383,8 @@ var AppController = angular.module('AppController',[])
         }
 
         $scope.createTask = function() {
-            $("createTaskModal").modal('show');
+            console.log("MADE IT TO CREATE TASK")
+            $("#createTaskModal").modal('show');
         }
 
         $scope.oneRoofMore = function() {
@@ -430,7 +436,15 @@ var AppController = angular.module('AppController',[])
             }
             $http.post('/api/deleteTask', data) 
                 .then(function(response) {
-                    console.log(response);
+                    console.log("DELETE TASSSSSSSSk", response);
+                    $http.post('/api/tasks', {
+                        status: $scope.statusType
+                    })
+                        .then(function(rows) {
+                            $scope.tasks = rows.data;
+                            $scope.selectedTask = rows.data[0];
+                            console.log("Did this work?")
+                        })
                 })
             
         }
@@ -593,7 +607,6 @@ var AppController = angular.module('AppController',[])
         }
         
         $scope.prettifyDue = function(dueDate) {
-            console.log("pretititititi due ddaatetee");
             var now = moment(new Date()); //todays date
             var due = moment(dueDate);
             var daysDiff = due.diff(now, 'days');
@@ -695,6 +708,8 @@ var AppController = angular.module('AppController',[])
         }
                     
      });
+
+
 
 /* Routes for the app, yeah the ability to view history: ngRoute*/
 /*oneApp.config(['$routeProvider', function($routeProvider, $locationProvider) {
