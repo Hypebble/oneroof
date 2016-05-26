@@ -406,13 +406,13 @@ a.btn-primary:hover {
   color: #9f7cb8;
 }
 
-#background {
+/*#background {
     height: 100%;
     width:100%;
     background-color: red;
     overflow: hidden;
     position: relative;
-}
+} */
 
 
 #backgroundImage {
