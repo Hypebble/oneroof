@@ -1,65 +1,61 @@
 <div id="content-page" class="container-fluid">
 	<div id="content-overview" class="col-md-12 col-md-12 col-xs-12">
 		<div id="house-overview""><h2>House Information</h2>
-			<row>
-			    <div class="col-md-6">
+			<row ng-show="{{houseName !== null ? true : false }}">
+			    <div class="col-md-12 col-sm-12 col-xs-12">
 				    <p>Your House Name: {{ houseName }}</p>
 				    <p>Your House Code: {{ houseCode }}</p>
 				</div>
 			</row>
-		    <div class="row">
+		    <row ng-show="{{houseName === null ? true : false }}">
 		    	<!--Join or Create House if not already in one-->
-		        <div ng-show="{{houseName !== 'undefined' ? true : false }}">
-			        <div class="col-md-6 col-sm-2">
-			            <form ng-submit="createHouse()">
-			                <div class="form-group">
-			                    <label for="createNewHouse"></label>
-			                    <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
-			                </div>
-			                <input class="btn btn-info" type="submit">
-			            </form>
-			        </div>
+		        <div class="col-md-12 col-sm-12 col-xs-12">
+		            <form ng-submit="createHouse()">
+		                <div class="form-group">
+		                    <label for="createNewHouse"></label>
+		                    <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
+		                </div>
+		                <input class="btn btn-info" type="submit">
+		            </form>
+		        </div>
 
-			        <div class="col-md-6 col-sm-2">
-			            <form ng-submit="joinHouse()">
-			                <div class="form-group">
-			                    <label for="joinAHouse"></label>
-			                    <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
-			                </div>
-			                <input class="btn btn-info" type="submit">
-			            </form>
-			    	</div>
+		        <div class="col-md-12 col-sm-12 col-xs-12">
+		            <form ng-submit="joinHouse()">
+		                <div class="form-group">
+		                    <label for="joinAHouse"></label>
+		                    <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
+		                </div>
+		                <input class="btn btn-info" type="submit">
+		            </form>
 		    	</div>
-
-			    <div>
-			    	<h3>Manage Responsibility Groups</h3>
-				    <div class="row">
-				        <div class="col-md-6">
-				            <form>
-				                <!--Need to create get house groups-->
-				                <select ng-model="joinIntoGroup" class="form-control" ng-options="item.group_name for item in groups" required>
-				                        <option value="">Select A Responsibility Group</option>
-				                </select>
-				                <button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button>
-				            </form>
-				        </div>
-						<div class="createResponsibiltyGroup">
-				            <h2>Create a Responsibility Group?</h2>
-				            
-				            <form ng-submit="createGroup()">
-				                <input class="form-control" ng-model="groupName" placeholder="Group Name" name="groupName" required>
-				                <input class="form-control" ng-model="groupDescr" placeholder="Write a bit about what this group does or is!" name="groupDescr" required>
-				                  
-				            <select class="form-control" ng-model="currentHousemate" ng-change="addAssigneeToGroup(currentHousemate)" required>
-				                <option value="">Select Roommate or Responsibility Group</option>
-				                <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
-				            </select>
-				                <button class="btn btn-primary">CREATE GROUP</button>
-				            </form>
-				        </div>          
-				    </div>
-				</div>
-			</div>
+		    </row>
+		    <row>
+		    	<h2>Manage Responsibility Groups</h2>
+				<div class="createResponsibiltyGroup">
+		            <h3>Create a Responsibility Group?</h3>
+		            
+		            <form ng-submit="createGroup()">
+		                <input class="form-control" ng-model="groupName" placeholder="Group Name" name="groupName" required>
+		                <input class="form-control" ng-model="groupDescr" placeholder="Write a bit about what this group does or is!" name="groupDescr" required>
+		                  
+		            <select class="form-control" ng-model="currentHousemate" ng-change="addAssigneeToGroup(currentHousemate)" required>
+		                <option value="">Select Roommate or Responsibility Group</option>
+		                <option ng-repeat="housemate in housemates" value="{{housemate}}">{{housemate.displayName}}</option>
+		            </select>
+		                <button class="btn btn-primary">CREATE GROUP</button>
+		            </form>
+		        </div>
+		        <div class="createResponsibilityGroup">
+		        	<h3>How About Joining an Existing Group?</h3>
+		            <form>
+		                <!--Need to create get house groups-->
+		                <select ng-model="joinIntoGroup" class="form-control" ng-options="item.group_name for item in groups" required>
+		                        <option value="">Select A Responsibility Group</option>
+		                </select>
+		                <button class="btn btn-success" ng-click="joinGroup()">JOIN GROUP</button>
+		            </form>
+		        </div>          
+		    </row>
 		</div>
 	</div>
 </div>
