@@ -32,13 +32,13 @@
 
     <div id="sidebar-list" class="smallSidebar sidebar">
 		<div class ="home-button sidebar-btn">
-            <a ui-sref=".feed"><img src="./img/newlogo2-04.png" width="48" height="48"/></a>
+            <a ui-sref=".feed.detail"><img src="./img/newlogo2-04.png" width="48" height="48"/></a>
         </div>
         <div id="f" class="home-button sidebar-btn" ng-init="todo='./img/icon/sidebar-icons/todo-white.png'" ng-mouseover="todo='./img/icon/sidebar-icons/todo-purple.png'" ng-mouseout="todo='./img/icon/sidebar-icons/todo-white.png'">
-            <a ui-sref=".feed"><img src="{{todo}}"/></a>
+            <a ui-sref=".feed.detail"><img src="{{todo}}"/></a>
         </div>
         <div id="r" class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
-            <a ui-sref=".roommates"><img src="{{roomease}}"/></a>
+            <a ui-sref=".roommates.detail"><img src="{{roomease}}"/></a>
         </div>
         <div id="h" ng-class="" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
             <a ui-sref=".house"><img src="{{houseS}}"/></a>
@@ -72,7 +72,7 @@
     <div id="header" class="navbar-fixed-top headline box-down">
 		<div class="links">
 			<div class="head-link col-md-12 col-xs-12 col-sm-12">
-				<a ng-click="imageClick('/feed')"><span class="logo">{{activePage === null ? "OneRoof" : activePage}}</span></a>
+				<span class="logo">{{activePage === null ? "OneRoof" : activePage}}</span>
 
                 <a id="signoutButton" href="/api/signout" class="waves-effect btn red lighten-1 z-depth-0">Sign out!</a>
 			</div>

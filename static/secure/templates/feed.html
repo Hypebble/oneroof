@@ -21,13 +21,13 @@
                     <div id="choreBoard" class="container-fluid">
                         <ul id="feed-list">
                         <li ng-repeat="task in tasks" class="row" ng-click="taskSelect(task)">
-                            <div class="col-sm-2">
+                            <a ui-sref=".detail"><div class="col-sm-2">
                             	<img class="task-icon" ng-src="{{task.task_type === 'Chore' && './img/icon/choreicon.png' || '/img/icon/choreandbills-02-02.png'}}"</span>
                             </div>
                             <div class="col-sm-9">
                             	<p id="individualTaskName">{{task.task_name}}</p>
                             	<p id="individualDueDate"><b>Due: {{prettifyDue(task.task_due_date)}}</b></p>
-                            </div>
+                            </div></a>
 
                             
                             <!--<button class="btn btn-submit" ng-model= "completeTaskButton" ng-click="completeTask(task.task_id)">Task Complete</button>-->
@@ -100,38 +100,5 @@
             </row>
 		</div>	
 	</div>
-	<div id="content-details" class="col-md-9 col-sm-9 col-xs-12">
-		<div id="feed-details" class="tasks task-details">
-		    <div class="headerWord">
-		        <h4 id="taskTitle">{{selectedTask.task_name}}</h4>
-		    </div>
-
-		    <div class ="details row">
-		        <div class="detailedTask col-md-6">
-		            <b>Task Description:</b>
-		            <p>{{selectedTask.task_descr}}</p>
-		            <b>Task Created On:</b>
-		            <p>{{selectedTask.task_time}}</p>
-		            <b>Task Status:</b>
-		            <p>{{selectedTask.task_status}}</p>
-		            <b>Task Due Date:</b>
-		            <p>{{selectedTask.due_date}}</p>
-		            <b>Task Type:</b>
-		            <p>{{selectedTask.task_type}}</p>
-		        </div>
-		        <div class="taskComment col-md-6" id="taskCommentList">
-		            <h3>Comments</h3>
-		            <span class="existingComment" ng-repeat="comment in comments" >
-		                <p>{{comment.comment_owner_id}}</p>
-		                <p>{{comment.comment_time}}</p>
-		                <p>{{comment.comment_descr}}</p>
-		                <button class="btn btn-danger" ng-click="deleteComment(comment)">Delete comment</button>
-		            </span>
-		            <input type="text" id="commentTextBox" placeholder="Add a comment" ng-model="commentDescription">
-		            <input class="btn light-green lighten-1" type="submit" ng-click="submitComment()"></input>
-		        </div>
-		    </div>
-		</div>
-		<button class="btn-large" id="completeTask"><h4>Complete Task<h4></button>
-	</div>
+	<div ui-view></div>
 </div>
