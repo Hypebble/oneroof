@@ -18,6 +18,7 @@
                 <div>
                     <div id="choreBoard" class="container-fluid">
                         <ul id="feed-list">
+                        
                         <li ng-repeat="task in tasks" class="row" ng-click="taskSelect(task)">
                             <a ui-sref=".detail" class="space"><div class="col-sm-2">
                             	<img class="task-icon" ng-src="{{task.task_type === 'Chore' && './img/icon/choreicon.png' || '/img/icon/choreandbills-02-02.png'}}"</span>

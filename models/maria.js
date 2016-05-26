@@ -174,8 +174,8 @@ var bankData = {
 	},
 
 	getTasksForUser(email, status) {
-		console.log(TAG + "getting tasks for user");
-		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id or u.user_id = ut.task_creator_id join tblTASK t on t.task_id = ut.task_id where u.email = ? AND t.task_status=?';
+		console.log(TAG + "getting tasks for user, email and status =======" + email + " " + status);
+		var sql = 'select * from tblUSER u join tblUSER_TASK ut on u.user_id = ut.task_owner_id join tblTASK t on t.task_id = ut.task_id where u.email=? AND t.task_status=?';
 		return connPool.queryAsync(sql, [email, status]);
 	},
 	
@@ -255,7 +255,6 @@ var bankData = {
 		console.log(TAG + "getting comment for task ", data.task_id);
         var sql = 'select * from tblCOMMENT where task_id=?';
         return connPool.queryAsync(sql, data.task_id);
-        
 	},
     
     deleteComment(id) {
