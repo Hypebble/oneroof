@@ -365,16 +365,19 @@ module.exports = function(passport, bankData) {
     //get all tasks for user, when you are the current user
     router.post('/api/tasks', function(req, res, next) {
         console.log("Entered get tasks");
-        console.log("EMAIL " + req.body.email);
+        console.log("USER " + req.body.users);
         console.log("SELECTED TASK TYPE: " , req.body.status);
-        bankData.getTasksForUser(req.user.email, req.body.status)
-            .then(function(rows) {
-                console.log("ROWS " + rows);
-                res.json(rows);
-            })
-            .catch(function() {
-                res.status("404").send("Tasks query failed");
-            });
+        var response = [];
+        for(var i = 0; i < req.body.users.length; i++) {
+            bankData.getTasksForUser(req.body.users[i].email, req.body.status)
+                .then(function(rows) {
+                    response.push(rows);
+                })
+                .catch(function() {
+                    res.status("404").send("Tasks query failed");
+                });
+        }
+        res.json(response);
     });
 
     //get all tasks for user, when its a different user

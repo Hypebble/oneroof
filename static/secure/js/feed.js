@@ -186,17 +186,17 @@ var AppController = angular.module('AppController',[])
         // past button when thats added to UI
         
         $http.post("/api/tasks", {
-            email: $scope.userObj.email,
+            users: [$scope.userObj],
             status: $scope.statusType
         })
             .then(function(response) {
                 console.log('task value', typeof(selectedTask) );
                 if($scope.selectedTask === 'undefined') {
                     $scope.taskSelect(response.data[0]);
-                    $scope.selectedTask(response.data[0]);
+                    $scope.selectedTask = response.data[0];
                 }
                 $scope.tasks = response.data;
-                console.log(response.data);
+                console.log("MADE IT PAST GETTING GHETTTTTTTTOOOOOOOO TASKS", response.data);
             });
 
         $scope.selectedTestAccount = null;
@@ -241,7 +241,7 @@ var AppController = angular.module('AppController',[])
                     console.log("MADE IT THROUGHGJEHKRJGGDJSHGJGH");
                     $scope.tasks.push(response.data);
                     $http.post("/api/tasks", {
-                        email: $scope.userObj.email,
+                        users: [$scope.userObj],
                         status: $scope.statusType
                     })
                         .then(function(response) {
@@ -443,7 +443,7 @@ var AppController = angular.module('AppController',[])
                 .then(function(response) {
                     console.log("DELETE TASSSSSSSSk", response);
                     $http.post('/api/tasks', {
-                        email: $scope.userObj.email,
+                        users: [$scope.userObj],
                         status: $scope.statusType
                     })
                         .then(function(rows) {
@@ -465,13 +465,13 @@ var AppController = angular.module('AppController',[])
             }
 
             $http.post("/api/tasks", {
-                email: $scope.userObj.email,
+                users: [$scope.userObj],
                 status: $scope.statusType
             })
             .then(function(response) {
                 $scope.tasks = response.data;
                 $scope.taskSelect(response.data[0]);
-                $scope.selectedTask(response.data[0]);
+                $scope.selectedTask = response.data[0];
                 console.log(response.data);
             });
            
@@ -718,19 +718,18 @@ var AppController = angular.module('AppController',[])
 
         $scope.showEveryone = function() {
             var tasksEveryone = [];
-            for(i = 0; i < $scope.pureHousemates; i++) {
-                $http.post("/api/tasks", {
-                    email: $scope.pureHousemates[i].email,
-                    status: $scope.statusType
-                })
-                .then(function(response) {
-                    tasksEveryone.push(response.data)
-                });
+            console.log('PURE HOUSEMATES', $scope.pureHousemates)
+            $http.post("/api/tasks", {
+                users: $scope.pureHousemates,
+                status: $scope.statusType
+            })
+            .then(function(response) {
+                tasksEveryone.push(response.data);
+            });
                
-            }
             $scope.tasks.push(tasksEveryone)
-            $scope.taskSelect(tasksEveryone.data[0]);
-            $scope.selectedTask(tasksEveryone.data[0]);
+            $scope.taskSelect(tasksEveryone[0]);
+            $scope.selectedTask = tasksEveryone[0];
         }
                     
      });
