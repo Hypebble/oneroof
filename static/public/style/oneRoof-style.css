@@ -48,7 +48,8 @@ body {
 }
 
 .centered {
-  position: fixed;
+  position: relative;
+  top:8%;
   left: 50%;
   /* bring your own prefixes */
 }
@@ -127,7 +128,6 @@ body {
 #signoutButton {
   float: right;
 }
-
 /**/
 
 
@@ -405,13 +405,13 @@ a.btn-primary:hover {
   color: #9f7cb8;
 }
 
-/*#background {
+#background {
     height: 100%;
     width:100%;
     background-color: red;
     overflow: hidden;
-    position: relative;
-} */
+    position: absolute;
+}
 
 
 #backgroundImage {
@@ -422,7 +422,8 @@ a.btn-primary:hover {
     background:url('/img/chores/vaccuuming.jpg');
     background-size: 100%;
     width:2880px;
-    height:1620px;  
+    height:1620px;
+    overflow-x: hidden;  
 }
 
 
@@ -576,9 +577,22 @@ input[type="file"] {
   margin: 20px 20px;
 }
 
+#signoutButtonM {
+  display: none;
+  visibility: hidden;
+}
+
 @media (max-width: 768px) { 
   #app-body, .navbar-fixed-top {
     margin:0;
+  }
+
+  #signoutButtonM {
+    visibility: visible;
+    display: inline;
+    margin-top: 2%;
+    margin-right: 1%;
+    float: right;
   }
 
   body {
@@ -588,11 +602,38 @@ input[type="file"] {
   #nav-mobile {
     visibility: visible;
     display: inline;
-    background-color: #000;
+    background-color: #9f7cb8;
+    height: 58px;
 
   }
 
-  #content-detail {
+  .navbar-header {
+    background-color: #9f7cb8;
+  }
+
+  #mobile-button {
+    padding: 0px 5px 0px 5px;
+    margin: 0px;
+    margin-left: 2%;
+  }
+
+  #titleAnch {
+    color:#FFF;
+  }
+  .collapsed {
+    margin: 0px;
+  }
+
+  .navbar-brand {
+    margin-top: 1%;
+    color: #FFF;
+  }
+
+  .navbar-default {
+    color:#FFF;
+  }
+
+  #profile-detail {
     display: none;
     visibility: hidden;
   }

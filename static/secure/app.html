@@ -46,54 +46,36 @@
         <div id="a" class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
             <a ui-sref=".settings"><img src="{{imgsrc}}"/></a>
         </div>
-    <!-- 	<label for="radio1" class = "sidebar-link text-center">
-    		<img src="./img/icon/user-silhouette.png">
-    	</label>		
-    	<input type="radio" value="personal" name="radio1" id="radio1" checked>
-    	
-    	<label for="radio2" class = "sidebar-link text-center">
-    		<img src="./img/icon/users-group.png">
-    	</label>
-    	<input type="radio" value="house" name="radio2" id="radio2"> -->
-
-
     </div>
-    <div id="nav-mobile" class="navbar-fixed-top nav-collapse collapse">
-        <div><img src="./img/newlogo2-04.png" height="36px" width="36px"/></div>
-        <ul class="nav">
-            <li>
-                <a ng-click="imageClick('/feed')">Feed</a>
-                <a ng-click="imageClick('/roommates')">Roommates</a>
-                <a ng-click="imageClick('/house')">House</a>
-                <a ng-click="imageClick('/settings')">Settings</a>
-            </li>
-        </ul>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+       
+        <div id="mobile-nav" class="navbar-header">
+            <button id="mobile-button" style="float:left" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#oneRoof-collapse">
+                <img  src="./img/newlogo2-04.png" height="36px" width="36px"/>
+            </button>
+            
+            <a id="titleAnch" class="head-link" ui-sref=".feed.details">OneRoof</a>
+            <a id="signoutButtonM" href="/api/signout" class="waves-effect btn red lighten-1 z-depth-0">Sign out!</a>
+        </div>
+       
+       <div class="collapse navbar-collapse" id="oneRoof-collapse">
+          <ul id="mobile-drop" class="nav navbar-nav">
+                <li><a ng-click="imageClick('/feed')">Feed</a></li>
+                <li><a ng-click="imageClick('/roommates')">Roommates</a></li>
+                <li><a ng-click="imageClick('/house')">House</a></li>
+                <li><a ng-click="imageClick('/settings')">Settings</a></li>
+          </ul>
+       </div>
+       
+    </nav>
+    <div id="nav-mobile" class="collapse nav-collapse">
     </div>
     <div id="header" class="navbar-fixed-top headline box-down">
 		<div class="links">
 			<div class="head-link col-md-12 col-xs-12 col-sm-12">
 				<span class="logo">{{activePage === null ? "OneRoof" : activePage}}</span>
-
                 <a id="signoutButton" href="/api/signout" class="waves-effect btn red lighten-1 z-depth-0">Sign out!</a>
 			</div>
-            <!--<div id="page-header" class="col-md-4 col-xs-4 logo logo-s" style="margin:0"></div>-->
-			<!--<div class="col-md-5">-->
-                    <!--<div id="sign-out" class="head-link sign-out">-->
-                        <!--<a href="/settings.html" class="btn btn-primary">Settings</a>-->
-                        
-                    
-                     
-                    <!--<div class="head-link prof-link">
-    					<a href="profile.html" ng-click="loadProf()">
-    					<div ng-show="defaultPic">
-    						<img src="img/icon/miner.png" alt="Your Profile" width= "48" height="48">
-    					</div>
-    					<div ng-hide="defaultPic">
-    						<img ng-Src="./{{ userPic }}" />
-    					</div></a>
-    				</div>-->
-                <!--</div>-->
-			<!--</div>-->
 		</div>
     </div>
     

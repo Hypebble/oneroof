@@ -5,7 +5,7 @@
 				<div class="sidebar-btn">
 	            	<h1>Personal Information</h1>
 					<div id = "profilePicture">
-						<img src = "{{userObj.user_pic === null ? 'img/icon/dj.png' : userObj.user_pic}}"><br>	
+						<img class="img-responsive" src = "{{userObj.user_pic === null ? 'img/icon/dj.png' : userObj.user_pic}}"><br>	
 						<form action="/api/upload" method="POST" enctype="multipart/form-data">
 							<h4>Edit Profile Picture:</h4>
 							<div id = "profilePicture">
