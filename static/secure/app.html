@@ -38,8 +38,8 @@
         <div id="r" class="home-button sidebar-btn" ng-init="roomease='./img/icon/sidebar-icons/roommates-white.png'" ng-mouseover="roomease='./img/icon/sidebar-icons/roommates-purple.png'" ng-mouseout="roomease='./img/icon/sidebar-icons/roommates-white.png'">
             <img ng-click="imageClick('/roommates')" src="{{roomease}}"/>
         </div>
-        <div id="h" ng-class="{sidebar-active: click == 3}" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
-            <img ng-model="click = 3" ng-click="imageClick('/house')" src="{{houseS}}"/>
+        <div id="h" ng-class="" class="home-button sidebar-btn" ng-init="houseS='./img/icon/sidebar-icons/house-white.png'" ng-mouseover="houseS='./img/icon/sidebar-icons/house-purple.png'" ng-mouseout="houseS='./img/icon/sidebar-icons/house-white.png'">
+            <img ng-click="imageClick('/house')" src="{{houseS}}"/>
         </div>
         <div id="a" class="home-button sidebar-btn" ng-init="imgsrc='./img/icon/sidebar-icons/account-white.png'" ng-mouseover="imgsrc='./img/icon/sidebar-icons/account-purple.png'" ng-mouseout="imgsrc='./img/icon/sidebar-icons/account-white.png'">
             <img ng-click="imageClick('/settings')" src="{{imgsrc}}"/>

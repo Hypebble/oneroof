@@ -88,11 +88,12 @@ var AppController = angular.module('AppController',[])
                $http.get("/api/getUsers")
                     .then(function (response) {
                     console.log("housemates: ", $scope.housemates)
+                    console.log(response.data[1]);
                         for(var i of response.data[1]){
                             console.log(i.name);
                             $scope.housemates.push(i);
                             console.log("updating input date!!!");
-                            document.getElementById('dueDate').valueAsDate = new Date(); 
+                            //document.getElementById('dueDate').valueAsDate = new Date(); 
                         }
                         console.log("new housemates: ", $scope.housemates)
                         $scope.userObj = response.data[0];

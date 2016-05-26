@@ -8,25 +8,27 @@
 				</div>
 			</row>
 		    <div class="row">
+		    	<!--Join or Create House if not already in one-->
+		        <div ng-show="{{houseName !== 'undefined' ? true : false }}">
+			        <div class="col-md-6 col-sm-2">
+			            <form ng-submit="createHouse()">
+			                <div class="form-group">
+			                    <label for="createNewHouse"></label>
+			                    <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
+			                </div>
+			                <input class="btn btn-info" type="submit">
+			            </form>
+			        </div>
 
-		        <div class="col-md-6 col-sm-2">
-		            <form ng-submit="createHouse()">
-		                <div class="form-group">
-		                    <label for="createNewHouse"></label>
-		                    <input class="form-control" id="createNewHouse" placeholder="House Name" name="setHouseName" ng-model="createNewHouse" required>
-		                </div>
-		                <input class="btn btn-info" type="submit">
-		            </form>
-		        </div>
-
-		        <div class="col-md-6 col-sm-2">
-		            <form ng-submit="joinHouse()">
-		                <div class="form-group">
-		                    <label for="joinAHouse"></label>
-		                    <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
-		                </div>
-		                <input class="btn btn-info" type="submit">
-		            </form>
+			        <div class="col-md-6 col-sm-2">
+			            <form ng-submit="joinHouse()">
+			                <div class="form-group">
+			                    <label for="joinAHouse"></label>
+			                    <input class="form-control" id="joinAHouse" placeholder="House Code" name="enterHouseCode" ng-model="joinAHouse" required>
+			                </div>
+			                <input class="btn btn-info" type="submit">
+			            </form>
+			    	</div>
 		    	</div>
 
 			    <div>
