@@ -5,6 +5,16 @@
   src: url('/fonts/EncodeSans-Thin.ttf') ;
 }
 
+#instructionModal, #createTaskModal {
+  display: none;
+  visibility: hidden;
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
 @font-face {
   font-family: 'Encode Sans Bold';
   src: url('/fonts/EncodeSans-Regular.ttf');
@@ -471,7 +481,7 @@ input[type="file"] {
 }
 
 #content-page {
-  margin-top: 65px;
+  margin-top: 1%;
   padding: 0px;
 }
 .container {
@@ -733,4 +743,13 @@ input[type="file"] {
   #roommates-list li{
     display: inline
   }
+
+  #task-menu {
+    padding-bottom: 10px;
+  }
+
+  #content-page {
+
+  }
+
 }
