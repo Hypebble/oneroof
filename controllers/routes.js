@@ -25,7 +25,7 @@ module.exports = function(passport, bankData) {
             req.user.user_pic = './uploads/' + (req.file.filename + '.png')
             fs.renameSync('./uploads/' + req.file.filename, req.user.user_pic);
             bankData.updateProfPic(req.user.user_id, req.user.user_pic);
-            res.json(req.user);
+            res.redirect('/app.html#/settings');
             
             // assign the file name when created, to the user table, so alter user table to have an image file link
             // also get defualt user image
