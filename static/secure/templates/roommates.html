@@ -1,8 +1,8 @@
 <div id="content-page" class="container-fluid">
-	<div id="content-overview" class="container-fluid col-md-3 col-sm-4 col-xs-12">
+	<div id="content-overview" class="container-fluid col-md-3 col-sm-4 col-xs-1">
 		<div id="roommates-overview">
             <ul id="roommate-list" ng-repeat="housemate in housemates" ng-click="roommateSelect(housemate)">
-                <li><a ui-sref=".detail"><img height="96" width="96" style="border-radius:50%" float="left" src="{{housemate.user_pic === null ? 'img/icon/dj.png' : housemate.user_pic}}"/><span style="padding-left:25px;font-size:18px" class="hide-on-small screen">{{housemate.email  === currentUser.email ? "Me" : housemate.displayName}}</span></a></li>
+                <li><a ui-sref=".detail"><img height="96" width="96" style="border-radius:50%" float="left" src="{{housemate.user_pic === null ? 'img/icon/dj.png' : housemate.user_pic}}"/><span style="padding-left:25px;font-size:18px" class="hide-on-small screen remove-name">{{housemate.email  === currentUser.email ? "Me" : housemate.displayName}}</span></a></li>
             </ul>
         </div>
         

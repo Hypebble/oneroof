@@ -663,6 +663,10 @@ input[type="file"] {
     visibility: hidden;
   }
 
+  .remove-name {
+    visibility: hidden;
+  }
+
   #sign-out-app {
     visibility: hidden;
   }
@@ -693,10 +697,10 @@ input[type="file"] {
     top: 60px; 
   }
 
-  #feed-details {
+  /*#feed-details {
     visibility: hidden;
     display: none;
-  }
+  }*/
 
   #mobileMenu li { 
     text-align: center; 
