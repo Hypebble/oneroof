@@ -1,68 +1,16 @@
 <div id="content-details" class="col-md-7 col-sm-7 col-xs-8">
-        <div id="roommates-detail" style="text-align:center">
-            <div>
+        <div id="roommates-detail" class="row" style="text-align:center">
+            <div class="col-md-6">
                 <img height="192" width="192" class="img-responsive" float="left" src="{{selectedHousemate.user_pic === null ? 'img/icon/dj.png' : selectedHousemate.user_pic}}"/>
             </div>
-            <div>
+            <div class="col-md-6">
                 <b>Name</b>
                 <p>{{selectedHousemate.displayName}}</p>
                 <b>Email</b>
                 <p>{{selectedHousemate.email}}</p>
                 <b>Phone Number</b>
                 <p>{{selectedHousemate.phone_num === null ? "N/A" : selectedHousemate.phone_num}}</p>
-                <h3>{{selectedHousemate.displayName}}'s Chore Completion</h3>
-                <div class ="plots sidebar-btn">
-                   <div id = "plot1" onload="makeStats()">
-                   <script>
-                       var housemateName = "{{selectedHousemate.displayName}}";
-                       var houseChores = 88.47;
-                       var housemateChores = 11.53;
-                       var data = [{
-                           values:[housemateChores, houseChores],
-                           labels:[housemateName + "'s Percentage", "House Percentage"],
-                           marker: { 'colors': ['#9f7cb8', 'lightgrey']},
-                           hole: .5,
-                           type: 'pie'
-                       }]
-                       
-                       var layout = {
-                        title: "Chores (All-time)",
-                        height: 400,
-                        width: 500,
-                        legend: {
-                            x: 50,
-                            y: -50
-                        }
-                       };
-                       
-                       Plotly.newPlot('plot1', data, layout);
-
-                       
-                    </script>
-                    <div id = "plot2" >
-                        <script>
-                       var housemateName = "{{selectedHousemate.displayName}}";
-                       var houseChores = 88.47;
-                       var housemateChores = 11.53;
-                       var data = [{
-                           values:[housemateChores, houseChores],
-                           labels:[housemateName + "'s Percentage", "House Percentage"],
-                           marker: { 'colors': ['#9f7cb8', 'lightgrey']},
-                           hole: .5,
-                           type: 'pie'
-                       }]
-                       
-                       var layout = {
-                        title: "Chores in the Past Week",
-                        height: 400,
-                        width: 500,
-                        legend: {
-                            x: 50,
-                            y: -50
-                        }
-                       };
-                       Plotly.newPlot('plot2', data, layout);
-                        </script>
+               
                     </div>
                 </div>
             </div>
