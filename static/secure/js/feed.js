@@ -765,7 +765,7 @@ var AppController = angular.module('AppController',[])
             $scope.taskSelect(tasksEveryone[0]);
             $scope.selectedTask = tasksEveryone[0];
                
-            
+            $scope.tasks = []
         }
                     
      });
