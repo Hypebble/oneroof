@@ -197,7 +197,7 @@
                             <label for="taskDescription">Task Description (optional) </label>
                             <input class="form-control" placeholder="Task description" ng-model="taskDescription">
                         </div>
-                        <input class="btn btn-info" type="submit" data-dismiss="modal"></input>
+                        <input class="btn btn-info" type="submit" ng-click="exitModal()" ></input>
                         <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="exitModal()">Never Mind!</button>
                     </form>
                 </div>
