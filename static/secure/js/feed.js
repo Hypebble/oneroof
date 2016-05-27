@@ -783,6 +783,24 @@ var AppController = angular.module('AppController',[])
                
             
         }
+        
+        $scope.initialTasks = []
+        $http.post("/api/tasks", {
+                users: $scope.pureHousemates,
+                status: $scope.statusType
+            })
+            .then(function(response) {
+                if (response.data[0].length > 0) {
+                    console.log("Intially getting data for view thing")
+                    response.data.map(function(data) {  
+                        data.map(function(nestedData) {
+                            $scope.initalTasks.push(nestedData)
+                        })
+                    })      
+                }
+
+            });
+        
                     
      });
      
